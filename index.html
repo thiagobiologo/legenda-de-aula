@@ -21,6 +21,7 @@
   --bg: #0d141c; --surface: #16202b; --ink: #eaf0f7; --mute: #9aabbf; --line: #2a3848;
   --accent: #7aa7ff; --accent-ink: #0d141c; --cap-bg: #05090e; --cap-fg: #ffe066; --ok: #5bd694; --warn: #f0b429; color-scheme: dark; }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 body { background: var(--bg); color: var(--ink); font: 17px/1.55 var(--f-body); padding-block: 20px 56px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .wrap { max-width: 720px; margin: 0 auto; display: grid; gap: 18px; }
@@ -43,7 +44,7 @@ h2 { font: 800 clamp(22px, 5vw, 28px)/1.15 var(--f-display); margin: 0; text-wra
 .stage .wf { position: absolute; background: #f7f8fa; border-radius: 1cqw; box-shadow: 0 1cqw 3cqw #0005; }
 .stage .tb { background: #e2e7ee; padding: .8cqw 1.4cqw; font-size: 1.9cqw; border-radius: 1cqw 1cqw 0 0; font-weight: 700; }
 .stage .ic { position: absolute; display: grid; justify-items: center; gap: .4cqw; font-size: 5cqw; line-height: 1; }
-.stage .ic span { font-size: 1.8cqw; background: #fff; padding: .2cqw .8cqw; border-radius: .4cqw; }
+.stage .ic span { font-size: 1.8cqw; color: #14202e; background: #fff; padding: .2cqw .8cqw; border-radius: .4cqw; }
 .stage .menu { position: absolute; background: #fff; border: 1px solid #c7d0dc; box-shadow: 0 .6cqw 2cqw #0004; padding: .4cqw; font-size: 1.9cqw; z-index: 3; }
 .stage .menu div { padding: .5cqw 2.4cqw .5cqw 1cqw; }
 .stage .dlg { position: absolute; background: #fff; border-radius: 1cqw; box-shadow: 0 1cqw 3cqw #0007; padding: 1.6cqw; font-size: 1.9cqw; z-index: 3; }
@@ -70,12 +71,12 @@ h2 { font: 800 clamp(22px, 5vw, 28px)/1.15 var(--f-display); margin: 0; text-wra
 @keyframes rip { 0% { transform: translate(-50%, -50%) scale(.3); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; } }
 .stage .capb { position: absolute; left: 3%; right: 3%; bottom: 3%; text-align: center; background: #000c; color: #ffe066; font-size: 2.5cqw; padding: .8cqw 1.4cqw; border-radius: .8cqw; z-index: 6; }
 .stage .rp { position: absolute; inset: 0; display: grid; place-items: center; background: #000a; color: #ffe066; font-weight: 700; font-size: 3cqw; z-index: 7; }
-.stage .hud { position: absolute; right: 2%; top: 3%; display: flex; align-items: center; gap: 1cqw; background: #0009; padding: .8cqw 1.2cqw; border-radius: 1cqw; z-index: 8; color: #fff; font-size: 1.9cqw; }
-.stage .hud .ms { width: 3.6cqw; height: 5cqw; }
+.stage .hud { position: absolute; right: 2%; top: 3%; display: flex; align-items: center; gap: 1.2cqw; background: #000c; padding: 1cqw 1.6cqw; border-radius: 1.2cqw; z-index: 8; color: #fff; font-size: 2.5cqw; white-space: nowrap; }
+.stage .hud .ms { width: 5.4cqw; height: 7.6cqw; flex: none; }
 .stage .hud .ms path { fill: #fff; stroke: #14202e; stroke-width: 1.2; }
 .stage .hud .ms path.mb { fill: #dfe5ee; } .stage .hud .ms path.ml { fill: none; } .stage .hud .ms path.on { fill: #ffe066; }
 .stage .hud .hl { font-weight: 700; color: #ffe066; }
-.stage .hud kbd { background: #fff; color: #14202e; border-radius: .5cqw; padding: .3cqw 1cqw; font: 700 1.9cqw ui-monospace, Consolas, monospace; border-bottom: .3cqw solid #9aa7b8; }
+.stage .hud kbd { background: #fff; color: #14202e; border-radius: .5cqw; padding: .3cqw 1cqw; font: 700 2.5cqw ui-monospace, Consolas, monospace; border-bottom: .3cqw solid #9aa7b8; }
 @media (prefers-reduced-motion: reduce) { .stage .cur, .stage .tgl, .stage .tgl::after { transition: none; } .stage .rip.go { animation: none; } }
 ol.do { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; counter-reset: s; }
 ol.do li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; min-width: 0; }
@@ -114,6 +115,9 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); ou
 .lkb button.main { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .dlbtn { display: block; text-align: center; background: var(--accent); color: var(--accent-ink); font: 800 19px var(--f-display); padding: 16px 18px; border-radius: 10px; text-decoration: none; }
 .dlbtn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.credit { border-top: 1px solid var(--line); padding-top: 16px; color: var(--mute); font-size: 15px; display: grid; gap: 6px; }
+.credit a { color: var(--accent); font-weight: 700; }
+.credit b { color: var(--ink); }
 .done-box { text-align: center; display: grid; gap: 10px; justify-items: center; }
 .done-box .big { font: 800 56px/1 var(--f-display); color: var(--ok); }
 </style>
@@ -138,6 +142,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); ou
     <button id="back"></button>
     <button id="next" class="main"></button>
   </nav>
+  <footer class="credit" id="credit"></footer>
 </div>
 
 <script>
@@ -231,7 +236,14 @@ let lang = 'pt', step = 0; const checked = {};
 try { lang = localStorage.getItem('guia-lang') || 'pt'; } catch (e) {}
 const $ = id => document.getElementById(id);
 
-const GUIDE_URL = 'https://thiagobiologo.github.io/legenda-de-aula/';
+const PORTFOLIO_URL = '';   // link do portfólio do autor (vazio = não mostra)
+function creditRender() {
+  const pt = lang === 'pt', a = (u, txt) => `<a href="${u}" target="_blank" rel="noopener">${txt}</a>`;
+  const links = [PORTFOLIO_URL ? a(PORTFOLIO_URL, pt ? 'Conheça meu portfólio' : 'Conoce mi portafolio') : '',
+    a('https://github.com/thiagobiologo/legenda-de-aula', pt ? 'Código aberto no GitHub' : 'Código abierto en GitHub')].filter(Boolean).join(' · ');
+  $('credit').innerHTML = `<div>${pt ? 'Criado por' : 'Creado por'} <b>Thiago Silva</b>. ${pt ? 'Projeto gratuito, feito para ajudar os colegas do mestrado.' : 'Proyecto gratuito, hecho para ayudar a los compañeros de la maestría.'}</div><div>${links}</div>`;
+}
+const GUIDE_URL ='https://thiagobiologo.github.io/legenda-de-aula/';
 function dlBox() {
   return `<a class="dlbtn" href="Legenda-de-Aula.zip" download>⬇ ${lang === 'pt' ? 'Baixar o instalador (.zip)' : 'Descargar el instalador (.zip)'}</a>`;
 }
@@ -256,7 +268,7 @@ function mock(kind, t) {
 function render() {
   const t = T[lang], S = t.steps, s = S[step], n = S.length;
   document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'es';
-  $('proto').textContent = t.proto; $('t').textContent = t.title; $('st').textContent = t.sub;
+  $('proto').textContent = t.proto; $('t').textContent = t.title; $('st').textContent = t.sub; creditRender();
   $('bpt').setAttribute('aria-pressed', lang === 'pt'); $('bes').setAttribute('aria-pressed', lang === 'es');
   $('prog').innerHTML = S.map((_, i) => `<i class="${i < step ? 'done' : i === step ? 'now' : ''}"></i>`).join('');
   $('stepOf').textContent = t.of(step + 1, n); $('time').textContent = t.time;
@@ -306,12 +318,15 @@ const SCENES = [
    '<div class="dlg" id="vb" hidden style="left:30%;top:24%;width:40%;height:42%"><b>VB-CABLE Driver Package</b><div class="btn2" style="left:25%;bottom:20%">Install Driver</div></div>',
    caps: { a: ['Dê dois cliques em INSTALAR.bat', 'Haz doble clic en INSTALAR.bat'], b: ['Clique em Sim', 'Haz clic en Sí'], c: ['Na janela do VB-CABLE, clique em Install Driver', 'En la ventana de VB-CABLE, haz clic en Install Driver'], d: ['Pronto. Agora reinicie o computador', 'Listo. Ahora reinicia la computadora'] },
    tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1200, 'cd'], [1800, 's', 'du'], [2500, 'cap', 'b'], [2600, 'm', 59, 61], [3700, 'c'], [3800, 'h', 'du'], [4000, 's', 'term'], [4200, 's', 'l1'], [5000, 's', 'l2'], [6000, 's', 'l3'], [6800, 's', 'vb'], [6900, 'cap', 'c'], [7000, 'm', 46, 54], [8300, 'c'], [8400, 'h', 'vb'], [8800, 's', 'l4'], [8900, 'cap', 'd']] },
- { len: 8800, html: '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e0"></div><div class="lbl" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
-   '<div class="menu" id="sm" hidden style="left:2%;top:44%;width:26%"><div>📄 Documentos</div><div>⚙ Configurações</div><div>⏻ Energia</div></div>' +
-   '<div class="menu" id="pm" hidden style="left:29%;top:60%;width:22%"><div>Suspender</div><div>Desligar</div><div>↻ Reiniciar</div></div>' +
+ { len: 8800, html: '<div style="position:absolute;left:38%;top:14%;font-size:22cqw;color:#ffffff26;line-height:1">⊞</div>' +
+   '<div class="ic" style="left:3%;top:6%;font-size:4.6cqw;color:#fff">🗑️<span>Lixeira</span></div><div class="ic" style="left:3%;top:30%;font-size:4.6cqw;color:#fff">🌐<span>Google Chrome</span></div><div class="ic" style="left:3%;top:54%;font-size:4.6cqw;color:#fff">📁<span>Downloads</span></div>' +
+   '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div><div class="lbl" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
+   '<div class="lbl" style="left:9%;top:90.5%;font-size:2.6cqw;color:#fff;font-weight:400">🔍  📁  🌐</div><div class="lbl" style="left:88%;top:89.5%;font-size:1.7cqw;color:#fff;font-weight:400;text-align:right">21:30<br>30/10/2026</div>' +
+   '<div class="menu" id="sm" hidden style="left:2%;top:66%;width:26%"><div>📄 Documentos</div><div>⚙ Configurações</div><div>⏻ Energia</div></div>' +
+   '<div class="menu" id="pm" hidden style="left:29%;top:68%;width:22%"><div>Suspender</div><div>Desligar</div><div>↻ Reiniciar</div></div>' +
    '<div id="bk" hidden style="position:absolute;inset:0;background:#000;color:#fff;display:grid;place-items:center;font-size:3.4cqw;z-index:5">↻ Reiniciando…</div>',
    caps: { a: ['Clique no botão Iniciar do Windows', 'Haz clic en el botón Inicio de Windows'], b: ['Clique em Energia', 'Haz clic en Energía'], c: ['Escolha Reiniciar', 'Elige Reiniciar'], d: ['O computador reinicia. Depois, volte a este guia.', 'La computadora se reinicia. Después, vuelve a esta guía.'] },
-   tl: [[0, 'cap', 'a'], [300, 'm', 3.5, 94], [1500, 'c'], [1600, 's', 'sm'], [2200, 'cap', 'b'], [2300, 'm', 12, 59], [3400, 'c'], [3500, 's', 'pm'], [4000, 'cap', 'c'], [4100, 'm', 36, 75], [5200, 'c'], [5300, 's', 'bk'], [5400, 'cap', 'd']] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 3.5, 94], [1500, 'c'], [1600, 's', 'sm'], [2200, 'cap', 'b'], [2300, 'm', 12, 79], [3400, 'c'], [3500, 's', 'pm'], [4000, 'cap', 'c'], [4100, 'm', 36, 81], [5200, 'c'], [5300, 's', 'bk'], [5400, 'cap', 'd']] },
  { len: 10500, html: WF.replace('%T%', '🌐 Google Chrome') +
    '<div class="url" style="left:9%;top:16%;width:60%"><span id="u"></span></div>' +
    '<div id="pg" hidden><div class="lbl" style="left:9%;top:27%;font-size:2.6cqw">Extensões</div><div class="lbl" style="left:62%;top:27%">Modo do desenvolvedor</div><div class="tgl" id="tg" style="left:84%;top:26%"></div></div>' +
@@ -358,10 +373,12 @@ function play(i) {
     const bl = q('mL'), br = q('mR'), lb = q('hudl'), pt = lang === 'pt';
     bl.classList.remove('on'); br.classList.remove('on');
     (k === 'cr' ? br : bl).classList.add('on');
-    lb.textContent = k === 'cr' ? (pt ? 'Clique direito' : 'Clic derecho') : k === 'cd' ? (pt ? 'Clique duplo (2 vezes rápido)' : 'Doble clic (2 veces rápido)') : (pt ? 'Clique esquerdo' : 'Clic izquierdo');
-    lb.hidden = false; clearTimeout(hudT);
-    hudT = setTimeout(() => { bl.classList.remove('on'); br.classList.remove('on'); lb.hidden = true; }, 3200);
+    lb.textContent = k === 'cr' ? (pt ? 'Botão DIREITO do mouse · 1 clique' : 'Botón DERECHO del mouse · 1 clic')
+      : k === 'cd' ? (pt ? 'Botão ESQUERDO · 2 cliques rápidos' : 'Botón IZQUIERDO · 2 clics rápidos')
+      : (pt ? 'Botão ESQUERDO do mouse · 1 clique' : 'Botón IZQUIERDO del mouse · 1 clic');
+    lb.hidden = false;   // fica escrito até o cursor se mover de novo
   };
+  const hudOff = () => { q('mL').classList.remove('on'); q('mR').classList.remove('on'); q('hudl').hidden = true; };
   const hudKey = name => { const kb = q('hudk'); kb.textContent = name; kb.hidden = false; clearTimeout(keyT); keyT = setTimeout(() => { kb.hidden = true; }, 3600); };
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const K = 1.8;   // quanto mais lento que o roteiro original
@@ -383,7 +400,7 @@ function play(i) {
   };
   const act = a => {
     const k = a[1], x = a[2], y = a[3];
-    if (k === 'm') { unhit(); cx = x; cy = y; cur.style.left = x + '%'; cur.style.top = y + '%'; if (!still) preHit(a); }
+    if (k === 'm') { unhit(); hudOff(); cx = x; cy = y; cur.style.left = x + '%'; cur.style.top = y + '%'; if (!still) preHit(a); }
     else if (k === 'c' || k === 'cr' || k === 'cd') {
       const ping = () => { rip.style.left = cx + '%'; rip.style.top = cy + '%'; rip.classList.remove('go'); void rip.offsetWidth; rip.classList.add('go'); };
       ping(); if (k === 'cd') tms.push(setTimeout(ping, 420));
