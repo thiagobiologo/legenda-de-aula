@@ -44,6 +44,20 @@ h2 { font: 800 clamp(22px, 5vw, 28px)/1.15 var(--f-display); margin: 0; text-wra
 .stage .wf { position: absolute; background: #f7f8fa; border-radius: 1cqw; box-shadow: 0 1cqw 3cqw #0005; }
 .stage .tb { background: #e2e7ee; padding: .8cqw 1.4cqw; font-size: 1.9cqw; border-radius: 1cqw 1cqw 0 0; font-weight: 700; }
 .stage .ic { position: absolute; display: grid; justify-items: center; gap: .4cqw; font-size: 5cqw; line-height: 1; }
+.stage .ic > svg, .stage .ic > div > svg { width: 5.6cqw; height: 5.6cqw; display: block; }
+.stage .ic > div > svg { width: 100%; height: 100%; }
+.stage .chr { width: 5.6cqw; height: 5.6cqw; border-radius: 50%; position: relative; background: conic-gradient(from 30deg, #ea4335 0 120deg, #fbbc05 0 240deg, #34a853 0 360deg); }
+.stage .chr::after { content: ""; position: absolute; inset: 28%; border-radius: 50%; background: #4285f4; border: .35cqw solid #fff; }
+.stage .lbl > svg { width: 100%; height: 100%; display: block; }
+.stage .tbi { position: absolute; display: flex; gap: 1.6cqw; align-items: center; }
+.stage .tbi svg, .stage .tbi .chr { width: 2.8cqw; height: 2.8cqw; }
+.stage .cbx { display: inline-block; width: 2cqw; height: 2cqw; border: .25cqw solid #6b7a90; border-radius: .4cqw; vertical-align: -.4cqw; margin-right: 1cqw; background: #fff; position: relative; }
+.stage .cbx.on { background: #1d4ed8; border-color: #1d4ed8; }
+.stage .cbx.on::after { content: ""; position: absolute; left: .55cqw; top: .05cqw; width: .6cqw; height: 1.2cqw; border: solid #fff; border-width: 0 .3cqw .3cqw 0; transform: rotate(45deg); }
+.lkb svg.bar { width: 100%; max-width: 360px; height: auto; }
+.lkb .pulse { animation: pulse2 1.4s ease-in-out infinite; }
+@keyframes pulse2 { 50% { opacity: .55; } }
+.lkb .note2 { font-size: 15px; color: var(--mute); }
 .stage .ic span { font-size: 1.8cqw; color: #14202e; background: #fff; padding: .2cqw .8cqw; border-radius: .4cqw; }
 .stage .menu { position: absolute; background: #fff; border: 1px solid #c7d0dc; box-shadow: 0 .6cqw 2cqw #0004; padding: .4cqw; font-size: 1.9cqw; z-index: 3; }
 .stage .menu div { padding: .5cqw 2.4cqw .5cqw 1cqw; }
@@ -162,7 +176,7 @@ const T = {
         note: "O Windows pode mostrar uma tela azul dizendo “O Windows protegeu o computador”, ou um aviso de segurança. É normal para programas novos. Clique em <b>Mais informações</b> e depois em <b>Executar assim mesmo</b> (ou só em <b>Executar</b>). Este instalador é texto aberto e só faz o que o guia diz: guarda a extensão e baixa o cabo de áudio gratuito do site oficial da VB-Audio.",
         see: "O Windows vai perguntar isto. Clique em Sim.", mock: "uac" },
       { h: "Reinicie o computador", cap: "Reiniciando o computador",
-        do: ["<b>Antes de reiniciar, guarde esta página:</b> aperte <span class=\"k\">Ctrl</span> + <span class=\"k\">D</span> para salvar nos favoritos do Chrome, ou mande o link para você mesmo no WhatsApp.", "Clique no botão <b>Iniciar</b> do Windows, depois em <b>Energia</b> e em <b>Reiniciar</b>.", "Quando o computador voltar, abra o Chrome e entre de novo por este link. O guia lembra onde você parou: é só clicar em <b>Continuar</b>."],
+        do: ["<b>Antes de reiniciar, guarde esta página:</b> clique na <b>estrela</b> no fim da barra de endereço (ou aperte <span class=\"k\">Ctrl</span> + <span class=\"k\">D</span>) e depois em <b>Concluído</b>.", "Clique no botão <b>Iniciar</b> do Windows, depois em <b>Energia</b> e em <b>Reiniciar</b>.", "Quando o computador voltar, abra o Chrome e entre de novo por este link. O guia lembra onde você parou: é só clicar em <b>Continuar</b>."],
         note: "Por que reiniciar? O Windows só reconhece o cabo de áudio novo depois de reiniciar. Sem isso, o passo do áudio não funciona. Ao reiniciar, tudo fecha, inclusive esta página.",
         see: "O caminho para reiniciar", mock: "restart", link: true },
       { h: "Adicione a extensão ao Chrome", cap: "Carregando a extensão no Chrome",
@@ -177,7 +191,7 @@ const T = {
         note: "Sem este passo você não escuta a aula, porque o som passa pelo cabo. Você faz isso só uma vez.",
         see: "O caminho no Windows", mock: "listen" },
       { h: "Abra a legenda e inicie", cap: "Iniciando a legenda",
-        do: ["No Chrome, clique no ícone de quebra-cabeça e depois em <b>Legenda de Aula</b>. A barra lateral abre.", "Escolha quem fala o quê (veja abaixo).", "Clique em <b>▶ Iniciar</b> e, se o Chrome pedir o microfone, clique em <b>Permitir</b>.", "Em <code>chrome://settings/content/microphone</code>, deixe o microfone do Chrome em <b>CABLE Output</b>."],
+        do: ["No Chrome, clique no ícone de quebra-cabeça e depois em <b>Legenda de Aula</b>. A barra lateral abre.", "Escolha quem fala o quê (veja abaixo).", "Clique em <b>Iniciar</b> e, se o Chrome pedir o microfone, clique em <b>Permitir</b>.", "Em <code>chrome://settings/content/microphone</code>, deixe o microfone do Chrome em <b>CABLE Output</b>."],
         dir: true, see: "Assim aparece a legenda", mock: "caption" },
       { h: "Pronto", done: true }
     ],
@@ -204,7 +218,7 @@ const T = {
         note: "Windows puede mostrar una pantalla azul que dice “Windows protegió su PC”, o un aviso de seguridad. Es normal en programas nuevos. Haz clic en <b>Más información</b> y luego en <b>Ejecutar de todas formas</b> (o solo en <b>Ejecutar</b>). Este instalador es texto abierto y solo hace lo que dice la guía: guarda la extensión y descarga el cable de audio gratuito del sitio oficial de VB-Audio.",
         see: "Windows va a preguntar esto. Haz clic en Sí.", mock: "uac" },
       { h: "Reinicia la computadora", cap: "Reiniciando la computadora",
-        do: ["<b>Antes de reiniciar, guarda esta página:</b> presiona <span class=\"k\">Ctrl</span> + <span class=\"k\">D</span> para guardarla en los favoritos de Chrome, o envíate el enlace por WhatsApp.", "Haz clic en el botón <b>Inicio</b> de Windows, luego en <b>Energía</b> y en <b>Reiniciar</b>.", "Cuando la computadora vuelva, abre Chrome y entra otra vez por este enlace. La guía recuerda dónde te quedaste: solo haz clic en <b>Continuar</b>."],
+        do: ["<b>Antes de reiniciar, guarda esta página:</b> haz clic en la <b>estrella</b> al final de la barra de direcciones (o presiona <span class=\"k\">Ctrl</span> + <span class=\"k\">D</span>) y luego en <b>Listo</b>.", "Haz clic en el botón <b>Inicio</b> de Windows, luego en <b>Energía</b> y en <b>Reiniciar</b>.", "Cuando la computadora vuelva, abre Chrome y entra otra vez por este enlace. La guía recuerda dónde te quedaste: solo haz clic en <b>Continuar</b>."],
         note: "¿Por qué reiniciar? Windows solo reconoce el cable de audio nuevo después de reiniciar. Sin eso, el paso del audio no funciona. Al reiniciar se cierra todo, incluida esta página.",
         see: "El camino para reiniciar", mock: "restart", link: true },
       { h: "Agrega la extensión a Chrome", cap: "Cargando la extensión en Chrome",
@@ -219,7 +233,7 @@ const T = {
         note: "Sin este paso no escuchas la clase, porque el sonido pasa por el cable. Lo haces una sola vez.",
         see: "El camino en Windows", mock: "listen" },
       { h: "Abre los subtítulos e inicia", cap: "Iniciando los subtítulos",
-        do: ["En Chrome, haz clic en el ícono de pieza de rompecabezas y luego en <b>Subtítulos de Clase</b>. Se abre la barra lateral.", "Elige quién habla qué (mira abajo).", "Haz clic en <b>▶ Iniciar</b> y, si Chrome pide el micrófono, haz clic en <b>Permitir</b>.", "En <code>chrome://settings/content/microphone</code>, deja el micrófono de Chrome en <b>CABLE Output</b>."],
+        do: ["En Chrome, haz clic en el ícono de pieza de rompecabezas y luego en <b>Subtítulos de Clase</b>. Se abre la barra lateral.", "Elige quién habla qué (mira abajo).", "Haz clic en <b>Iniciar</b> y, si Chrome pide el micrófono, haz clic en <b>Permitir</b>.", "En <code>chrome://settings/content/microphone</code>, deja el micrófono de Chrome en <b>CABLE Output</b>."],
         dir: true, see: "Así se ven los subtítulos", mock: "caption" },
       { h: "Listo", done: true }
     ],
@@ -245,23 +259,28 @@ function creditRender() {
 }
 const GUIDE_URL ='https://thiagobiologo.github.io/legenda-de-aula/';
 function dlBox() {
-  return `<a class="dlbtn" href="Legenda-de-Aula.zip" download>⬇ ${lang === 'pt' ? 'Baixar o instalador (.zip)' : 'Descargar el instalador (.zip)'}</a>`;
+  return `<a class="dlbtn" href="Legenda-de-Aula.zip" download>${lang === 'pt' ? 'Baixar o instalador (.zip)' : 'Descargar el instalador (.zip)'}</a>`;
 }
 function linkBox() {
   const pt = lang === 'pt';
-  const msg = encodeURIComponent((pt ? 'Guia Legenda de Aula (voltar aqui depois de reiniciar): ' : 'Guía Subtítulos de Clase (volver aquí después de reiniciar): ') + GUIDE_URL);
-  return `<div class="see lkb"><small>${pt ? 'Guarde este link para voltar depois de reiniciar' : 'Guarda este enlace para volver después de reiniciar'}</small>
+  return `<div class="see lkb"><small>${pt ? 'Guarde esta página para voltar depois de reiniciar' : 'Guarda esta página para volver después de reiniciar'}</small>
+    <svg class="bar" viewBox="0 0 360 44" role="img" aria-label="${pt ? 'Barra de endereço do Chrome com a estrela no final' : 'Barra de direcciones de Chrome con la estrella al final'}">
+      <rect x="1" y="1" width="358" height="42" rx="21" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
+      <text x="20" y="27" font-size="11.5" fill="var(--mute)" font-family="ui-monospace, Consolas, monospace">thiagobiologo.github.io/legenda-de-aula</text>
+      <circle cx="334" cy="22" r="17" fill="#ffe066" class="pulse"/>
+      <path d="M334 12l3.1 6.6 7.2.9-5.3 5 1.4 7.1-6.4-3.6-6.4 3.6 1.4-7.1-5.3-5 7.2-.9z" fill="none" stroke="#14202e" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+    <div class="note2">${pt ? 'Depois de reiniciar, abra o Chrome e clique em <b>Favoritos</b> ou nesta página salva. O guia lembra onde você parou.' : 'Después de reiniciar, abre Chrome y haz clic en <b>Favoritos</b> o en esta página guardada. La guía recuerda dónde te quedaste.'}</div>
     <input id="lk" readonly value="${GUIDE_URL}" aria-label="link">
-    <div class="acts"><button id="cp" class="main">📋 ${pt ? 'Copiar link' : 'Copiar enlace'}</button>
-    <a class="wa" href="https://wa.me/?text=${msg}" target="_blank" rel="noopener">💬 ${pt ? 'Mandar para o meu WhatsApp' : 'Enviarme por WhatsApp'}</a></div></div>`;
+    <div class="acts"><button id="cp" class="main">${pt ? 'Copiar link' : 'Copiar enlace'}</button></div></div>`;
 }
 function mock(kind, t) {
-  if (kind === 'files') return `<div class="win"><div class="bar">📁 Legenda-de-Aula</div>${t.files.map(f => `<div>${f}</div>`).join('')}</div>`;
+  if (kind === 'files') return `<div class="win"><div class="bar">Legenda-de-Aula</div>${t.files.map(f => `<div>${f}</div>`).join('')}</div>`;
   if (kind === 'uac') return `<div class="win"><div>${t.uac}</div><div class="row"><span class="btn-fake">${t.yes}</span><span class="btn-fake ghost">${t.no}</span></div></div>`;
   if (kind === 'ext') return `<div class="win"><div class="row"><span>${t.ext[0]}</span><span class="sw"></span></div><div class="row"><span class="btn-fake">${t.ext[1]}</span></div></div>`;
   if (kind === 'audio') return `<div class="win"><div class="row"><span>${t.aud[0]}</span><span class="k">CABLE Input</span></div><div class="row"><span>${t.aud[1]}</span><span class="k">${t.aud[2]}</span></div></div>`;
-  if (kind === 'listen') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Gravação › CABLE Output › Propriedades › Ouvir' : 'Grabación › CABLE Output › Propiedades › Escuchar'}</span></div><div><b>☑ ${lang === 'pt' ? 'Escutar este dispositivo' : 'Escuchar este dispositivo'}</b></div></div>`;
-  if (kind === 'restart') return `<div class="win"><div class="row"><span>⊞ Iniciar → ⏻ ${lang === 'pt' ? 'Energia' : 'Energía'}</span></div><div>${lang === 'pt' ? 'Suspender' : 'Suspender'}</div><div>${lang === 'pt' ? 'Desligar' : 'Apagar'}</div><div><b>↻ ${lang === 'pt' ? 'Reiniciar' : 'Reiniciar'} ◀</b></div></div>`;
+  if (kind === 'listen') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Gravação › CABLE Output › Propriedades › Ouvir' : 'Grabación › CABLE Output › Propiedades › Escuchar'}</span></div><div><b>${lang === 'pt' ? 'Marque: Escutar este dispositivo' : 'Marca: Escuchar este dispositivo'}</b></div></div>`;
+  if (kind === 'restart') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Iniciar › Energia › Reiniciar' : 'Inicio › Energía › Reiniciar'}</span></div><div>${lang === 'pt' ? 'Suspender' : 'Suspender'}</div><div>${lang === 'pt' ? 'Desligar' : 'Apagar'}</div><div><b>Reiniciar</b></div></div>`;
   return `<div class="cap-demo"><b>${t.cap1}</b>${t.cap1t}</div>`;
 }
 
@@ -276,7 +295,7 @@ function render() {
   $('back').textContent = t.back; $('back').disabled = step === 0;
   $('next').textContent = s.done ? t.restart : (step === n - 2 ? t.finish : t.next);
   if (s.done) {
-    $('card').innerHTML = `<div class="done-box"><div class="big">✓</div><h2>${t.doneT}</h2><p>${t.doneP}</p><p class="sub">${t.help}</p></div>`;
+    $('card').innerHTML = `<div class="done-box"><div class="big"><svg viewBox="0 0 48 48" width="64" height="64"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="3"/><path d="M13 25l8 8 14-16" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h2>${t.doneT}</h2><p>${t.doneP}</p><p class="sub">${t.help}</p></div>`;
     return;
   }
   const dir = s.dir ? `<div class="see"><small>${t.dirLabel}</small><div class="dir"><span class="on">${t.d1}</span><span>${t.d2}</span></div><div class="note">${t.dnote}</div></div>` : '';
@@ -294,70 +313,81 @@ function render() {
   const cp = $('cp');
   if (cp) cp.onclick = async () => {
     const pt = lang === 'pt';
-    try { await navigator.clipboard.writeText(GUIDE_URL); cp.textContent = pt ? '✓ Link copiado' : '✓ Enlace copiado'; }
+    try { await navigator.clipboard.writeText(GUIDE_URL); cp.textContent = pt ? 'Link copiado' : 'Enlace copiado'; }
     catch (e) { $('lk').focus(); $('lk').select(); cp.textContent = pt ? 'Agora aperte Ctrl + C' : 'Ahora presiona Ctrl + C'; }
   };
   play(step);
 }
 // ---------- animações dos passos ----------
+const IC = {
+  folder: '<svg viewBox="0 0 48 40"><path d="M3 7a3 3 0 0 1 3-3h13l4 5h19a3 3 0 0 1 3 3v24a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z" fill="#e0a92b"/><path d="M3 15h42v20a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z" fill="#f7c948"/></svg>',
+  zip: '<svg viewBox="0 0 40 48"><path d="M5 3h21l10 10v32H5z" fill="#fff" stroke="#8a97a8" stroke-width="2"/><path d="M26 3v10h10" fill="#dfe5ee" stroke="#8a97a8" stroke-width="2"/><path d="M17 8h4v4h-4zm0 8h4v4h-4zm0 8h4v4h-4zm0 8h4v4h-4z" fill="#6b7a90"/></svg>',
+  bat: '<svg viewBox="0 0 40 48"><path d="M5 3h21l10 10v32H5z" fill="#fff" stroke="#8a97a8" stroke-width="2"/><path d="M26 3v10h10" fill="#dfe5ee" stroke="#8a97a8" stroke-width="2"/><rect x="9" y="22" width="22" height="16" rx="2" fill="#14202e"/><path d="M13 27l4 3-4 3M20 34h7" stroke="#7ee08a" stroke-width="2" fill="none"/></svg>',
+  trash: '<svg viewBox="0 0 40 48"><path d="M8 12h24l-2 32H10z" fill="#cfd8e3" stroke="#6b7a90" stroke-width="2"/><rect x="5" y="7" width="30" height="5" rx="2" fill="#9aa7b8"/><rect x="15" y="3" width="10" height="4" rx="1" fill="#9aa7b8"/></svg>',
+  user: '<svg viewBox="0 0 48 48"><circle cx="24" cy="16" r="9" fill="#9aa7b8"/><path d="M6 44c0-10 8-16 18-16s18 6 18 16z" fill="#9aa7b8"/></svg>',
+  chrome: '<div class="chr"></div>',
+  win: '<svg viewBox="0 0 24 24"><path d="M2 3.5l9-1.3v9H2zM12 2l10-1.5v10.7H12zM2 12.5h9v9L2 20.3zM12 12.5h10v11L12 22z" fill="#fff"/></svg>',
+  search: '<svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M15 15l6 6" stroke="#fff" stroke-width="2.4"/></svg>',
+  puzzle: '<svg viewBox="0 0 24 24"><path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5S21.88 11 20.5 11z" fill="#56657a"/></svg>'
+};
 const WF = '<div class="wf" style="left:5%;top:7%;width:90%;height:86%"><div class="tb">%T%</div></div>';
 const CUR = '<svg class="cur" id="cur" viewBox="0 0 24 24" style="left:50%;top:70%"><path d="M3 2l7 18 2.6-7.4L20 10z" fill="#fff" stroke="#14202e" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="rip" id="rip"></span>' +
  '<div class="hud" id="hud"><svg class="ms" viewBox="0 0 24 34"><path id="mL" d="M12 2H9a7 7 0 0 0-7 7v7h10z"/><path id="mR" d="M12 2h3a7 7 0 0 1 7 7v7H12z"/><path class="mb" d="M2 16h20v9a9 9 0 0 1-9 9h-2a9 9 0 0 1-9-9z"/><path class="ml" d="M12 2v14"/></svg><kbd id="hudk" hidden></kbd></div>';
 const SCENES = [
- { len: 8600, html: WF.replace('%T%', '📁 Downloads') +
-   '<div class="ic" id="zip" style="left:12%;top:24%">🗜️<span>Legenda-de-Aula.zip</span></div>' +
+ { len: 8600, html: WF.replace('%T%', 'Downloads') +
+   '<div class="ic" id="zip" style="left:12%;top:24%">' + IC.zip + '<span>Legenda-de-Aula.zip</span></div>' +
    '<div class="menu" id="mn" hidden style="left:20%;top:38%"><div>Abrir</div><div id="mi">Extrair tudo…</div><div>Propriedades</div></div>' +
    '<div class="dlg" id="dl" hidden style="left:32%;top:22%;width:44%;height:40%">Extrair pastas compactadas<div class="btn2" id="bx" style="right:4%;bottom:10%">Extrair</div></div>' +
-   '<div class="ic" id="fd" hidden style="left:42%;top:24%">📁<span>Legenda-de-Aula</span></div>',
+   '<div class="ic" id="fd" hidden style="left:42%;top:24%">' + IC.folder + '<span>Legenda-de-Aula</span></div>',
    caps: { a: ['Clique com o botão direito no arquivo .zip', 'Haz clic derecho en el archivo .zip'], b: ['Escolha “Extrair tudo…”', 'Elige “Extraer todo…”'], c: ['Clique em Extrair', 'Haz clic en Extraer'], d: ['Pronto: a pasta apareceu', 'Listo: apareció la carpeta'] },
    tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1500, 'cr'], [1600, 's', 'mn'], [2300, 'cap', 'b'], [2400, 'mt', 'mi'], [3500, 'c'], [3600, 'h', 'mn'], [3700, 's', 'dl'], [4200, 'cap', 'c'], [4300, 'mt', 'bx'], [5500, 'c'], [5600, 'h', 'dl'], [5700, 's', 'fd'], [5800, 'cap', 'd']] },
- { len: 11500, html: WF.replace('%T%', '📁 Legenda-de-Aula') +
-   '<div class="ic" id="bat" style="left:12%;top:24%">⚙️<span>INSTALAR.bat</span></div>' +
+ { len: 11500, html: WF.replace('%T%', 'Legenda-de-Aula') +
+   '<div class="ic" id="bat" style="left:12%;top:24%">' + IC.bat + '<span>INSTALAR.bat</span></div>' +
    '<div class="dlg" id="du" hidden style="left:28%;top:20%;width:44%;height:46%"><b>Controle de Conta de Usuário</b><br>Deseja permitir que este aplicativo faça alterações no dispositivo?<div class="btn2" style="right:26%;bottom:8%">Sim</div><div class="btn2 g" style="right:4%;bottom:8%">Não</div></div>' +
-   '<div class="term" id="term" hidden style="left:18%;top:14%;width:64%;height:60%"><div id="l1" hidden>&gt; Guardando a extensão no seu computador…</div><div id="l2" hidden>&gt; Baixando o VB-CABLE do site oficial…</div><div id="l3" hidden>&gt; Abrindo o instalador do VB-CABLE…</div><div id="l4" class="ok" hidden>✔ Pronto! Agora reinicie o computador.</div></div>' +
+   '<div class="term" id="term" hidden style="left:18%;top:14%;width:64%;height:60%"><div id="l1" hidden>&gt; Guardando a extensão no seu computador…</div><div id="l2" hidden>&gt; Baixando o VB-CABLE do site oficial…</div><div id="l3" hidden>&gt; Abrindo o instalador do VB-CABLE…</div><div id="l4" class="ok" hidden>Pronto! Agora reinicie o computador.</div></div>' +
    '<div class="dlg" id="vb" hidden style="left:30%;top:24%;width:40%;height:42%"><b>VB-CABLE Driver Package</b><div class="btn2" style="left:25%;bottom:20%">Install Driver</div></div>',
    caps: { a: ['Dê dois cliques em INSTALAR.bat', 'Haz doble clic en INSTALAR.bat'], b: ['Clique em Sim', 'Haz clic en Sí'], c: ['Na janela do VB-CABLE, clique em Install Driver', 'En la ventana de VB-CABLE, haz clic en Install Driver'], d: ['Pronto. Agora reinicie o computador', 'Listo. Ahora reinicia la computadora'] },
    tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1200, 'cd'], [1800, 's', 'du'], [2500, 'cap', 'b'], [2600, 'm', 59, 61], [3700, 'c'], [3800, 'h', 'du'], [4000, 's', 'term'], [4200, 's', 'l1'], [5000, 's', 'l2'], [6000, 's', 'l3'], [6800, 's', 'vb'], [6900, 'cap', 'c'], [7000, 'm', 46, 54], [8300, 'c'], [8400, 'h', 'vb'], [8800, 's', 'l4'], [8900, 'cap', 'd']] },
- { len: 8800, html: '<div style="position:absolute;left:38%;top:14%;font-size:22cqw;color:#ffffff26;line-height:1">⊞</div>' +
-   '<div class="ic" style="left:3%;top:6%;font-size:4.6cqw;color:#fff">🗑️<span>Lixeira</span></div><div class="ic" style="left:3%;top:30%;font-size:4.6cqw;color:#fff">🌐<span>Google Chrome</span></div><div class="ic" style="left:3%;top:54%;font-size:4.6cqw;color:#fff">📁<span>Downloads</span></div>' +
-   '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div><div class="lbl" id="stb" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
-   '<div class="lbl" style="left:9%;top:90.5%;font-size:2.6cqw;color:#fff;font-weight:400">🔍  📁  🌐</div><div class="lbl" style="left:88%;top:89.5%;font-size:1.7cqw;color:#fff;font-weight:400;text-align:right">21:30<br>30/10/2026</div>' +
-   '<div class="menu" id="sm" hidden style="left:2%;top:66%;width:26%"><div>📄 Documentos</div><div>⚙ Configurações</div><div id="ener">⏻ Energia</div></div>' +
-   '<div class="menu" id="pm" hidden style="left:29%;top:68%;width:22%"><div>Suspender</div><div>Desligar</div><div id="reini">↻ Reiniciar</div></div>' +
-   '<div id="bk" hidden style="position:absolute;inset:0;background:#000;color:#fff;display:grid;place-items:center;font-size:3.4cqw;z-index:5">↻ Reiniciando…</div>',
+ { len: 8800, html: '<div style="position:absolute;left:41%;top:16%;width:19cqw;height:19cqw;opacity:.16">' + IC.win + '</div>' +
+   '<div class="ic" style="left:3%;top:6%">' + IC.trash + '<span>Lixeira</span></div><div class="ic" style="left:3%;top:30%">' + IC.chrome + '<span>Google Chrome</span></div><div class="ic" style="left:3%;top:54%">' + IC.folder + '<span>Downloads</span></div>' +
+   '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div><div class="lbl" id="stb" style="left:2.2%;top:89.4%;width:3.4cqw;height:3.4cqw">' + IC.win + '</div>' +
+   '<div class="tbi" style="left:9%;top:90.2%">' + IC.search + IC.folder + IC.chrome + '</div><div class="lbl" style="left:88%;top:89.5%;font-size:1.7cqw;color:#fff;font-weight:400;text-align:right">21:30<br>30/10/2026</div>' +
+   '<div class="menu" id="sm" hidden style="left:2%;top:66%;width:26%"><div>Documentos</div><div>Configurações</div><div id="ener">Energia</div></div>' +
+   '<div class="menu" id="pm" hidden style="left:29%;top:68%;width:22%"><div>Suspender</div><div>Desligar</div><div id="reini">Reiniciar</div></div>' +
+   '<div id="bk" hidden style="position:absolute;inset:0;background:#000;color:#fff;display:grid;place-items:center;font-size:3.4cqw;z-index:5">Reiniciando…</div>',
    caps: { a: ['Clique no botão Iniciar do Windows', 'Haz clic en el botón Inicio de Windows'], b: ['Clique em Energia', 'Haz clic en Energía'], c: ['Escolha Reiniciar', 'Elige Reiniciar'], d: ['O computador reinicia. Depois, volte a este guia.', 'La computadora se reinicia. Después, vuelve a esta guía.'] },
    tl: [[0, 'cap', 'a'], [300, 'mt', 'stb'], [1500, 'c'], [1600, 's', 'sm'], [2200, 'cap', 'b'], [2300, 'mt', 'ener'], [3400, 'c'], [3500, 's', 'pm'], [4000, 'cap', 'c'], [4100, 'mt', 'reini'], [5200, 'c'], [5300, 's', 'bk'], [5400, 'cap', 'd']] },
- { len: 10500, html: WF.replace('%T%', '🌐 Google Chrome') +
+ { len: 10500, html: WF.replace('%T%', 'Google Chrome') +
    '<div class="url" style="left:9%;top:16%;width:60%"><span id="u"></span></div>' +
    '<div id="pg" hidden><div class="lbl" style="left:9%;top:27%;font-size:2.6cqw">Extensões</div><div class="lbl" style="left:62%;top:27%">Modo do desenvolvedor</div><div class="tgl" id="tg" style="left:84%;top:26%"></div></div>' +
    '<div class="btn2" id="bl" hidden style="left:9%;top:42%">Carregar sem compactação</div>' +
-   '<div class="dlg" id="fdlg" hidden style="left:32%;top:30%;width:44%;height:44%">Selecionar pasta<div class="sel" style="left:6%;top:42%;width:50%;background:#eaf0ff">📁 extensao</div></div>' +
+   '<div class="dlg" id="fdlg" hidden style="left:32%;top:30%;width:44%;height:44%">Selecionar pasta<div class="sel" style="left:6%;top:42%;width:50%;background:#eaf0ff">extensao</div></div>' +
    '<div class="dlg" id="card" hidden style="left:9%;top:60%;width:44%;height:26%;padding:1.2cqw"><b>Legenda de Aula</b> · 1.0<div class="tgl on" style="right:4%;top:30%"></div></div>',
    caps: { a: ['Abra chrome://extensions', 'Abre chrome://extensions'], b: ['Ligue o Modo do desenvolvedor', 'Activa el Modo de desarrollador'], c: ['Clique em Carregar sem compactação', 'Haz clic en Cargar descomprimida'], d: ['Escolha a pasta “extensao”', 'Elige la carpeta “extensao”'], e: ['Pronto: a extensão apareceu', 'Listo: apareció la extensión'] },
    tl: [[0, 'cap', 'a'], [300, 'm', 38, 20], [1000, 'c'], [1100, 'ty', 'u', 'chrome://extensions'], [2500, 'key', 'Enter'], [2800, 's', 'pg'], [3000, 'cap', 'b'], [3100, 'm', 86.5, 28.5], [4100, 'c'], [4200, 'k', 'tg'], [4300, 's', 'bl'], [5000, 'cap', 'c'], [5100, 'm', 19, 45], [6100, 'c'], [6200, 's', 'fdlg'], [6400, 'cap', 'd'], [6500, 'm', 40, 50], [7600, 'c'], [7700, 'h', 'fdlg'], [7900, 's', 'card'], [8000, 'cap', 'e']] },
- { len: 8200, html: WF.replace('%T%', '⚙ Configurações de áudio da reunião') +
+ { len: 8200, html: WF.replace('%T%', 'Configurações de áudio da reunião') +
    '<div class="lbl" style="left:10%;top:28%">Alto-falante</div><div class="sel" id="sp" style="left:34%;top:26%;width:52%"><span id="spt">Alto-falantes (Realtek)</span></div>' +
    '<div class="lbl" style="left:10%;top:52%">Microfone</div><div class="sel" style="left:34%;top:50%;width:52%">Microfone (Realtek)</div>' +
    '<div class="menu" id="ol" hidden style="left:34%;top:37%;width:52%"><div>Alto-falantes (Realtek)</div><div style="background:#cfe0ff;font-weight:700">CABLE Input</div></div>',
    caps: { a: ['Abra as configurações de áudio da reunião', 'Abre la configuración de audio de la reunión'], b: ['No alto-falante, escolha CABLE Input', 'En altavoz, elige CABLE Input'], c: ['O microfone continua o seu normal', 'El micrófono sigue siendo el tuyo de siempre'] },
    tl: [[0, 'cap', 'a'], [300, 'm', 60, 31], [1500, 'c'], [1600, 's', 'ol'], [2200, 'cap', 'b'], [2300, 'm', 50, 46], [3500, 'c'], [3600, 'h', 'ol'], [3700, 't', 'spt', 'CABLE Input'], [3750, 'k', 'sp'], [5000, 'cap', 'c'], [5100, 'm', 60, 56]] },
- { len: 12500, html: WF.replace('%T%', '🔊 Som') +
+ { len: 12500, html: WF.replace('%T%', 'Som') +
    '<div class="lbl" style="left:10%;top:20%;color:#56657a">Reprodução</div><div class="lbl" id="tg" style="left:28%;top:20%;color:#56657a;border-bottom:.4cqw solid #1d4ed8">Gravação</div>' +
-   '<div id="lst" hidden><div class="sel" id="cab" style="left:10%;top:34%;width:58%">🎙 CABLE Output</div><div class="btn2" id="pr" style="left:72%;top:34%">Propriedades</div></div>' +
+   '<div id="lst" hidden><div class="sel" id="cab" style="left:10%;top:34%;width:58%">CABLE Output</div><div class="btn2" id="pr" style="left:72%;top:34%">Propriedades</div></div>' +
    '<div class="dlg" id="pd" hidden style="left:22%;top:14%;width:56%;height:70%"><b>Propriedades de CABLE Output</b><div class="lbl" style="left:6%;top:18%;color:#1d4ed8">Ouvir</div>' +
-   '<div class="sel" id="chk" style="left:6%;top:32%;width:88%">☐ Escutar este dispositivo</div><div class="sel" id="dev" style="left:6%;top:52%;width:88%">Reproduzir neste dispositivo: Padrão</div><div class="btn2" style="right:5%;bottom:8%">OK</div></div>',
+   '<div class="sel" id="chk" style="left:6%;top:32%;width:88%"><span class="cbx" id="cbx"></span>Escutar este dispositivo</div><div class="sel" id="dev" style="left:6%;top:52%;width:88%">Reproduzir neste dispositivo: Padrão</div><div class="btn2" style="right:5%;bottom:8%">OK</div></div>',
    caps: { a: ['Na janela Som, abra a aba Gravação', 'En la ventana Sonido, abre la pestaña Grabación'], b: ['Clique em CABLE Output e depois em Propriedades', 'Haz clic en CABLE Output y luego en Propiedades'], c: ['Aba Ouvir: marque “Escutar este dispositivo”', 'Pestaña Escuchar: marca “Escuchar este dispositivo”'], d: ['Escolha o seu fone e clique em OK', 'Elige tus auriculares y haz clic en Aceptar'] },
-   tl: [[0, 'cap', 'a'], [300, 'm', 31, 23], [1500, 'c'], [1600, 's', 'lst'], [2300, 'cap', 'b'], [2400, 'm', 30, 37], [3400, 'c'], [3500, 'm', 80, 38], [4500, 'c'], [4600, 's', 'pd'], [5200, 'cap', 'c'], [5300, 'm', 36, 37], [6300, 'c'], [6400, 't', 'chk', '☑ Escutar este dispositivo'], [7000, 'm', 50, 52], [8000, 'c'], [8100, 't', 'dev', 'Reproduzir neste dispositivo: Seu fone'], [8200, 'cap', 'd'], [8700, 'm', 70, 76], [9700, 'c'], [9800, 'h', 'pd']] },
- { len: 11500, html: WF.replace('%T%', '🌐 Aula de hoje · Google Chrome') +
-   '<div class="ic" style="left:14%;top:26%;font-size:9cqw;filter:grayscale(.3)">👤<span>Professor</span></div>' +
-   '<div class="lbl" style="left:84%;top:13%;font-size:3.4cqw">🧩</div>' +
-   '<div class="menu" id="dd" hidden style="left:62%;top:22%;width:30%"><div>💬 Legenda de Aula</div></div>' +
-   '<div class="pan" id="pn" hidden style="left:58%;top:12%;width:36%;height:78%"><div class="btn2" id="gb" style="left:5%;top:4%">▶ Iniciar</div><div id="st" hidden style="position:absolute;left:5%;top:15%;color:#9aabbf">Ouvindo · áudio ▮▮▮▯▯</div>' +
+   tl: [[0, 'cap', 'a'], [300, 'm', 31, 23], [1500, 'c'], [1600, 's', 'lst'], [2300, 'cap', 'b'], [2400, 'm', 30, 37], [3400, 'c'], [3500, 'm', 80, 38], [4500, 'c'], [4600, 's', 'pd'], [5200, 'cap', 'c'], [5300, 'm', 36, 37], [6300, 'c'], [6400, 'k', 'cbx'], [7000, 'm', 50, 52], [8000, 'c'], [8100, 't', 'dev', 'Reproduzir neste dispositivo: Seu fone'], [8200, 'cap', 'd'], [8700, 'm', 70, 76], [9700, 'c'], [9800, 'h', 'pd']] },
+ { len: 11500, html: WF.replace('%T%', 'Aula de hoje · Google Chrome') +
+   '<div class="ic" style="left:14%;top:26%"><div style="width:11cqw;height:11cqw">' + IC.user + '</div><span>Professor</span></div>' +
+   '<div class="lbl" style="left:84%;top:13%;width:3.6cqw;height:3.6cqw">' + IC.puzzle + '</div>' +
+   '<div class="menu" id="dd" hidden style="left:62%;top:22%;width:30%"><div>Legenda de Aula</div></div>' +
+   '<div class="pan" id="pn" hidden style="left:58%;top:12%;width:36%;height:78%"><div class="btn2" id="gb" style="left:5%;top:4%">Iniciar</div><div id="st" hidden style="position:absolute;left:5%;top:15%;color:#9aabbf">Ouvindo</div>' +
    '<div class="ln" id="l1" hidden style="top:24%"><b style="color:#6aa9ff">Voz 1</b> 19:02<br>Bom, hoje vamos falar da metodologia da pesquisa.</div>' +
-   '<div class="ln hi" id="l2" hidden style="top:46%"><b style="color:#6aa9ff">Voz 1</b> 19:03<br>Vamos combinar o prazo de entrega do trabalho final.<br><span style="color:#ffd166">📅 Prazo / data</span></div>' +
+   '<div class="ln hi" id="l2" hidden style="top:46%"><b style="color:#6aa9ff">Voz 1</b> 19:03<br>Vamos combinar o prazo de entrega do trabalho final.<br><span style="color:#ffd166">Prazo / data</span></div>' +
    '<div class="ln" id="l3" hidden style="top:76%"><b style="color:#ff9e64">Voz 2</b> 19:03<br>Professor, a leitura é obrigatória?</div></div>',
    caps: { a: ['Clique no ícone de quebra-cabeça', 'Haz clic en el ícono de rompecabezas'], b: ['Abra Legenda de Aula', 'Abre Subtítulos de Clase'], c: ['Clique em Iniciar', 'Haz clic en Iniciar'], d: ['A legenda aparece ao vivo, com os destaques', 'Los subtítulos aparecen en vivo, con lo importante resaltado'] },
-   tl: [[0, 'cap', 'a'], [300, 'm', 86, 17], [1500, 'c'], [1600, 's', 'dd'], [2200, 'cap', 'b'], [2300, 'm', 72, 26], [3400, 'c'], [3500, 'h', 'dd'], [3600, 's', 'pn'], [4200, 'cap', 'c'], [4300, 'm', 65, 17], [5400, 'c'], [5500, 't', 'gb', '■ Parar'], [5600, 's', 'st'], [6500, 's', 'l1'], [7700, 's', 'l2'], [8900, 's', 'l3'], [9000, 'cap', 'd']] }
+   tl: [[0, 'cap', 'a'], [300, 'm', 86, 17], [1500, 'c'], [1600, 's', 'dd'], [2200, 'cap', 'b'], [2300, 'm', 72, 26], [3400, 'c'], [3500, 'h', 'dd'], [3600, 's', 'pn'], [4200, 'cap', 'c'], [4300, 'm', 65, 17], [5400, 'c'], [5500, 't', 'gb', 'Parar'], [5600, 's', 'st'], [6500, 's', 'l1'], [7700, 's', 'l2'], [8900, 's', 'l3'], [9000, 'cap', 'd']] }
 ];
 let tms = [], ivs = [];
 function stopAnim() { tms.forEach(clearTimeout); ivs.forEach(clearInterval); tms = []; ivs = []; }
@@ -426,7 +456,7 @@ function play(i) {
   if (still) { sc.tl.forEach(act); return; }
   sc.tl.forEach(a => tms.push(setTimeout(() => act(a), a[0] * K)));
   tms.push(setTimeout(() => {
-    const r = document.createElement('div'); r.className = 'rp'; r.textContent = lang === 'pt' ? '↻ Ver de novo' : '↻ Ver de nuevo'; st.appendChild(r);
+    const r = document.createElement('div'); r.className = 'rp'; r.textContent = lang === 'pt' ? 'Ver de novo' : 'Ver de nuevo'; st.appendChild(r);
   }, sc.len * K));
 }
 $('bpt').onclick = () => setLang('pt'); $('bes').onclick = () => setLang('es');
