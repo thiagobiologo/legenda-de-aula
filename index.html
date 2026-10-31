@@ -186,8 +186,8 @@ const T = {
       { h: "Adicione a extensão ao Chrome", cap: "Carregando a extensão no Chrome",
         do: ["Abra o Google Chrome. Na faixa branca do topo (a barra de endereço), apague o que estiver escrito, digite <code>chrome://extensions</code> e aperte <b>Enter</b>.", "Ligue a chavinha <b>Modo do desenvolvedor</b> (canto de cima, à direita).", "Clique em <b>Carregar sem compactação</b>. Vai abrir uma janela para escolher a pasta.", "Clique no botão <b>Copiar</b> logo abaixo. Na janela, clique na <b>faixa de endereço</b> (a linha de cima), aperte <span class=\"k\">Ctrl</span> e <span class=\"k\">V</span> juntas e depois <span class=\"k\">Enter</span>.", "Clique em <b>Selecionar pasta</b>.", "Não apague essa pasta depois: é nela que a extensão fica guardada."],
         see: "Procure esta chavinha e este botão", mock: "ext", copy: "C:\LegendaDeAula\extensao" },
-      { h: "Mande o som para o cabo", cap: "Escolhendo o CABLE Input no canto da tela",
-        do: ["No canto de baixo da tela, à direita, clique no <b>ícone do alto-falante</b>, perto do relógio.", "Clique na <b>setinha</b> ao lado do controle de volume para abrir a lista de aparelhos de som. (No Windows 10, clique no nome do aparelho que aparece em cima do volume.)", "Na lista, escolha <b>CABLE Input</b>."],
+      { h: "Mande o som para o cabo", cap: "Escolhendo o CABLE In 16 Ch no canto da tela",
+        do: ["No canto de baixo da tela, à direita, clique no <b>ícone do alto-falante</b>, perto do relógio.", "Clique na <b>setinha</b> ao lado do controle de volume para abrir a lista de aparelhos de som. (No Windows 10, clique no nome do aparelho que aparece em cima do volume.)", "Na lista, escolha <b>CABLE In 16 Ch (VB-Audio Virtual Cable)</b>. O nome pode variar um pouco, mas começa com <b>CABLE In</b>."],
         note: "Agora todo o som do computador passa pelo cabo, e a legenda consegue ouvir. No próximo passo você faz o som voltar para o seu fone. No fim da aula, repita e escolha o seu alto-falante de volta. Se o Zoom ou o Meet estiver com um alto-falante escolhido à mão, troque para <b>Igual ao sistema</b>.",
         see: "Deixe assim", mock: "audio" },
       { h: "Ouça a aula no seu fone", cap: "Fazendo o som voltar para o seu fone",
@@ -239,8 +239,8 @@ const T = {
       { h: "Agrega la extensión a Chrome", cap: "Cargando la extensión en Chrome",
         do: ["Abre Google Chrome. En la franja blanca de arriba (la barra de direcciones), borra lo que esté escrito, escribe <code>chrome://extensions</code> y presiona <b>Enter</b>.", "Activa el interruptor <b>Modo de desarrollador</b> (arriba, a la derecha).", "Haz clic en <b>Cargar descomprimida</b>. Se abre una ventana para elegir la carpeta.", "Haz clic en el botón <b>Copiar</b> de aquí abajo. En la ventana, haz clic en la <b>franja de dirección</b> (la línea de arriba), presiona <span class=\"k\">Ctrl</span> y <span class=\"k\">V</span> juntas y luego <span class=\"k\">Enter</span>.", "Haz clic en <b>Seleccionar carpeta</b>.", "No borres esa carpeta después: es donde queda guardada la extensión."],
         see: "Busca este interruptor y este botón", mock: "ext", copy: "C:\LegendaDeAula\extensao" },
-      { h: "Manda el sonido al cable", cap: "Eligiendo CABLE Input en la esquina de la pantalla",
-        do: ["En la esquina de abajo de la pantalla, a la derecha, haz clic en el <b>ícono del altavoz</b>, cerca del reloj.", "Haz clic en la <b>flechita</b> junto al control de volumen para abrir la lista de dispositivos de sonido. (En Windows 10, haz clic en el nombre del dispositivo que aparece arriba del volumen.)", "En la lista, elige <b>CABLE Input</b>."],
+      { h: "Manda el sonido al cable", cap: "Eligiendo CABLE In 16 Ch en la esquina de la pantalla",
+        do: ["En la esquina de abajo de la pantalla, a la derecha, haz clic en el <b>ícono del altavoz</b>, cerca del reloj.", "Haz clic en la <b>flechita</b> junto al control de volumen para abrir la lista de dispositivos de sonido. (En Windows 10, haz clic en el nombre del dispositivo que aparece arriba del volumen.)", "En la lista, elige <b>CABLE In 16 Ch (VB-Audio Virtual Cable)</b>. El nombre puede variar un poco, pero empieza con <b>CABLE In</b>."],
         note: "Ahora todo el sonido de la computadora pasa por el cable y los subtítulos pueden escucharlo. En el siguiente paso haces que el sonido vuelva a tus auriculares. Al final de la clase, repite y vuelve a elegir tu altavoz. Si Zoom o Meet tiene un altavoz elegido a mano, cámbialo a <b>Igual que el sistema</b>.",
         see: "Déjalo así", mock: "audio" },
       { h: "Escucha la clase en tus auriculares", cap: "Haciendo que el sonido vuelva a tus auriculares",
@@ -305,7 +305,7 @@ function mock(kind, t) {
   if (kind === 'files') return `<div class="win"><div class="bar">Legenda-de-Aula</div>${t.files.map(f => `<div>${f}</div>`).join('')}</div>`;
   if (kind === 'uac') return `<div class="win"><div>${t.uac}</div><div class="row"><span class="btn-fake">${t.yes}</span><span class="btn-fake ghost">${t.no}</span></div></div>`;
   if (kind === 'ext') return `<div class="win"><div class="row"><span>${t.ext[0]}</span><span class="sw"></span></div><div class="row"><span class="btn-fake">${t.ext[1]}</span></div></div>`;
-  if (kind === 'audio') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Saída de som' : 'Salida de sonido'}</span><span class="k">CABLE Input</span></div><div class="row"><span>${t.aud[1]}</span><span class="k">${t.aud[2]}</span></div></div>`;
+  if (kind === 'audio') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Saída de som' : 'Salida de sonido'}</span><span class="k">CABLE In 16 Ch</span></div><div class="row"><span>${t.aud[1]}</span><span class="k">${t.aud[2]}</span></div></div>`;
   if (kind === 'dlmock') return `<div class="win"><div class="row"><span>Legenda-de-Aula.zip</span><span class="k">${lang === 'pt' ? 'Concluído' : 'Completado'}</span></div></div>`;
   if (kind === 'micset') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Microfone usado pelo Chrome' : 'Micrófono usado por Chrome'}</span><span class="k">CABLE Output</span></div></div>`;
   if (kind === 'after') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Saída de som' : 'Salida de sonido'}</span><span class="k">${lang === 'pt' ? 'Alto-falantes (o seu normal)' : 'Altavoces (el tuyo normal)'}</span></div></div>`;
@@ -377,7 +377,7 @@ const CORNER = (cur, first, second) => '<div style="position:absolute;left:38%;t
    '<div class="lbl" style="left:75%;top:89.4%;font-size:2.6cqw;color:#fff">📶</div><div class="lbl" id="spk" style="left:80%;top:89.4%;font-size:2.6cqw;color:#fff">🔊</div>' +
    '<div class="lbl" style="left:88%;top:89.5%;font-size:1.7cqw;color:#fff;font-weight:400;text-align:right">21:30<br>30/10/2026</div>' +
    '<div class="dlg" id="qp" hidden style="left:58%;top:50%;width:38%;height:34%;padding:1.4cqw"><div class="lbl" style="left:5%;top:14%;font-size:2.6cqw">🔊</div><div style="position:absolute;left:17%;top:26%;width:54%;height:.9cqw;background:#c7d0dc;border-radius:1cqw"><div style="width:60%;height:100%;background:#1d4ed8;border-radius:1cqw"></div></div><div class="btn2 g" id="arr" style="right:5%;top:10%">&gt;</div><div id="dn" style="position:absolute;left:5%;top:60%;font-weight:700;font-size:1.9cqw">' + cur + '</div></div>' +
-   '<div class="menu" id="ol" hidden style="left:56%;top:26%;width:40%"><div id="rt">Alto-falantes (Realtek)</div><div>Fones de ouvido</div><div id="ci">CABLE Input</div></div>';
+   '<div class="menu" id="ol" hidden style="left:56%;top:26%;width:40%"><div id="rt">Alto-falantes (Realtek)</div><div>Fones de ouvido</div><div id="ci">CABLE In 16 Ch</div></div>';
 const SCENES = [
  { len: 6500, html: WF.replace('%T%', '🌐 Google Chrome') +
    '<div class="lbl" style="left:12%;top:24%;font-size:3cqw">Legenda de Aula</div><div class="btn2" id="dbtn" style="left:12%;top:44%;font-size:2.4cqw;padding:1.2cqw 3cqw">Baixar o instalador (.zip)</div>' +
@@ -414,7 +414,7 @@ const SCENES = [
    '<div class="dlg" id="card" hidden style="left:9%;top:60%;width:44%;height:26%;padding:1.2cqw"><b>Legenda de Aula</b> · 1.0<div class="tgl on" style="right:4%;top:30%"></div></div>',
    tl: [[300, 'm', 38, 20], [1000, 'c'], [1100, 'ty', 'u', 'chrome://extensions'], [2500, 'key', 'Enter'], [2800, 's', 'pg'], [3100, 'm', 86.5, 28.5], [4100, 'c'], [4200, 'k', 'tg'], [4300, 's', 'bl'], [5100, 'm', 19, 45], [6100, 'c'], [6200, 's', 'fdlg'], [6900, 'mt', 'pth'], [7900, 'c'], [8000, 'key', 'Ctrl + V'], [8100, 't', 'ptt', 'C:\LegendaDeAula\extensao'], [9200, 'key', 'Enter'], [10000, 'mt', 'selb'], [11000, 'c'], [11100, 'h', 'fdlg'], [11300, 's', 'card']] },
  { len: 8800, html: CORNER('Alto-falantes (Realtek)'),
-   tl: [[300, 'mt', 'spk'], [1500, 'c'], [1600, 's', 'qp'], [2400, 'mt', 'arr'], [3500, 'c'], [3600, 's', 'ol'], [4300, 'mt', 'ci'], [5300, 'c'], [5400, 'k', 'ci'], [5800, 'h', 'ol'], [5900, 't', 'dn', 'CABLE Input']] },
+   tl: [[300, 'mt', 'spk'], [1500, 'c'], [1600, 's', 'qp'], [2400, 'mt', 'arr'], [3500, 'c'], [3600, 's', 'ol'], [4300, 'mt', 'ci'], [5300, 'c'], [5400, 'k', 'ci'], [5800, 'h', 'ol'], [5900, 't', 'dn', 'CABLE In 16 Ch']] },
  { len: 15500, html: '<div style="position:absolute;left:38%;top:14%;font-size:22cqw;color:#ffffff26;line-height:1">⊞</div>' +
    '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div>' +
    '<div class="lbl" id="stb" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
@@ -440,7 +440,7 @@ const SCENES = [
    '<div class="ln hi" id="l2" hidden style="top:46%"><b style="color:#6aa9ff">Voz 1</b> 19:03<br>Vamos combinar o prazo de entrega do trabalho final.<br><span style="color:#ffd166">Prazo / data</span></div>' +
    '<div class="ln" id="l3" hidden style="top:76%"><b style="color:#ff9e64">Voz 2</b> 19:03<br>Professor, a leitura é obrigatória?</div></div>',
    tl: [[300, 'm', 86, 17], [1500, 'c'], [1600, 's', 'dd'], [2300, 'm', 72, 26], [3400, 'c'], [3500, 'h', 'dd'], [3600, 's', 'pn'], [4300, 'm', 65, 17], [5400, 'c'], [5500, 't', 'gb', 'Parar'], [5600, 's', 'perm'], [6400, 'mt', 'allow'], [7400, 'c'], [7500, 'h', 'perm'], [7600, 's', 'st'], [8500, 's', 'l1'], [9700, 's', 'l2'], [10900, 's', 'l3']] },
- { len: 8800, html: CORNER('CABLE Input'),
+ { len: 8800, html: CORNER('CABLE In 16 Ch'),
    tl: [[300, 'mt', 'spk'], [1500, 'c'], [1600, 's', 'qp'], [2400, 'mt', 'arr'], [3500, 'c'], [3600, 's', 'ol'], [4300, 'mt', 'rt'], [5300, 'c'], [5400, 'k', 'rt'], [5800, 'h', 'ol'], [5900, 't', 'dn', 'Alto-falantes (Realtek)']] }
 ];
 let tms = [], ivs = [];
