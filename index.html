@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia Legenda de Aula</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:wght@600;800&display=swap">
+<style>
+/* Layout: coluna única estreita, passo a passo com barra de progresso e uma "legenda" amarela como assinatura visual. */
+:root {
+  --bg: #f3f5f8; --surface: #ffffff; --ink: #14202e; --mute: #56657a; --line: #d6dde7;
+  --accent: #1d4ed8; --accent-ink: #ffffff; --cap-bg: #101923; --cap-fg: #ffe066; --ok: #1a7f4b; --warn: #a15c00;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0d141c; --surface: #16202b; --ink: #eaf0f7; --mute: #9aabbf; --line: #2a3848;
+  --accent: #7aa7ff; --accent-ink: #0d141c; --cap-bg: #05090e; --cap-fg: #ffe066; --ok: #5bd694; --warn: #f0b429; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0d141c; --surface: #16202b; --ink: #eaf0f7; --mute: #9aabbf; --line: #2a3848;
+  --accent: #7aa7ff; --accent-ink: #0d141c; --cap-bg: #05090e; --cap-fg: #ffe066; --ok: #5bd694; --warn: #f0b429; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 17px/1.55 var(--f-body); padding-block: 20px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 720px; margin: 0 auto; display: grid; gap: 18px; }
+.proto { background: var(--cap-bg); color: var(--cap-fg); font-size: 13px; padding: 8px 12px; border-radius: 6px; letter-spacing: .02em; }
+header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+h1 { font: 800 clamp(26px, 6vw, 36px)/1.1 var(--f-display); margin: 0; text-wrap: balance; }
+.sub { color: var(--mute); margin: 6px 0 0; max-width: 46ch; }
+.lang { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.lang button { border: 0; background: var(--surface); color: var(--ink); font: inherit; padding: 8px 14px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.prog { display: flex; gap: 6px; }
+.prog i { flex: 1; height: 8px; border-radius: 4px; background: var(--line); }
+.prog i.done { background: var(--ok); } .prog i.now { background: var(--accent); }
+.meta { display: flex; justify-content: space-between; color: var(--mute); font-size: 14px; margin-top: -8px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px 20px; display: grid; gap: 16px; }
+h2 { font: 800 clamp(22px, 5vw, 28px)/1.15 var(--f-display); margin: 0; text-wrap: balance; }
+.stage { aspect-ratio: 16/9; max-width: 100%; border-radius: 10px; position: relative; overflow: hidden; container-type: inline-size;
+  background: linear-gradient(135deg, #2b4a7a, #16294a); cursor: pointer; user-select: none; font-size: 2cqw; color: #14202e; }
+.vcap { color: var(--mute); font-size: 14px; margin-top: -8px; }
+.stage .wf { position: absolute; background: #f7f8fa; border-radius: 1cqw; box-shadow: 0 1cqw 3cqw #0005; }
+.stage .tb { background: #e2e7ee; padding: .8cqw 1.4cqw; font-size: 1.9cqw; border-radius: 1cqw 1cqw 0 0; font-weight: 700; }
+.stage .ic { position: absolute; display: grid; justify-items: center; gap: .4cqw; font-size: 5cqw; line-height: 1; }
+.stage .ic span { font-size: 1.8cqw; background: #fff; padding: .2cqw .8cqw; border-radius: .4cqw; }
+.stage .menu { position: absolute; background: #fff; border: 1px solid #c7d0dc; box-shadow: 0 .6cqw 2cqw #0004; padding: .4cqw; font-size: 1.9cqw; z-index: 3; }
+.stage .menu div { padding: .5cqw 2.4cqw .5cqw 1cqw; }
+.stage .dlg { position: absolute; background: #fff; border-radius: 1cqw; box-shadow: 0 1cqw 3cqw #0007; padding: 1.6cqw; font-size: 1.9cqw; z-index: 3; }
+.stage .btn2 { position: absolute; background: #1d4ed8; color: #fff; padding: .6cqw 2cqw; border-radius: .5cqw; font-size: 1.9cqw; }
+.stage .btn2.g { background: #e2e7ee; color: #14202e; }
+.stage .term { position: absolute; background: #0b0f14; color: #d6e2f0; font: 1.9cqw/1.6 ui-monospace, Consolas, monospace; padding: 1.6cqw; border-radius: 1cqw; z-index: 3; }
+.stage .term .ok { color: #5bd694; font-weight: 700; }
+.stage .url { position: absolute; background: #fff; border: 1px solid #c7d0dc; border-radius: 2cqw; padding: .6cqw 1.6cqw; font-size: 1.9cqw; }
+.stage .tgl { position: absolute; width: 5cqw; height: 2.6cqw; border-radius: 1.3cqw; background: #9aa7b8; transition: background .3s; }
+.stage .tgl::after { content: ""; position: absolute; left: .3cqw; top: .3cqw; width: 2cqw; height: 2cqw; border-radius: 50%; background: #fff; transition: left .3s; }
+.stage .tgl.on { background: #1d4ed8; } .stage .tgl.on::after { left: 2.7cqw; }
+.stage .sel { position: absolute; background: #fff; border: 1px solid #a9b6c8; border-radius: .6cqw; padding: .8cqw 1.4cqw; font-size: 1.9cqw; }
+.stage .sel.on { border: .3cqw solid #1d4ed8; background: #eaf0ff; font-weight: 700; }
+.stage .lbl { position: absolute; font-size: 1.9cqw; font-weight: 700; }
+.stage .pan { position: absolute; background: #14161a; color: #eceff4; border-radius: .8cqw; z-index: 3; font-size: 1.6cqw; overflow: hidden; }
+.stage .pan .ln { position: absolute; left: 5%; right: 5%; line-height: 1.3; }
+.stage .pan .ln.hi { border-left: .4cqw solid #ffd166; background: #2b2410; padding-left: 1cqw; }
+.stage .cur { position: absolute; width: 3cqw; height: 3cqw; z-index: 5; pointer-events: none; transition: left .9s ease, top .9s ease; filter: drop-shadow(0 1px 1px #0008); }
+.stage .rip { position: absolute; width: 5cqw; height: 5cqw; border: .4cqw solid #ffe066; border-radius: 50%; z-index: 4; opacity: 0; pointer-events: none; transform: translate(-50%, -50%); }
+.stage .rip.go { animation: rip .55s ease-out; }
+@keyframes rip { 0% { transform: translate(-50%, -50%) scale(.3); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; } }
+.stage .capb { position: absolute; left: 3%; right: 3%; bottom: 3%; text-align: center; background: #000c; color: #ffe066; font-size: 2.5cqw; padding: .8cqw 1.4cqw; border-radius: .8cqw; z-index: 6; }
+.stage .rp { position: absolute; inset: 0; display: grid; place-items: center; background: #000a; color: #ffe066; font-weight: 700; font-size: 3cqw; z-index: 7; }
+@media (prefers-reduced-motion: reduce) { .stage .cur, .stage .tgl, .stage .tgl::after { transition: none; } .stage .rip.go { animation: none; } }
+ol.do { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; counter-reset: s; }
+ol.do li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; min-width: 0; }
+ol.do li::before { content: counter(s); width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font: 800 16px/34px var(--f-display); text-align: center; }
+code, .k { font: 600 .92em ui-monospace, Consolas, monospace; background: var(--bg); border: 1px solid var(--line); padding: 1px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+.see { border: 1px dashed var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 8px; }
+.see small { color: var(--mute); text-transform: uppercase; letter-spacing: .08em; font-size: 12px; }
+.win { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-size: 14px; display: grid; gap: 8px; }
+.win .bar { color: var(--mute); font-size: 12px; }
+.row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.btn-fake { background: var(--accent); color: var(--accent-ink); padding: 5px 14px; border-radius: 5px; font-weight: 700; }
+.btn-fake.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.sw { width: 40px; height: 22px; border-radius: 11px; background: var(--accent); position: relative; flex: none; }
+.sw::after { content: ""; position: absolute; right: 3px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--accent-ink); }
+.note { border-left: 4px solid var(--warn); background: var(--bg); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 15px; }
+.cap-demo { background: var(--cap-bg); color: var(--cap-fg); border-radius: 8px; padding: 12px 14px; font-size: 16px; }
+.cap-demo b { color: #9fc2ff; font-size: 13px; display: block; }
+.dir { display: flex; gap: 8px; flex-wrap: wrap; }
+.dir span { border: 1px solid var(--line); padding: 8px 12px; border-radius: 8px; }
+.dir span.on { border-color: var(--accent); background: var(--bg); font-weight: 700; }
+label.chk { display: flex; gap: 10px; align-items: center; cursor: pointer; font-weight: 700; }
+label.chk input { width: 22px; height: 22px; accent-color: var(--accent); }
+nav { display: flex; justify-content: space-between; gap: 10px; }
+nav button { font: 700 17px var(--f-body); border-radius: 10px; padding: 13px 22px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); min-width: 120px; }
+nav button.main { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+nav button:disabled { opacity: .4; cursor: default; }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.resume { background: var(--surface); border: 2px solid var(--accent); border-radius: 12px; padding: 16px 18px; display: grid; gap: 12px; }
+.resume p { margin: 0; font-weight: 700; }
+.resume .acts { display: flex; gap: 10px; flex-wrap: wrap; }
+.resume button { font: 700 16px var(--f-body); border-radius: 8px; padding: 10px 18px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.resume button.main { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.lkb input { width: 100%; font: 600 15px ui-monospace, Consolas, monospace; padding: 11px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.lkb .acts { display: flex; gap: 10px; flex-wrap: wrap; }
+.lkb button, .lkb a.wa { font: 700 16px var(--f-body); border-radius: 8px; padding: 11px 18px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; }
+.lkb button.main { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.done-box { text-align: center; display: grid; gap: 10px; justify-items: center; }
+.done-box .big { font: 800 56px/1 var(--f-display); color: var(--ok); }
+</style>
+
+<div class="wrap">
+  <div class="proto" id="proto"></div>
+  <header>
+    <div>
+      <h1 id="t"></h1>
+      <p class="sub" id="st"></p>
+    </div>
+    <div class="lang" role="group" aria-label="Idioma / Idioma">
+      <button id="bpt" aria-pressed="true">Português</button>
+      <button id="bes" aria-pressed="false">Español</button>
+    </div>
+  </header>
+  <div class="prog" id="prog" aria-hidden="true"></div>
+  <div class="meta"><span id="stepOf"></span><span id="time"></span></div>
+  <div id="resume"></div>
+  <section class="card" id="card" aria-live="polite"></section>
+  <nav>
+    <button id="back"></button>
+    <button id="next" class="main"></button>
+  </nav>
+</div>
+
+<script>
+const T = {
+  pt: {
+    proto: "PROTÓTIPO · É assim que o guia de instalação vai ficar. Os vídeos e os prints reais entram na versão final.",
+    title: "Legenda de Aula", sub: "Legenda e tradução ao vivo das aulas do mestrado, grátis, no seu computador com Windows.",
+    of: (a, b) => `Passo ${a} de ${b}`, time: "cerca de 15 minutos, com a reinicialização", back: "Voltar", next: "Próximo passo", finish: "Concluir", restart: "Ver de novo",
+    video: "Animação deste passo. Clique na imagem para ver de novo.", checked: "Já fiz este passo",
+    steps: [
+      { h: "Baixe e abra a pasta", cap: "Baixando e extraindo a pasta",
+        do: ["Clique no link da pasta que o professor mandou no grupo.", "Clique em <b>Baixar</b> e espere terminar.", "Clique com o botão direito no arquivo <code>.zip</code> e escolha <b>Extrair tudo…</b>, depois <b>Extrair</b>."],
+        see: "Você vai ver uma pasta com estes itens", mock: "files" },
+      { h: "Instale o cabo de áudio", cap: "Instalando o cabo de áudio",
+        do: ["Dentro da pasta, dê dois cliques em <code>INSTALAR.bat</code>.", "Quando o Windows perguntar se deixa fazer alterações, clique em <b>Sim</b>.", "Espere a tela dizer <b>Pronto</b>. O próximo passo é reiniciar o computador."],
+        note: "É normal o Windows avisar que o programa é de um editor desconhecido. Ele só instala o cabo de áudio gratuito (VB-CABLE).",
+        see: "O Windows vai perguntar isto. Clique em Sim.", mock: "uac" },
+      { h: "Reinicie o computador", cap: "Reiniciando o computador",
+        do: ["<b>Antes de reiniciar, guarde esta página:</b> aperte <span class=\"k\">Ctrl</span> + <span class=\"k\">D</span> para salvar nos favoritos do Chrome, ou mande o link para você mesmo no WhatsApp.", "Clique no botão <b>Iniciar</b> do Windows, depois em <b>Energia</b> e em <b>Reiniciar</b>.", "Quando o computador voltar, abra o Chrome e entre de novo por este link. O guia lembra onde você parou: é só clicar em <b>Continuar</b>."],
+        note: "Por que reiniciar? O Windows só reconhece o cabo de áudio novo depois de reiniciar. Sem isso, o passo do áudio não funciona. Ao reiniciar, tudo fecha, inclusive esta página.",
+        see: "O caminho para reiniciar", mock: "restart", link: true },
+      { h: "Adicione a extensão ao Chrome", cap: "Carregando a extensão no Chrome",
+        do: ["Abra o Google Chrome e digite na barra de endereço: <code>chrome://extensions</code>", "Ligue a chavinha <b>Modo do desenvolvedor</b> (canto de cima, à direita).", "Clique em <b>Carregar sem compactação</b> e escolha a pasta <code>extensao</code>."],
+        see: "Procure esta chavinha e este botão", mock: "ext" },
+      { h: "Configure o áudio da reunião", cap: "Escolhendo o alto-falante na reunião",
+        do: ["Entre na aula pelo Zoom ou Meet, como sempre.", "Abra as configurações de áudio da reunião.", "No <b>alto-falante</b>, escolha <b>CABLE Input</b>. No <b>microfone</b>, deixe o seu microfone normal."],
+        note: "O som da aula passa pelo cabo para a legenda poder ouvir. Ligue o <b>Escutar este dispositivo</b> do CABLE Output para continuar ouvindo no seu fone (o vídeo mostra onde).",
+        see: "Na reunião, deixe assim", mock: "audio" },
+      { h: "Abra a legenda e inicie", cap: "Iniciando a legenda",
+        do: ["No Chrome, clique no ícone de quebra-cabeça e depois em <b>Legenda de Aula</b>. A barra lateral abre.", "Escolha quem fala o quê (veja abaixo).", "Clique em <b>▶ Iniciar</b> e deixe o Chrome usar o microfone “CABLE Output” quando pedir."],
+        dir: true, see: "Assim aparece a legenda", mock: "caption" },
+      { h: "Pronto", done: true }
+    ],
+    dirLabel: "Escolha o idioma da aula:", d1: "Espanhol → Português", d2: "Português → Espanhol", dnote: "Na barra lateral, o primeiro menu troca o sentido. Quem fala espanhol e assiste aula em português usa “Português → Espanhol”.",
+    doneT: "Tudo certo!", doneP: "A legenda aparece na barra lateral, e no fim da aula você clica em <b>Salvar</b> para guardar o texto e estudar depois.",
+    help: "Se algo não funcionar: abra o vídeo do passo de novo e confira se o Chrome está usando o microfone “CABLE Output”.",
+    files: ["INSTALAR.bat", "DESINSTALAR.bat", "extensao (pasta)", "LEIA-ME.pdf"],
+    uac: "Deseja permitir que este aplicativo faça alterações no dispositivo?", yes: "Sim", no: "Não",
+    ext: ["Modo do desenvolvedor", "Carregar sem compactação"], aud: ["Alto-falante", "Microfone", "Seu microfone normal"],
+    cap1: "Voz 1 · professor", cap1t: "Hoje vamos combinar o prazo de entrega do trabalho final."
+  },
+  es: {
+    proto: "PROTOTIPO · Así quedará la guía de instalación. Los videos y las capturas reales se agregan en la versión final.",
+    title: "Subtítulos de Clase", sub: "Subtítulos y traducción en vivo de las clases de la maestría, gratis, en tu computadora con Windows.",
+    of: (a, b) => `Paso ${a} de ${b}`, time: "unos 15 minutos, con el reinicio", back: "Atrás", next: "Siguiente paso", finish: "Terminar", restart: "Ver de nuevo",
+    video: "Animación de este paso. Haz clic en la imagen para verla de nuevo.", checked: "Ya hice este paso",
+    steps: [
+      { h: "Descarga y abre la carpeta", cap: "Descargando y extrayendo la carpeta",
+        do: ["Haz clic en el enlace de la carpeta que el profesor mandó al grupo.", "Haz clic en <b>Descargar</b> y espera a que termine.", "Haz clic derecho en el archivo <code>.zip</code> y elige <b>Extraer todo…</b>, luego <b>Extraer</b>."],
+        see: "Vas a ver una carpeta con estos elementos", mock: "files" },
+      { h: "Instala el cable de audio", cap: "Instalando el cable de audio",
+        do: ["Dentro de la carpeta, haz doble clic en <code>INSTALAR.bat</code>.", "Cuando Windows pregunte si permites cambios, haz clic en <b>Sí</b>.", "Espera a que diga <b>Listo</b>. El siguiente paso es reiniciar la computadora."],
+        note: "Es normal que Windows avise que el programa es de un editor desconocido. Solo instala el cable de audio gratuito (VB-CABLE).",
+        see: "Windows va a preguntar esto. Haz clic en Sí.", mock: "uac" },
+      { h: "Reinicia la computadora", cap: "Reiniciando la computadora",
+        do: ["<b>Antes de reiniciar, guarda esta página:</b> presiona <span class=\"k\">Ctrl</span> + <span class=\"k\">D</span> para guardarla en los favoritos de Chrome, o envíate el enlace por WhatsApp.", "Haz clic en el botón <b>Inicio</b> de Windows, luego en <b>Energía</b> y en <b>Reiniciar</b>.", "Cuando la computadora vuelva, abre Chrome y entra otra vez por este enlace. La guía recuerda dónde te quedaste: solo haz clic en <b>Continuar</b>."],
+        note: "¿Por qué reiniciar? Windows solo reconoce el cable de audio nuevo después de reiniciar. Sin eso, el paso del audio no funciona. Al reiniciar se cierra todo, incluida esta página.",
+        see: "El camino para reiniciar", mock: "restart", link: true },
+      { h: "Agrega la extensión a Chrome", cap: "Cargando la extensión en Chrome",
+        do: ["Abre Google Chrome y escribe en la barra de direcciones: <code>chrome://extensions</code>", "Activa el interruptor <b>Modo de desarrollador</b> (arriba, a la derecha).", "Haz clic en <b>Cargar descomprimida</b> y elige la carpeta <code>extensao</code>."],
+        see: "Busca este interruptor y este botón", mock: "ext" },
+      { h: "Configura el audio de la reunión", cap: "Eligiendo el altavoz en la reunión",
+        do: ["Entra a la clase por Zoom o Meet, como siempre.", "Abre la configuración de audio de la reunión.", "En <b>altavoz</b>, elige <b>CABLE Input</b>. En <b>micrófono</b>, deja tu micrófono normal."],
+        note: "El sonido de la clase pasa por el cable para que los subtítulos puedan escucharlo. Activa <b>Escuchar este dispositivo</b> en CABLE Output para seguir oyendo en tus auriculares (el video muestra dónde).",
+        see: "En la reunión, déjalo así", mock: "audio" },
+      { h: "Abre los subtítulos e inicia", cap: "Iniciando los subtítulos",
+        do: ["En Chrome, haz clic en el ícono de pieza de rompecabezas y luego en <b>Subtítulos de Clase</b>. Se abre la barra lateral.", "Elige quién habla qué (mira abajo).", "Haz clic en <b>▶ Iniciar</b> y deja que Chrome use el micrófono “CABLE Output” cuando lo pida."],
+        dir: true, see: "Así se ven los subtítulos", mock: "caption" },
+      { h: "Listo", done: true }
+    ],
+    dirLabel: "Elige el idioma de la clase:", d1: "Español → Portugués", d2: "Portugués → Español", dnote: "En la barra lateral, el primer menú cambia el sentido. Quien habla español y asiste a clase en portugués usa “Portugués → Español”.",
+    doneT: "¡Todo listo!", doneP: "Los subtítulos aparecen en la barra lateral y, al final de la clase, haces clic en <b>Guardar</b> para conservar el texto y estudiar después.",
+    help: "Si algo no funciona: vuelve a ver el video del paso y revisa que Chrome use el micrófono “CABLE Output”.",
+    files: ["INSTALAR.bat", "DESINSTALAR.bat", "extensao (carpeta)", "LEIA-ME.pdf"],
+    uac: "¿Quieres permitir que esta aplicación haga cambios en el dispositivo?", yes: "Sí", no: "No",
+    ext: ["Modo de desarrollador", "Cargar descomprimida"], aud: ["Altavoz", "Micrófono", "Tu micrófono normal"],
+    cap1: "Voz 1 · profesor", cap1t: "Hoy vamos a acordar la fecha de entrega del trabajo final."
+  }
+};
+let lang = 'pt', step = 0; const checked = {};
+try { lang = localStorage.getItem('guia-lang') || 'pt'; } catch (e) {}
+const $ = id => document.getElementById(id);
+
+const GUIDE_URL = 'https://thiagobiologo.github.io/legenda-de-aula/';
+function linkBox() {
+  const pt = lang === 'pt';
+  const msg = encodeURIComponent((pt ? 'Guia Legenda de Aula (voltar aqui depois de reiniciar): ' : 'Guía Subtítulos de Clase (volver aquí después de reiniciar): ') + GUIDE_URL);
+  return `<div class="see lkb"><small>${pt ? 'Guarde este link para voltar depois de reiniciar' : 'Guarda este enlace para volver después de reiniciar'}</small>
+    <input id="lk" readonly value="${GUIDE_URL}" aria-label="link">
+    <div class="acts"><button id="cp" class="main">📋 ${pt ? 'Copiar link' : 'Copiar enlace'}</button>
+    <a class="wa" href="https://wa.me/?text=${msg}" target="_blank" rel="noopener">💬 ${pt ? 'Mandar para o meu WhatsApp' : 'Enviarme por WhatsApp'}</a></div></div>`;
+}
+function mock(kind, t) {
+  if (kind === 'files') return `<div class="win"><div class="bar">📁 Legenda-de-Aula</div>${t.files.map(f => `<div>${f}</div>`).join('')}</div>`;
+  if (kind === 'uac') return `<div class="win"><div>${t.uac}</div><div class="row"><span class="btn-fake">${t.yes}</span><span class="btn-fake ghost">${t.no}</span></div></div>`;
+  if (kind === 'ext') return `<div class="win"><div class="row"><span>${t.ext[0]}</span><span class="sw"></span></div><div class="row"><span class="btn-fake">${t.ext[1]}</span></div></div>`;
+  if (kind === 'audio') return `<div class="win"><div class="row"><span>${t.aud[0]}</span><span class="k">CABLE Input</span></div><div class="row"><span>${t.aud[1]}</span><span class="k">${t.aud[2]}</span></div></div>`;
+  if (kind === 'restart') return `<div class="win"><div class="row"><span>⊞ Iniciar → ⏻ ${lang === 'pt' ? 'Energia' : 'Energía'}</span></div><div>${lang === 'pt' ? 'Suspender' : 'Suspender'}</div><div>${lang === 'pt' ? 'Desligar' : 'Apagar'}</div><div><b>↻ ${lang === 'pt' ? 'Reiniciar' : 'Reiniciar'} ◀</b></div></div>`;
+  return `<div class="cap-demo"><b>${t.cap1}</b>${t.cap1t}</div>`;
+}
+
+function render() {
+  const t = T[lang], S = t.steps, s = S[step], n = S.length;
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'es';
+  $('proto').textContent = t.proto; $('t').textContent = t.title; $('st').textContent = t.sub;
+  $('bpt').setAttribute('aria-pressed', lang === 'pt'); $('bes').setAttribute('aria-pressed', lang === 'es');
+  $('prog').innerHTML = S.map((_, i) => `<i class="${i < step ? 'done' : i === step ? 'now' : ''}"></i>`).join('');
+  $('stepOf').textContent = t.of(step + 1, n); $('time').textContent = t.time;
+  saveState(); showResume(t);
+  $('back').textContent = t.back; $('back').disabled = step === 0;
+  $('next').textContent = s.done ? t.restart : (step === n - 2 ? t.finish : t.next);
+  if (s.done) {
+    $('card').innerHTML = `<div class="done-box"><div class="big">✓</div><h2>${t.doneT}</h2><p>${t.doneP}</p><p class="sub">${t.help}</p></div>`;
+    return;
+  }
+  const dir = s.dir ? `<div class="see"><small>${t.dirLabel}</small><div class="dir"><span class="on">${t.d1}</span><span>${t.d2}</span></div><div class="note">${t.dnote}</div></div>` : '';
+  $('card').innerHTML = `
+    <h2>${s.h}</h2>
+    <div class="stage" id="stage" role="img" aria-label="${s.cap}"></div><div class="vcap">${t.video}</div>
+    <ol class="do">${s.do.map(x => `<li><span>${x}</span></li>`).join('')}</ol>
+    ${s.note ? `<div class="note">${s.note}</div>` : ''}
+    ${s.link ? linkBox() : ''}
+    <div class="see"><small>${s.see}</small>${mock(s.mock, t)}</div>
+    ${dir}
+    <label class="chk"><input type="checkbox" id="ck" ${checked[step] ? 'checked' : ''}> ${t.checked}</label>`;
+  $('ck').onchange = e => { checked[step] = e.target.checked; };
+  const cp = $('cp');
+  if (cp) cp.onclick = async () => {
+    const pt = lang === 'pt';
+    try { await navigator.clipboard.writeText(GUIDE_URL); cp.textContent = pt ? '✓ Link copiado' : '✓ Enlace copiado'; }
+    catch (e) { $('lk').focus(); $('lk').select(); cp.textContent = pt ? 'Agora aperte Ctrl + C' : 'Ahora presiona Ctrl + C'; }
+  };
+  play(step);
+}
+// ---------- animações dos passos ----------
+const WF = '<div class="wf" style="left:5%;top:7%;width:90%;height:86%"><div class="tb">%T%</div></div>';
+const CUR = '<svg class="cur" id="cur" viewBox="0 0 24 24" style="left:50%;top:70%"><path d="M3 2l7 18 2.6-7.4L20 10z" fill="#fff" stroke="#14202e" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="rip" id="rip"></span><div class="capb" id="capb" hidden></div>';
+const SCENES = [
+ { len: 8600, html: WF.replace('%T%', '📁 Downloads') +
+   '<div class="ic" id="zip" style="left:12%;top:24%">🗜️<span>legenda-aula.zip</span></div>' +
+   '<div class="menu" id="mn" hidden style="left:20%;top:38%"><div>Abrir</div><div>Extrair tudo…</div><div>Propriedades</div></div>' +
+   '<div class="dlg" id="dl" hidden style="left:32%;top:22%;width:44%;height:40%">Extrair pastas compactadas<div class="btn2" style="right:4%;bottom:10%">Extrair</div></div>' +
+   '<div class="ic" id="fd" hidden style="left:42%;top:24%">📁<span>Legenda-de-Aula</span></div>',
+   caps: { a: ['Clique com o botão direito no arquivo .zip', 'Haz clic derecho en el archivo .zip'], b: ['Escolha “Extrair tudo…”', 'Elige “Extraer todo…”'], c: ['Clique em Extrair', 'Haz clic en Extraer'], d: ['Pronto: a pasta apareceu', 'Listo: apareció la carpeta'] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1500, 'c'], [1600, 's', 'mn'], [2300, 'cap', 'b'], [2400, 'm', 24, 46.5], [3500, 'c'], [3600, 'h', 'mn'], [3700, 's', 'dl'], [4200, 'cap', 'c'], [4300, 'm', 70, 55], [5500, 'c'], [5600, 'h', 'dl'], [5700, 's', 'fd'], [5800, 'cap', 'd']] },
+ { len: 11000, html: WF.replace('%T%', '📁 Legenda-de-Aula') +
+   '<div class="ic" id="bat" style="left:12%;top:24%">⚙️<span>INSTALAR.bat</span></div>' +
+   '<div class="dlg" id="du" hidden style="left:28%;top:20%;width:44%;height:46%"><b>Controle de Conta de Usuário</b><br>Deseja permitir que este aplicativo faça alterações no dispositivo?<div class="btn2" style="right:26%;bottom:8%">Sim</div><div class="btn2 g" style="right:4%;bottom:8%">Não</div></div>' +
+   '<div class="term" id="term" hidden style="left:18%;top:18%;width:64%;height:56%"><div id="l1" hidden>&gt; Baixando o VB-CABLE do site oficial…</div><div id="l2" hidden>&gt; Instalando o cabo de áudio…</div><div id="l3" hidden>&gt; Conferindo se funcionou…</div><div id="l4" class="ok" hidden>✔ Pronto! Agora reinicie o computador.</div></div>',
+   caps: { a: ['Dê dois cliques em INSTALAR.bat', 'Haz doble clic en INSTALAR.bat'], b: ['Clique em Sim', 'Haz clic en Sí'], c: ['Espere terminar e reinicie o computador', 'Espera a que termine y reinicia la computadora'] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1200, 'c'], [1450, 'c'], [1800, 's', 'du'], [2500, 'cap', 'b'], [2600, 'm', 59, 61], [3700, 'c'], [3800, 'h', 'du'], [4000, 's', 'term'], [4200, 's', 'l1'], [5400, 's', 'l2'], [6600, 's', 'l3'], [7800, 's', 'l4'], [7900, 'cap', 'c']] },
+ { len: 8800, html: '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e0"></div><div class="lbl" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
+   '<div class="menu" id="sm" hidden style="left:2%;top:44%;width:26%"><div>📄 Documentos</div><div>⚙ Configurações</div><div>⏻ Energia</div></div>' +
+   '<div class="menu" id="pm" hidden style="left:29%;top:60%;width:22%"><div>Suspender</div><div>Desligar</div><div>↻ Reiniciar</div></div>' +
+   '<div id="bk" hidden style="position:absolute;inset:0;background:#000;color:#fff;display:grid;place-items:center;font-size:3.4cqw;z-index:5">↻ Reiniciando…</div>',
+   caps: { a: ['Clique no botão Iniciar do Windows', 'Haz clic en el botón Inicio de Windows'], b: ['Clique em Energia', 'Haz clic en Energía'], c: ['Escolha Reiniciar', 'Elige Reiniciar'], d: ['O computador reinicia. Depois, volte a este guia.', 'La computadora se reinicia. Después, vuelve a esta guía.'] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 3.5, 94], [1500, 'c'], [1600, 's', 'sm'], [2200, 'cap', 'b'], [2300, 'm', 12, 59], [3400, 'c'], [3500, 's', 'pm'], [4000, 'cap', 'c'], [4100, 'm', 36, 75], [5200, 'c'], [5300, 's', 'bk'], [5400, 'cap', 'd']] },
+ { len: 10500, html: WF.replace('%T%', '🌐 Google Chrome') +
+   '<div class="url" style="left:9%;top:16%;width:60%"><span id="u"></span></div>' +
+   '<div id="pg" hidden><div class="lbl" style="left:9%;top:27%;font-size:2.6cqw">Extensões</div><div class="lbl" style="left:62%;top:27%">Modo do desenvolvedor</div><div class="tgl" id="tg" style="left:84%;top:26%"></div></div>' +
+   '<div class="btn2" id="bl" hidden style="left:9%;top:42%">Carregar sem compactação</div>' +
+   '<div class="dlg" id="fdlg" hidden style="left:32%;top:30%;width:44%;height:44%">Selecionar pasta<div class="sel" style="left:6%;top:42%;width:50%;background:#eaf0ff">📁 extensao</div></div>' +
+   '<div class="dlg" id="card" hidden style="left:9%;top:60%;width:44%;height:26%;padding:1.2cqw"><b>Legenda de Aula</b> · 1.0<div class="tgl on" style="right:4%;top:30%"></div></div>',
+   caps: { a: ['Abra chrome://extensions', 'Abre chrome://extensions'], b: ['Ligue o Modo do desenvolvedor', 'Activa el Modo de desarrollador'], c: ['Clique em Carregar sem compactação', 'Haz clic en Cargar descomprimida'], d: ['Escolha a pasta “extensao”', 'Elige la carpeta “extensao”'], e: ['Pronto: a extensão apareceu', 'Listo: apareció la extensión'] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 38, 20], [1000, 'c'], [1100, 'ty', 'u', 'chrome://extensions'], [2800, 's', 'pg'], [3000, 'cap', 'b'], [3100, 'm', 86.5, 28.5], [4100, 'c'], [4200, 'k', 'tg'], [4300, 's', 'bl'], [5000, 'cap', 'c'], [5100, 'm', 19, 45], [6100, 'c'], [6200, 's', 'fdlg'], [6400, 'cap', 'd'], [6500, 'm', 40, 50], [7600, 'c'], [7700, 'h', 'fdlg'], [7900, 's', 'card'], [8000, 'cap', 'e']] },
+ { len: 8200, html: WF.replace('%T%', '⚙ Configurações de áudio da reunião') +
+   '<div class="lbl" style="left:10%;top:28%">Alto-falante</div><div class="sel" id="sp" style="left:34%;top:26%;width:52%"><span id="spt">Alto-falantes (Realtek)</span></div>' +
+   '<div class="lbl" style="left:10%;top:52%">Microfone</div><div class="sel" style="left:34%;top:50%;width:52%">Microfone (Realtek)</div>' +
+   '<div class="menu" id="ol" hidden style="left:34%;top:37%;width:52%"><div>Alto-falantes (Realtek)</div><div style="background:#cfe0ff;font-weight:700">CABLE Input</div></div>',
+   caps: { a: ['Abra as configurações de áudio da reunião', 'Abre la configuración de audio de la reunión'], b: ['No alto-falante, escolha CABLE Input', 'En altavoz, elige CABLE Input'], c: ['O microfone continua o seu normal', 'El micrófono sigue siendo el tuyo de siempre'] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 60, 31], [1500, 'c'], [1600, 's', 'ol'], [2200, 'cap', 'b'], [2300, 'm', 50, 46], [3500, 'c'], [3600, 'h', 'ol'], [3700, 't', 'spt', 'CABLE Input'], [3750, 'k', 'sp'], [5000, 'cap', 'c'], [5100, 'm', 60, 56]] },
+ { len: 11500, html: WF.replace('%T%', '🌐 Aula de hoje · Google Chrome') +
+   '<div class="ic" style="left:14%;top:26%;font-size:9cqw;filter:grayscale(.3)">👤<span>Professor</span></div>' +
+   '<div class="lbl" style="left:84%;top:13%;font-size:3.4cqw">🧩</div>' +
+   '<div class="menu" id="dd" hidden style="left:62%;top:22%;width:30%"><div>💬 Legenda de Aula</div></div>' +
+   '<div class="pan" id="pn" hidden style="left:58%;top:12%;width:36%;height:78%"><div class="btn2" id="gb" style="left:5%;top:4%">▶ Iniciar</div><div id="st" hidden style="position:absolute;left:5%;top:15%;color:#9aabbf">Ouvindo · áudio ▮▮▮▯▯</div>' +
+   '<div class="ln" id="l1" hidden style="top:24%"><b style="color:#6aa9ff">Voz 1</b> 19:02<br>Bom, hoje vamos falar da metodologia da pesquisa.</div>' +
+   '<div class="ln hi" id="l2" hidden style="top:46%"><b style="color:#6aa9ff">Voz 1</b> 19:03<br>Vamos combinar o prazo de entrega do trabalho final.<br><span style="color:#ffd166">📅 Prazo / data</span></div>' +
+   '<div class="ln" id="l3" hidden style="top:76%"><b style="color:#ff9e64">Voz 2</b> 19:03<br>Professor, a leitura é obrigatória?</div></div>',
+   caps: { a: ['Clique no ícone de quebra-cabeça', 'Haz clic en el ícono de rompecabezas'], b: ['Abra Legenda de Aula', 'Abre Subtítulos de Clase'], c: ['Clique em Iniciar', 'Haz clic en Iniciar'], d: ['A legenda aparece ao vivo, com os destaques', 'Los subtítulos aparecen en vivo, con lo importante resaltado'] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 86, 17], [1500, 'c'], [1600, 's', 'dd'], [2200, 'cap', 'b'], [2300, 'm', 72, 26], [3400, 'c'], [3500, 'h', 'dd'], [3600, 's', 'pn'], [4200, 'cap', 'c'], [4300, 'm', 65, 17], [5400, 'c'], [5500, 't', 'gb', '■ Parar'], [5600, 's', 'st'], [6500, 's', 'l1'], [7700, 's', 'l2'], [8900, 's', 'l3'], [9000, 'cap', 'd']] }
+];
+let tms = [], ivs = [];
+function stopAnim() { tms.forEach(clearTimeout); ivs.forEach(clearInterval); tms = []; ivs = []; }
+function play(i) {
+  stopAnim();
+  const st = $('stage'), sc = SCENES[i]; if (!st || !sc) return;
+  st.innerHTML = sc.html + CUR;
+  st.onclick = () => play(i);
+  const q = id => st.querySelector('#' + id), cur = q('cur'), rip = q('rip'), capb = q('capb');
+  let cx = 50, cy = 70;
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const act = a => {
+    const k = a[1], x = a[2], y = a[3];
+    if (k === 'm') { cx = x; cy = y; cur.style.left = x + '%'; cur.style.top = y + '%'; }
+    else if (k === 'c') { rip.style.left = cx + '%'; rip.style.top = cy + '%'; rip.classList.remove('go'); void rip.offsetWidth; rip.classList.add('go'); }
+    else if (k === 's') q(x).hidden = false;
+    else if (k === 'h') q(x).hidden = true;
+    else if (k === 'k') q(x).classList.toggle('on');
+    else if (k === 't') q(x).textContent = y;
+    else if (k === 'ty') {
+      const el = q(x), full = y; let n = 0;
+      if (still) { el.textContent = full; return; }
+      const v = setInterval(() => { el.textContent = full.slice(0, ++n); if (n >= full.length) clearInterval(v); }, 60); ivs.push(v);
+    }
+    else if (k === 'cap') { capb.hidden = false; capb.textContent = sc.caps[x][lang === 'pt' ? 0 : 1]; }
+  };
+  if (still) { sc.tl.forEach(act); return; }
+  sc.tl.forEach(a => tms.push(setTimeout(() => act(a), a[0])));
+  tms.push(setTimeout(() => {
+    const r = document.createElement('div'); r.className = 'rp'; r.textContent = lang === 'pt' ? '↻ Ver de novo' : '↻ Ver de nuevo'; st.appendChild(r);
+  }, sc.len));
+}
+$('bpt').onclick = () => setLang('pt'); $('bes').onclick = () => setLang('es');
+function setLang(l) { lang = l; try { localStorage.setItem('guia-lang', l); } catch (e) {} render(); }
+$('back').onclick = () => { if (step > 0) { step--; render(); window.scrollTo(0, 0); } };
+$('next').onclick = () => { const n = T[lang].steps.length; step = step >= n - 1 ? 0 : step + 1; render(); window.scrollTo(0, 0); };
+// Lembra onde a pessoa parou (o computador reinicia no meio do caminho).
+let resume = 0;
+try { const sv = JSON.parse(localStorage.getItem('guia-state') || 'null'); if (sv && sv.step > 0 && sv.step < T.pt.steps.length - 1) { resume = sv.step; Object.assign(checked, sv.checked || {}); } } catch (e) {}
+function saveState() { if (resume > 0) return; try { localStorage.setItem('guia-state', JSON.stringify({ step, checked })); } catch (e) {} }
+function showResume(t) {
+  const r = $('resume');
+  if (resume <= 0) { r.innerHTML = ''; return; }
+  r.innerHTML = `<div class="resume"><p>${lang === 'pt' ? `Você parou no passo ${resume + 1}. Quer continuar de onde parou?` : `Te quedaste en el paso ${resume + 1}. ¿Quieres continuar desde ahí?`}</p><div class="acts"><button class="main" id="rc">${lang === 'pt' ? 'Continuar' : 'Continuar'}</button><button id="rz">${lang === 'pt' ? 'Começar do zero' : 'Empezar de cero'}</button></div></div>`;
+  $('rc').onclick = () => { step = resume; resume = 0; render(); };
+  $('rz').onclick = () => { step = 0; resume = 0; Object.keys(checked).forEach(k => delete checked[k]); render(); };
+}
+render();
+</script>
+
+</html>
