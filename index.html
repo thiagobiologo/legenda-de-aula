@@ -63,7 +63,10 @@ h2 { font: 800 clamp(22px, 5vw, 28px)/1.15 var(--f-display); margin: 0; text-wra
 .stage .pan .ln.hi { border-left: .4cqw solid #ffd166; background: #2b2410; padding-left: 1cqw; }
 .stage .cur { position: absolute; width: 3cqw; height: 3cqw; z-index: 5; pointer-events: none; transition: left .9s ease, top .9s ease; filter: drop-shadow(0 1px 1px #0008); }
 .stage .rip { position: absolute; width: 5cqw; height: 5cqw; border: .4cqw solid #ffe066; border-radius: 50%; z-index: 4; opacity: 0; pointer-events: none; transform: translate(-50%, -50%); }
-.stage .rip.go { animation: rip .55s ease-out; }
+.stage .rip.go { animation: rip .9s ease-out; }
+.stage .hit { outline: .5cqw solid #ffe066; outline-offset: .3cqw; box-shadow: 0 0 2.5cqw .8cqw #ffe066aa; animation: pulse 1s ease-in-out infinite; }
+.stage .menu div.hit { background: #fff3b0; outline-offset: -.3cqw; }
+@keyframes pulse { 50% { box-shadow: 0 0 3.5cqw 1.4cqw #ffe066; } }
 @keyframes rip { 0% { transform: translate(-50%, -50%) scale(.3); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; } }
 .stage .capb { position: absolute; left: 3%; right: 3%; bottom: 3%; text-align: center; background: #000c; color: #ffe066; font-size: 2.5cqw; padding: .8cqw 1.4cqw; border-radius: .8cqw; z-index: 6; }
 .stage .rp { position: absolute; inset: 0; display: grid; place-items: center; background: #000a; color: #ffe066; font-weight: 700; font-size: 3cqw; z-index: 7; }
@@ -357,17 +360,34 @@ function play(i) {
     (k === 'cr' ? br : bl).classList.add('on');
     lb.textContent = k === 'cr' ? (pt ? 'Clique direito' : 'Clic derecho') : k === 'cd' ? (pt ? 'Clique duplo (2 vezes rápido)' : 'Doble clic (2 veces rápido)') : (pt ? 'Clique esquerdo' : 'Clic izquierdo');
     lb.hidden = false; clearTimeout(hudT);
-    hudT = setTimeout(() => { bl.classList.remove('on'); br.classList.remove('on'); lb.hidden = true; }, 1800);
+    hudT = setTimeout(() => { bl.classList.remove('on'); br.classList.remove('on'); lb.hidden = true; }, 3200);
   };
-  const hudKey = name => { const kb = q('hudk'); kb.textContent = name; kb.hidden = false; clearTimeout(keyT); keyT = setTimeout(() => { kb.hidden = true; }, 2200); };
+  const hudKey = name => { const kb = q('hudk'); kb.textContent = name; kb.hidden = false; clearTimeout(keyT); keyT = setTimeout(() => { kb.hidden = true; }, 3600); };
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const K = 1.8;   // quanto mais lento que o roteiro original
+  cur.style.transition = still ? 'none' : 'left 1.5s ease, top 1.5s ease';
+  // o item que deve ser clicado acende em amarelo quando o cursor chega e continua aceso no clique
+  let hitEl = null;
+  const unhit = () => { if (hitEl) hitEl.classList.remove('hit'); hitEl = null; };
+  const hit = () => {
+    const r = st.getBoundingClientRect(), px = r.left + r.width * cx / 100, py = r.top + r.height * cy / 100;
+    for (const e of document.elementsFromPoint(px, py)) {
+      if (!st.contains(e) || e === st) continue;
+      const t = e.closest('.btn2,.ic,.menu div,.sel,.tgl,.url,.lbl');
+      if (t && st.contains(t)) { unhit(); t.classList.add('hit'); hitEl = t; return; }
+    }
+  };
+  const preHit = a => {
+    const n = sc.tl.slice(sc.tl.indexOf(a) + 1).find(z => z[1] === 'c' || z[1] === 'cr' || z[1] === 'cd');
+    if (n && n[0] - a[0] <= 3500) tms.push(setTimeout(hit, 1550));
+  };
   const act = a => {
     const k = a[1], x = a[2], y = a[3];
-    if (k === 'm') { cx = x; cy = y; cur.style.left = x + '%'; cur.style.top = y + '%'; }
+    if (k === 'm') { unhit(); cx = x; cy = y; cur.style.left = x + '%'; cur.style.top = y + '%'; if (!still) preHit(a); }
     else if (k === 'c' || k === 'cr' || k === 'cd') {
       const ping = () => { rip.style.left = cx + '%'; rip.style.top = cy + '%'; rip.classList.remove('go'); void rip.offsetWidth; rip.classList.add('go'); };
-      ping(); if (k === 'cd') tms.push(setTimeout(ping, 220));
-      hud(k);
+      ping(); if (k === 'cd') tms.push(setTimeout(ping, 420));
+      hud(k); hit();
     }
     else if (k === 'key') hudKey(x);
     else if (k === 's') q(x).hidden = false;
@@ -377,15 +397,15 @@ function play(i) {
     else if (k === 'ty') {
       const el = q(x), full = y; let n = 0;
       if (still) { el.textContent = full; return; }
-      const v = setInterval(() => { el.textContent = full.slice(0, ++n); if (n >= full.length) clearInterval(v); }, 60); ivs.push(v);
+      const v = setInterval(() => { el.textContent = full.slice(0, ++n); if (n >= full.length) clearInterval(v); }, 110); ivs.push(v);
     }
     else if (k === 'cap') { capb.hidden = false; capb.textContent = sc.caps[x][lang === 'pt' ? 0 : 1]; }
   };
   if (still) { sc.tl.forEach(act); return; }
-  sc.tl.forEach(a => tms.push(setTimeout(() => act(a), a[0])));
+  sc.tl.forEach(a => tms.push(setTimeout(() => act(a), a[0] * K)));
   tms.push(setTimeout(() => {
     const r = document.createElement('div'); r.className = 'rp'; r.textContent = lang === 'pt' ? '↻ Ver de novo' : '↻ Ver de nuevo'; st.appendChild(r);
-  }, sc.len));
+  }, sc.len * K));
 }
 $('bpt').onclick = () => setLang('pt'); $('bes').onclick = () => setLang('es');
 function setLang(l) { lang = l; try { localStorage.setItem('guia-lang', l); } catch (e) {} render(); }
