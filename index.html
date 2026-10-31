@@ -151,7 +151,7 @@ const T = {
     proto: "Projeto gratuito e sem fins lucrativos. Funciona só no Windows, com o Google Chrome.",
     title: "Legenda de Aula", sub: "Legenda e tradução ao vivo das aulas do mestrado, grátis, no seu computador com Windows.",
     of: (a, b) => `Passo ${a} de ${b}`, time: "cerca de 15 minutos, com a reinicialização", back: "Voltar", next: "Próximo passo", finish: "Concluir", restart: "Ver de novo",
-    video: "Animação deste passo. No canto, o mouse desenhado mostra qual botão clicar, e as teclas aparecem quando precisar. Clique na imagem para ver de novo.", checked: "Já fiz este passo",
+    video: "Animação deste passo. No canto, o mouse acende em amarelo no botão que você deve clicar. Clique na imagem para ver de novo.", checked: "Já fiz este passo",
     steps: [
       { h: "Baixe e abra a pasta", cap: "Baixando e extraindo a pasta",
         do: ["Clique no botão azul <b>Baixar o instalador (.zip)</b> logo abaixo e espere terminar.", "Abra o <b>Explorador de Arquivos</b> (o ícone de pasta amarela na barra de baixo da tela) e clique em <b>Downloads</b>, no menu da esquerda.", "Clique com o <b>botão direito</b> do mouse em <code>Legenda-de-Aula.zip</code> (no notebook, toque com dois dedos no touchpad) e escolha <b>Extrair tudo…</b>.", "Clique em <b>Extrair</b> e abra a pasta que apareceu. <b>Não abra os arquivos de dentro do zip</b>: extraia primeiro."],
@@ -193,7 +193,7 @@ const T = {
     proto: "Proyecto gratuito y sin fines de lucro. Funciona solo en Windows, con Google Chrome.",
     title: "Subtítulos de Clase", sub: "Subtítulos y traducción en vivo de las clases de la maestría, gratis, en tu computadora con Windows.",
     of: (a, b) => `Paso ${a} de ${b}`, time: "unos 15 minutos, con el reinicio", back: "Atrás", next: "Siguiente paso", finish: "Terminar", restart: "Ver de nuevo",
-    video: "Animación de este paso. En la esquina, el mouse dibujado muestra qué botón presionar, y las teclas aparecen cuando hacen falta. Haz clic en la imagen para verla de nuevo.", checked: "Ya hice este paso",
+    video: "Animación de este paso. En la esquina, el mouse se ilumina en amarillo en el botón que debes presionar. Haz clic en la imagen para verla de nuevo.", checked: "Ya hice este paso",
     steps: [
       { h: "Descarga y abre la carpeta", cap: "Descargando y extrayendo la carpeta",
         do: ["Haz clic en el botón azul <b>Descargar el instalador (.zip)</b> aquí abajo y espera a que termine.", "Abre el <b>Explorador de archivos</b> (el ícono de carpeta amarilla en la barra de abajo de la pantalla) y haz clic en <b>Descargas</b>, en el menú de la izquierda.", "Haz clic con el <b>botón derecho</b> del mouse en <code>Legenda-de-Aula.zip</code> (en la notebook, toca con dos dedos el touchpad) y elige <b>Extraer todo…</b>.", "Haz clic en <b>Extraer</b> y abre la carpeta que apareció. <b>No abras los archivos desde dentro del zip</b>: extrae primero."],
@@ -301,16 +301,16 @@ function render() {
 }
 // ---------- animações dos passos ----------
 const WF = '<div class="wf" style="left:5%;top:7%;width:90%;height:86%"><div class="tb">%T%</div></div>';
-const CUR = '<svg class="cur" id="cur" viewBox="0 0 24 24" style="left:50%;top:70%"><path d="M3 2l7 18 2.6-7.4L20 10z" fill="#fff" stroke="#14202e" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="rip" id="rip"></span><div class="capb" id="capb" hidden></div>' +
- '<div class="hud" id="hud"><svg class="ms" viewBox="0 0 24 34"><path id="mL" d="M12 2H9a7 7 0 0 0-7 7v7h10z"/><path id="mR" d="M12 2h3a7 7 0 0 1 7 7v7H12z"/><path class="mb" d="M2 16h20v9a9 9 0 0 1-9 9h-2a9 9 0 0 1-9-9z"/><path class="ml" d="M12 2v14"/></svg><span class="hl" id="hudl" hidden></span><kbd id="hudk" hidden></kbd></div>';
+const CUR = '<svg class="cur" id="cur" viewBox="0 0 24 24" style="left:50%;top:70%"><path d="M3 2l7 18 2.6-7.4L20 10z" fill="#fff" stroke="#14202e" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="rip" id="rip"></span>' +
+ '<div class="hud" id="hud"><svg class="ms" viewBox="0 0 24 34"><path id="mL" d="M12 2H9a7 7 0 0 0-7 7v7h10z"/><path id="mR" d="M12 2h3a7 7 0 0 1 7 7v7H12z"/><path class="mb" d="M2 16h20v9a9 9 0 0 1-9 9h-2a9 9 0 0 1-9-9z"/><path class="ml" d="M12 2v14"/></svg><kbd id="hudk" hidden></kbd></div>';
 const SCENES = [
  { len: 8600, html: WF.replace('%T%', '📁 Downloads') +
    '<div class="ic" id="zip" style="left:12%;top:24%">🗜️<span>Legenda-de-Aula.zip</span></div>' +
-   '<div class="menu" id="mn" hidden style="left:20%;top:38%"><div>Abrir</div><div>Extrair tudo…</div><div>Propriedades</div></div>' +
-   '<div class="dlg" id="dl" hidden style="left:32%;top:22%;width:44%;height:40%">Extrair pastas compactadas<div class="btn2" style="right:4%;bottom:10%">Extrair</div></div>' +
+   '<div class="menu" id="mn" hidden style="left:20%;top:38%"><div>Abrir</div><div id="mi">Extrair tudo…</div><div>Propriedades</div></div>' +
+   '<div class="dlg" id="dl" hidden style="left:32%;top:22%;width:44%;height:40%">Extrair pastas compactadas<div class="btn2" id="bx" style="right:4%;bottom:10%">Extrair</div></div>' +
    '<div class="ic" id="fd" hidden style="left:42%;top:24%">📁<span>Legenda-de-Aula</span></div>',
    caps: { a: ['Clique com o botão direito no arquivo .zip', 'Haz clic derecho en el archivo .zip'], b: ['Escolha “Extrair tudo…”', 'Elige “Extraer todo…”'], c: ['Clique em Extrair', 'Haz clic en Extraer'], d: ['Pronto: a pasta apareceu', 'Listo: apareció la carpeta'] },
-   tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1500, 'cr'], [1600, 's', 'mn'], [2300, 'cap', 'b'], [2400, 'm', 24, 46.5], [3500, 'c'], [3600, 'h', 'mn'], [3700, 's', 'dl'], [4200, 'cap', 'c'], [4300, 'm', 70, 55], [5500, 'c'], [5600, 'h', 'dl'], [5700, 's', 'fd'], [5800, 'cap', 'd']] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1500, 'cr'], [1600, 's', 'mn'], [2300, 'cap', 'b'], [2400, 'mt', 'mi'], [3500, 'c'], [3600, 'h', 'mn'], [3700, 's', 'dl'], [4200, 'cap', 'c'], [4300, 'mt', 'bx'], [5500, 'c'], [5600, 'h', 'dl'], [5700, 's', 'fd'], [5800, 'cap', 'd']] },
  { len: 11500, html: WF.replace('%T%', '📁 Legenda-de-Aula') +
    '<div class="ic" id="bat" style="left:12%;top:24%">⚙️<span>INSTALAR.bat</span></div>' +
    '<div class="dlg" id="du" hidden style="left:28%;top:20%;width:44%;height:46%"><b>Controle de Conta de Usuário</b><br>Deseja permitir que este aplicativo faça alterações no dispositivo?<div class="btn2" style="right:26%;bottom:8%">Sim</div><div class="btn2 g" style="right:4%;bottom:8%">Não</div></div>' +
@@ -320,13 +320,13 @@ const SCENES = [
    tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1200, 'cd'], [1800, 's', 'du'], [2500, 'cap', 'b'], [2600, 'm', 59, 61], [3700, 'c'], [3800, 'h', 'du'], [4000, 's', 'term'], [4200, 's', 'l1'], [5000, 's', 'l2'], [6000, 's', 'l3'], [6800, 's', 'vb'], [6900, 'cap', 'c'], [7000, 'm', 46, 54], [8300, 'c'], [8400, 'h', 'vb'], [8800, 's', 'l4'], [8900, 'cap', 'd']] },
  { len: 8800, html: '<div style="position:absolute;left:38%;top:14%;font-size:22cqw;color:#ffffff26;line-height:1">⊞</div>' +
    '<div class="ic" style="left:3%;top:6%;font-size:4.6cqw;color:#fff">🗑️<span>Lixeira</span></div><div class="ic" style="left:3%;top:30%;font-size:4.6cqw;color:#fff">🌐<span>Google Chrome</span></div><div class="ic" style="left:3%;top:54%;font-size:4.6cqw;color:#fff">📁<span>Downloads</span></div>' +
-   '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div><div class="lbl" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
+   '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div><div class="lbl" id="stb" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
    '<div class="lbl" style="left:9%;top:90.5%;font-size:2.6cqw;color:#fff;font-weight:400">🔍  📁  🌐</div><div class="lbl" style="left:88%;top:89.5%;font-size:1.7cqw;color:#fff;font-weight:400;text-align:right">21:30<br>30/10/2026</div>' +
-   '<div class="menu" id="sm" hidden style="left:2%;top:66%;width:26%"><div>📄 Documentos</div><div>⚙ Configurações</div><div>⏻ Energia</div></div>' +
-   '<div class="menu" id="pm" hidden style="left:29%;top:68%;width:22%"><div>Suspender</div><div>Desligar</div><div>↻ Reiniciar</div></div>' +
+   '<div class="menu" id="sm" hidden style="left:2%;top:66%;width:26%"><div>📄 Documentos</div><div>⚙ Configurações</div><div id="ener">⏻ Energia</div></div>' +
+   '<div class="menu" id="pm" hidden style="left:29%;top:68%;width:22%"><div>Suspender</div><div>Desligar</div><div id="reini">↻ Reiniciar</div></div>' +
    '<div id="bk" hidden style="position:absolute;inset:0;background:#000;color:#fff;display:grid;place-items:center;font-size:3.4cqw;z-index:5">↻ Reiniciando…</div>',
    caps: { a: ['Clique no botão Iniciar do Windows', 'Haz clic en el botón Inicio de Windows'], b: ['Clique em Energia', 'Haz clic en Energía'], c: ['Escolha Reiniciar', 'Elige Reiniciar'], d: ['O computador reinicia. Depois, volte a este guia.', 'La computadora se reinicia. Después, vuelve a esta guía.'] },
-   tl: [[0, 'cap', 'a'], [300, 'm', 3.5, 94], [1500, 'c'], [1600, 's', 'sm'], [2200, 'cap', 'b'], [2300, 'm', 12, 79], [3400, 'c'], [3500, 's', 'pm'], [4000, 'cap', 'c'], [4100, 'm', 36, 81], [5200, 'c'], [5300, 's', 'bk'], [5400, 'cap', 'd']] },
+   tl: [[0, 'cap', 'a'], [300, 'mt', 'stb'], [1500, 'c'], [1600, 's', 'sm'], [2200, 'cap', 'b'], [2300, 'mt', 'ener'], [3400, 'c'], [3500, 's', 'pm'], [4000, 'cap', 'c'], [4100, 'mt', 'reini'], [5200, 'c'], [5300, 's', 'bk'], [5400, 'cap', 'd']] },
  { len: 10500, html: WF.replace('%T%', '🌐 Google Chrome') +
    '<div class="url" style="left:9%;top:16%;width:60%"><span id="u"></span></div>' +
    '<div id="pg" hidden><div class="lbl" style="left:9%;top:27%;font-size:2.6cqw">Extensões</div><div class="lbl" style="left:62%;top:27%">Modo do desenvolvedor</div><div class="tgl" id="tg" style="left:84%;top:26%"></div></div>' +
@@ -370,15 +370,14 @@ function play(i) {
   let cx = 50, cy = 70, hudT, keyT;
   // mouse desenhado no canto: mostra qual botão clicar; a tecla só aparece quando for usada
   const hud = k => {
-    const bl = q('mL'), br = q('mR'), lb = q('hudl'), pt = lang === 'pt';
+    const bl = q('mL'), br = q('mR'), b = k === 'cr' ? br : bl;
     bl.classList.remove('on'); br.classList.remove('on');
     (k === 'cr' ? br : bl).classList.add('on');
-    lb.textContent = k === 'cr' ? (pt ? 'Botão DIREITO do mouse · 1 clique' : 'Botón DERECHO del mouse · 1 clic')
-      : k === 'cd' ? (pt ? 'Botão ESQUERDO · 2 cliques rápidos' : 'Botón IZQUIERDO · 2 clics rápidos')
-      : (pt ? 'Botão ESQUERDO do mouse · 1 clique' : 'Botón IZQUIERDO del mouse · 1 clic');
-    lb.hidden = false;   // fica escrito até o cursor se mover de novo
+    clearTimeout(hudT);   // só o desenho: o botão clicado acende em amarelo (duas piscadas no clique duplo)
+    if (k === 'cd') { tms.push(setTimeout(() => b.classList.remove('on'), 260), setTimeout(() => b.classList.add('on'), 460)); }
+    hudT = setTimeout(() => b.classList.remove('on'), 1400);
   };
-  const hudOff = () => { q('mL').classList.remove('on'); q('mR').classList.remove('on'); q('hudl').hidden = true; };
+  const hudOff = () => { q('mL').classList.remove('on'); q('mR').classList.remove('on'); };
   const hudKey = name => { const kb = q('hudk'); kb.textContent = name; kb.hidden = false; clearTimeout(keyT); keyT = setTimeout(() => { kb.hidden = true; }, 3600); };
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const K = 1.8;   // quanto mais lento que o roteiro original
@@ -416,7 +415,13 @@ function play(i) {
       if (still) { el.textContent = full; return; }
       const v = setInterval(() => { el.textContent = full.slice(0, ++n); if (n >= full.length) clearInterval(v); }, 110); ivs.push(v);
     }
-    else if (k === 'cap') { capb.hidden = false; capb.textContent = sc.caps[x][lang === 'pt' ? 0 : 1]; }
+    else if (k === 'mt') {   // move o cursor para o centro de um elemento (não erra o alvo)
+      const el = q(x), sr = st.getBoundingClientRect(), r = el.getBoundingClientRect();
+      unhit(); hudOff();
+      cx = (r.left + r.width / 2 - sr.left) / sr.width * 100; cy = (r.top + r.height / 2 - sr.top) / sr.height * 100;
+      cur.style.left = cx + '%'; cur.style.top = cy + '%'; if (!still) preHit(a);
+    }
+    else if (k === 'cap') { /* sem legenda: só o mouse e o destaque amarelo */ }
   };
   if (still) { sc.tl.forEach(act); return; }
   sc.tl.forEach(a => tms.push(setTimeout(() => act(a), a[0] * K)));
