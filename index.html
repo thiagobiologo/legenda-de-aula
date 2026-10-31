@@ -168,10 +168,13 @@ const T = {
     of: (a, b) => `Passo ${a} de ${b}`, time: "cerca de 15 minutos, com a reinicialização", back: "Voltar", next: "Próximo passo", finish: "Concluir", restart: "Ver de novo",
     video: "Animação deste passo. No canto, o mouse acende em amarelo no botão que você deve clicar. Clique na imagem para ver de novo.", checked: "Já fiz este passo",
     steps: [
-      { h: "Baixe e abra a pasta", cap: "Baixando e extraindo a pasta",
-        do: ["Clique no botão azul <b>Baixar o instalador (.zip)</b> logo abaixo e espere terminar.", "Abra o <b>Explorador de Arquivos</b> (o ícone de pasta amarela na barra de baixo da tela) e clique em <b>Downloads</b>, no menu da esquerda.", "Clique com o <b>botão direito</b> do mouse em <code>Legenda-de-Aula.zip</code> (no notebook, toque com dois dedos no touchpad) e escolha <b>Extrair tudo…</b>.", "Clique em <b>Extrair</b> e abra a pasta que apareceu. <b>Não abra os arquivos de dentro do zip</b>: extraia primeiro."],
-        note: "Se o Chrome avisar que este tipo de arquivo não é baixado com frequência, clique em <b>Manter</b>. É o instalador gratuito deste guia.",
-        see: "Você vai ver uma pasta com estes itens", mock: "files", dl: true },
+      { h: "Baixe o instalador", cap: "Baixando o instalador",
+        do: ["Logo abaixo, clique no botão azul <b>Baixar o instalador (.zip)</b>.", "O Chrome baixa o arquivo sozinho. Se ele avisar que este tipo de arquivo não é baixado com frequência, clique em <b>Manter</b>."],
+        note: "É o instalador gratuito deste guia. Ele fica na pasta Downloads do seu computador.",
+        see: "O arquivo baixado aparece assim", mock: "dlmock", dl: true },
+      { h: "Abra a pasta e extraia", cap: "Abrindo a pasta e extraindo",
+        do: ["Clique na <b>pasta amarela</b> na barra de baixo da tela (é o Explorador de Arquivos) e depois em <b>Downloads</b>, no menu da esquerda.", "Clique com o <b>botão direito</b> do mouse em <code>Legenda-de-Aula.zip</code> (no notebook, toque com dois dedos no touchpad) e escolha <b>Extrair tudo…</b>.", "Clique em <b>Extrair</b> e abra a pasta que apareceu. <b>Não abra os arquivos de dentro do zip</b>: extraia primeiro."],
+        see: "Você vai ver uma pasta com estes itens", mock: "files" },
       { h: "Instale o cabo de áudio", cap: "Instalando o cabo de áudio",
         do: ["Dentro da pasta, dê dois cliques em <code>INSTALAR.bat</code>.", "Quando o Windows perguntar se deixa fazer alterações, clique em <b>Sim</b>.", "Vai abrir a janela do cabo de áudio (VB-CABLE). Clique em <b>Install Driver</b> e depois em <b>OK</b>. Pode demorar alguns segundos.", "Espere a tela dizer <b>Pronto</b>. O próximo passo é reiniciar o computador."],
         note: "O Windows pode mostrar uma tela azul dizendo “O Windows protegeu o computador”, ou um aviso de segurança. É normal para programas novos. Clique em <b>Mais informações</b> e depois em <b>Executar assim mesmo</b> (ou só em <b>Executar</b>). Este instalador é texto aberto e só faz o que o guia diz: guarda a extensão e baixa o cabo de áudio gratuito do site oficial da VB-Audio.",
@@ -188,12 +191,20 @@ const T = {
         note: "Agora todo o som do computador passa pelo cabo, e a legenda consegue ouvir. No próximo passo você faz o som voltar para o seu fone. No fim da aula, repita e escolha o seu alto-falante de volta. Se o Zoom ou o Meet estiver com um alto-falante escolhido à mão, troque para <b>Igual ao sistema</b>.",
         see: "Deixe assim", mock: "audio" },
       { h: "Ouça a aula no seu fone", cap: "Fazendo o som voltar para o seu fone",
-        do: ["Aperte as teclas <span class=\"k\">Windows</span> e <span class=\"k\">R</span> ao mesmo tempo.", "Na janelinha que abrir, digite <code>mmsys.cpl</code> e aperte <span class=\"k\">Enter</span>.", "Na janela <b>Som</b>, clique na aba <b>Gravação</b>, depois em <b>CABLE Output</b> e em <b>Propriedades</b>.", "Aba <b>Ouvir</b>: marque <b>Escutar este dispositivo</b>, escolha o seu fone ou caixa de som e clique em <b>OK</b>."],
+        do: ["Clique no botão <b>Copiar</b> logo abaixo, para copiar o texto <code>mmsys.cpl</code>.", "Clique no botão <b>Iniciar</b> do Windows (o logo no canto de baixo, à esquerda).", "Aperte <span class=\"k\">Ctrl</span> e <span class=\"k\">V</span> juntas, para colar o texto, e depois <span class=\"k\">Enter</span>.", "Na janela <b>Som</b>, clique na aba <b>Gravação</b>, depois em <b>CABLE Output</b> e em <b>Propriedades</b>.", "Aba <b>Ouvir</b>: marque <b>Escutar este dispositivo</b>, escolha o seu fone ou caixa de som e clique em <b>OK</b>."],
         note: "Sem este passo você não escuta a aula, porque o som passa pelo cabo. Você faz isso só uma vez.",
-        see: "O caminho no Windows", mock: "listen" },
+        see: "O caminho no Windows", mock: "listen", copy: "mmsys.cpl" },
+      { h: "Deixe o Chrome ouvindo o cabo", cap: "Escolhendo o microfone do Chrome",
+        do: ["Clique no botão <b>Copiar</b> logo abaixo. No Chrome, clique na barra de endereço, aperte <span class=\"k\">Ctrl</span> e <span class=\"k\">V</span> juntas e depois <span class=\"k\">Enter</span>.", "Na linha do microfone, clique na caixinha e escolha <b>CABLE Output</b>."],
+        note: "Isso faz o Chrome escutar o som da aula pelo cabo, e não o seu microfone.",
+        see: "Deixe assim", mock: "micset", copy: "chrome://settings/content/microphone" },
       { h: "Abra a legenda e inicie", cap: "Iniciando a legenda",
-        do: ["No Chrome, clique no ícone de quebra-cabeça e depois em <b>Legenda de Aula</b>. A barra lateral abre.", "Escolha quem fala o quê (veja abaixo).", "Clique em <b>Iniciar</b> e, se o Chrome pedir o microfone, clique em <b>Permitir</b>.", "Em <code>chrome://settings/content/microphone</code>, deixe o microfone do Chrome em <b>CABLE Output</b>."],
+        do: ["No Chrome, clique no ícone de quebra-cabeça e depois em <b>Legenda de Aula</b>. A barra lateral abre.", "Escolha quem fala o quê (veja abaixo).", "Clique em <b>Iniciar</b> e, se o Chrome pedir o microfone, clique em <b>Permitir</b>."],
         dir: true, see: "Assim aparece a legenda", mock: "caption" },
+      { h: "Depois da aula", cap: "Salvando e voltando o som",
+        do: ["Na barra lateral da legenda, clique em <b>Salvar (.md)</b>. O arquivo vai para a pasta Downloads: é ele que você sobe no NotebookLM.", "Volte o som: clique no <b>ícone do alto-falante</b> no canto da tela, abra a lista e escolha o seu <b>alto-falante normal</b>."],
+        note: "Sem voltar o som, o computador fica mudo para tudo, porque o som continua indo para o cabo.",
+        see: "Assim o som volta ao normal", mock: "after" },
       { h: "Pronto", done: true }
     ],
     dirLabel: "Escolha o idioma da aula:", d1: "Espanhol → Português", d2: "Português → Espanhol", dnote: "Na barra lateral, o primeiro menu troca o sentido. Quem fala espanhol e assiste aula em português usa “Português → Espanhol”.",
@@ -210,10 +221,13 @@ const T = {
     of: (a, b) => `Paso ${a} de ${b}`, time: "unos 15 minutos, con el reinicio", back: "Atrás", next: "Siguiente paso", finish: "Terminar", restart: "Ver de nuevo",
     video: "Animación de este paso. En la esquina, el mouse se ilumina en amarillo en el botón que debes presionar. Haz clic en la imagen para verla de nuevo.", checked: "Ya hice este paso",
     steps: [
-      { h: "Descarga y abre la carpeta", cap: "Descargando y extrayendo la carpeta",
-        do: ["Haz clic en el botón azul <b>Descargar el instalador (.zip)</b> aquí abajo y espera a que termine.", "Abre el <b>Explorador de archivos</b> (el ícono de carpeta amarilla en la barra de abajo de la pantalla) y haz clic en <b>Descargas</b>, en el menú de la izquierda.", "Haz clic con el <b>botón derecho</b> del mouse en <code>Legenda-de-Aula.zip</code> (en la notebook, toca con dos dedos el touchpad) y elige <b>Extraer todo…</b>.", "Haz clic en <b>Extraer</b> y abre la carpeta que apareció. <b>No abras los archivos desde dentro del zip</b>: extrae primero."],
-        note: "Si Chrome avisa que este tipo de archivo no se descarga con frecuencia, haz clic en <b>Conservar</b>. Es el instalador gratuito de esta guía.",
-        see: "Vas a ver una carpeta con estos elementos", mock: "files", dl: true },
+      { h: "Descarga el instalador", cap: "Descargando el instalador",
+        do: ["Aquí abajo, haz clic en el botón azul <b>Descargar el instalador (.zip)</b>.", "Chrome descarga el archivo solo. Si avisa que este tipo de archivo no se descarga con frecuencia, haz clic en <b>Conservar</b>."],
+        note: "Es el instalador gratuito de esta guía. Queda en la carpeta Descargas de tu computadora.",
+        see: "El archivo descargado aparece así", mock: "dlmock", dl: true },
+      { h: "Abre la carpeta y extrae", cap: "Abriendo la carpeta y extrayendo",
+        do: ["Haz clic en la <b>carpeta amarilla</b> de la barra de abajo de la pantalla (es el Explorador de archivos) y luego en <b>Descargas</b>, en el menú de la izquierda.", "Haz clic con el <b>botón derecho</b> del mouse en <code>Legenda-de-Aula.zip</code> (en la notebook, toca con dos dedos el touchpad) y elige <b>Extraer todo…</b>.", "Haz clic en <b>Extraer</b> y abre la carpeta que apareció. <b>No abras los archivos desde dentro del zip</b>: extrae primero."],
+        see: "Vas a ver una carpeta con estos elementos", mock: "files" },
       { h: "Instala el cable de audio", cap: "Instalando el cable de audio",
         do: ["Dentro de la carpeta, haz doble clic en <code>INSTALAR.bat</code>.", "Cuando Windows pregunte si permites cambios, haz clic en <b>Sí</b>.", "Se abre la ventana del cable de audio (VB-CABLE). Haz clic en <b>Install Driver</b> y luego en <b>OK</b>. Puede tardar unos segundos.", "Espera a que diga <b>Listo</b>. El siguiente paso es reiniciar la computadora."],
         note: "Windows puede mostrar una pantalla azul que dice “Windows protegió su PC”, o un aviso de seguridad. Es normal en programas nuevos. Haz clic en <b>Más información</b> y luego en <b>Ejecutar de todas formas</b> (o solo en <b>Ejecutar</b>). Este instalador es texto abierto y solo hace lo que dice la guía: guarda la extensión y descarga el cable de audio gratuito del sitio oficial de VB-Audio.",
@@ -230,12 +244,20 @@ const T = {
         note: "Ahora todo el sonido de la computadora pasa por el cable y los subtítulos pueden escucharlo. En el siguiente paso haces que el sonido vuelva a tus auriculares. Al final de la clase, repite y vuelve a elegir tu altavoz. Si Zoom o Meet tiene un altavoz elegido a mano, cámbialo a <b>Igual que el sistema</b>.",
         see: "Déjalo así", mock: "audio" },
       { h: "Escucha la clase en tus auriculares", cap: "Haciendo que el sonido vuelva a tus auriculares",
-        do: ["Presiona las teclas <span class=\"k\">Windows</span> y <span class=\"k\">R</span> al mismo tiempo.", "En la ventanita que se abre, escribe <code>mmsys.cpl</code> y presiona <span class=\"k\">Enter</span>.", "En la ventana <b>Sonido</b>, haz clic en la pestaña <b>Grabación</b>, luego en <b>CABLE Output</b> y en <b>Propiedades</b>.", "Pestaña <b>Escuchar</b>: marca <b>Escuchar este dispositivo</b>, elige tus auriculares o altavoces y haz clic en <b>Aceptar</b>."],
+        do: ["Haz clic en el botón <b>Copiar</b> de aquí abajo, para copiar el texto <code>mmsys.cpl</code>.", "Haz clic en el botón <b>Inicio</b> de Windows (el logo en la esquina de abajo, a la izquierda).", "Presiona <span class=\"k\">Ctrl</span> y <span class=\"k\">V</span> juntas, para pegar el texto, y luego <span class=\"k\">Enter</span>.", "En la ventana <b>Sonido</b>, haz clic en la pestaña <b>Grabación</b>, luego en <b>CABLE Output</b> y en <b>Propiedades</b>.", "Pestaña <b>Escuchar</b>: marca <b>Escuchar este dispositivo</b>, elige tus auriculares o altavoces y haz clic en <b>Aceptar</b>."],
         note: "Sin este paso no escuchas la clase, porque el sonido pasa por el cable. Lo haces una sola vez.",
-        see: "El camino en Windows", mock: "listen" },
+        see: "El camino en Windows", mock: "listen", copy: "mmsys.cpl" },
+      { h: "Deja a Chrome escuchando el cable", cap: "Eligiendo el micrófono de Chrome",
+        do: ["Haz clic en el botón <b>Copiar</b> de aquí abajo. En Chrome, haz clic en la barra de direcciones, presiona <span class=\"k\">Ctrl</span> y <span class=\"k\">V</span> juntas y luego <span class=\"k\">Enter</span>.", "En la línea del micrófono, haz clic en la cajita y elige <b>CABLE Output</b>."],
+        note: "Esto hace que Chrome escuche el sonido de la clase por el cable, y no tu micrófono.",
+        see: "Déjalo así", mock: "micset", copy: "chrome://settings/content/microphone" },
       { h: "Abre los subtítulos e inicia", cap: "Iniciando los subtítulos",
-        do: ["En Chrome, haz clic en el ícono de pieza de rompecabezas y luego en <b>Subtítulos de Clase</b>. Se abre la barra lateral.", "Elige quién habla qué (mira abajo).", "Haz clic en <b>Iniciar</b> y, si Chrome pide el micrófono, haz clic en <b>Permitir</b>.", "En <code>chrome://settings/content/microphone</code>, deja el micrófono de Chrome en <b>CABLE Output</b>."],
+        do: ["En Chrome, haz clic en el ícono de pieza de rompecabezas y luego en <b>Subtítulos de Clase</b>. Se abre la barra lateral.", "Elige quién habla qué (mira abajo).", "Haz clic en <b>Iniciar</b> y, si Chrome pide el micrófono, haz clic en <b>Permitir</b>."],
         dir: true, see: "Así se ven los subtítulos", mock: "caption" },
+      { h: "Después de la clase", cap: "Guardando y devolviendo el sonido",
+        do: ["En la barra lateral de los subtítulos, haz clic en <b>Guardar (.md)</b>. El archivo va a la carpeta Descargas: es el que subes a NotebookLM.", "Devuelve el sonido: haz clic en el <b>ícono del altavoz</b> en la esquina de la pantalla, abre la lista y elige tu <b>altavoz normal</b>."],
+        note: "Sin devolver el sonido, la computadora queda muda para todo, porque el sonido sigue yendo al cable.",
+        see: "Así vuelve el sonido a la normalidad", mock: "after" },
       { h: "Listo", done: true }
     ],
     dirLabel: "Elige el idioma de la clase:", d1: "Español → Portugués", d2: "Portugués → Español", dnote: "En la barra lateral, el primer menú cambia el sentido. Quien habla español y asiste a clase en portugués usa “Portugués → Español”.",
@@ -262,6 +284,10 @@ const GUIDE_URL ='https://thiagobiologo.github.io/legenda-de-aula/';
 function dlBox() {
   return `<a class="dlbtn" href="Legenda-de-Aula.zip" download>${lang === 'pt' ? 'Baixar o instalador (.zip)' : 'Descargar el instalador (.zip)'}</a>`;
 }
+function copyBox(txt) {
+  const pt = lang === 'pt';
+  return `<div class="see lkb"><small>${pt ? 'Texto para copiar' : 'Texto para copiar'}</small><input id="cptxt" readonly value="${txt}" aria-label="${txt}"><div class="acts"><button id="cpx" class="main">${pt ? 'Copiar' : 'Copiar'}</button></div></div>`;
+}
 function linkBox() {
   const pt = lang === 'pt';
   return `<div class="see lkb"><small>${pt ? 'Guarde esta página para voltar depois de reiniciar' : 'Guarda esta página para volver después de reiniciar'}</small>
@@ -280,6 +306,9 @@ function mock(kind, t) {
   if (kind === 'uac') return `<div class="win"><div>${t.uac}</div><div class="row"><span class="btn-fake">${t.yes}</span><span class="btn-fake ghost">${t.no}</span></div></div>`;
   if (kind === 'ext') return `<div class="win"><div class="row"><span>${t.ext[0]}</span><span class="sw"></span></div><div class="row"><span class="btn-fake">${t.ext[1]}</span></div></div>`;
   if (kind === 'audio') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Saída de som' : 'Salida de sonido'}</span><span class="k">CABLE Input</span></div><div class="row"><span>${t.aud[1]}</span><span class="k">${t.aud[2]}</span></div></div>`;
+  if (kind === 'dlmock') return `<div class="win"><div class="row"><span>Legenda-de-Aula.zip</span><span class="k">${lang === 'pt' ? 'Concluído' : 'Completado'}</span></div></div>`;
+  if (kind === 'micset') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Microfone usado pelo Chrome' : 'Micrófono usado por Chrome'}</span><span class="k">CABLE Output</span></div></div>`;
+  if (kind === 'after') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Saída de som' : 'Salida de sonido'}</span><span class="k">${lang === 'pt' ? 'Alto-falantes (o seu normal)' : 'Altavoces (el tuyo normal)'}</span></div></div>`;
   if (kind === 'listen') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Windows + R › mmsys.cpl › Gravação › CABLE Output › Propriedades › Ouvir' : 'Windows + R › mmsys.cpl › Grabación › CABLE Output › Propiedades › Escuchar'}</span></div><div><b>${lang === 'pt' ? 'Marque: Escutar este dispositivo' : 'Marca: Escuchar este dispositivo'}</b></div></div>`;
   if (kind === 'restart') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Iniciar › Energia › Reiniciar' : 'Inicio › Energía › Reiniciar'}</span></div><div>${lang === 'pt' ? 'Suspender' : 'Suspender'}</div><div>${lang === 'pt' ? 'Desligar' : 'Apagar'}</div><div><b>Reiniciar</b></div></div>`;
   return `<div class="cap-demo"><b>${t.cap1}</b>${t.cap1t}</div>`;
@@ -306,6 +335,7 @@ function render() {
     <ol class="do">${s.do.map(x => `<li><span>${x}</span></li>`).join('')}</ol>
     ${s.note ? `<div class="note">${s.note}</div>` : ''}
     ${s.dl ? dlBox() : ''}
+    ${s.copy ? copyBox(s.copy) : ''}
     ${s.link ? linkBox() : ''}
     <div class="see"><small>${s.see}</small>${mock(s.mock, t)}</div>
     ${dir}
@@ -316,6 +346,12 @@ function render() {
     const pt = lang === 'pt';
     try { await navigator.clipboard.writeText(GUIDE_URL); cp.textContent = pt ? 'Link copiado' : 'Enlace copiado'; }
     catch (e) { $('lk').focus(); $('lk').select(); cp.textContent = pt ? 'Agora aperte Ctrl + C' : 'Ahora presiona Ctrl + C'; }
+  };
+  const cpx = $('cpx');
+  if (cpx) cpx.onclick = async () => {
+    const pt = lang === 'pt';
+    try { await navigator.clipboard.writeText(s.copy); cpx.textContent = pt ? 'Copiado' : 'Copiado'; }
+    catch (e) { $('cptxt').focus(); $('cptxt').select(); cpx.textContent = pt ? 'Agora aperte Ctrl + C' : 'Ahora presiona Ctrl + C'; }
   };
   play(step);
 }
@@ -334,13 +370,28 @@ const IC = {
 const WF = '<div class="wf" style="left:5%;top:7%;width:90%;height:86%"><div class="tb">%T%</div></div>';
 const CUR = '<svg class="cur" id="cur" viewBox="0 0 24 24" style="left:50%;top:70%"><path d="M3 2l7 18 2.6-7.4L20 10z" fill="#fff" stroke="#14202e" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="rip" id="rip"></span>' +
  '<div class="hud" id="hud"><svg class="ms" viewBox="0 0 24 34"><path id="mL" d="M12 2H9a7 7 0 0 0-7 7v7h10z"/><path id="mR" d="M12 2h3a7 7 0 0 1 7 7v7H12z"/><path class="mb" d="M2 16h20v9a9 9 0 0 1-9 9h-2a9 9 0 0 1-9-9z"/><path class="ml" d="M12 2v14"/></svg><kbd id="hudk" hidden></kbd></div>';
+const CORNER = (cur, first, second) => '<div style="position:absolute;left:38%;top:14%;font-size:22cqw;color:#ffffff26;line-height:1">⊞</div>' +
+   '<div class="ic" style="left:3%;top:6%;font-size:4.6cqw;color:#fff">🗑️<span>Lixeira</span></div>' +
+   '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div>' +
+   '<div class="lbl" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
+   '<div class="lbl" style="left:75%;top:89.4%;font-size:2.6cqw;color:#fff">📶</div><div class="lbl" id="spk" style="left:80%;top:89.4%;font-size:2.6cqw;color:#fff">🔊</div>' +
+   '<div class="lbl" style="left:88%;top:89.5%;font-size:1.7cqw;color:#fff;font-weight:400;text-align:right">21:30<br>30/10/2026</div>' +
+   '<div class="dlg" id="qp" hidden style="left:58%;top:50%;width:38%;height:34%;padding:1.4cqw"><div class="lbl" style="left:5%;top:14%;font-size:2.6cqw">🔊</div><div style="position:absolute;left:17%;top:26%;width:54%;height:.9cqw;background:#c7d0dc;border-radius:1cqw"><div style="width:60%;height:100%;background:#1d4ed8;border-radius:1cqw"></div></div><div class="btn2 g" id="arr" style="right:5%;top:10%">&gt;</div><div id="dn" style="position:absolute;left:5%;top:60%;font-weight:700;font-size:1.9cqw">' + cur + '</div></div>' +
+   '<div class="menu" id="ol" hidden style="left:56%;top:26%;width:40%"><div id="rt">Alto-falantes (Realtek)</div><div>Fones de ouvido</div><div id="ci">CABLE Input</div></div>';
 const SCENES = [
- { len: 8600, html: WF.replace('%T%', '📁 Downloads') +
-   '<div class="ic" id="zip" style="left:12%;top:24%">🗜️<span>Legenda-de-Aula.zip</span></div>' +
-   '<div class="menu" id="mn" hidden style="left:20%;top:38%"><div>Abrir</div><div id="mi">Extrair tudo…</div><div>Propriedades</div></div>' +
+ { len: 6500, html: WF.replace('%T%', '🌐 Google Chrome') +
+   '<div class="lbl" style="left:12%;top:24%;font-size:3cqw">Legenda de Aula</div><div class="btn2" id="dbtn" style="left:12%;top:44%;font-size:2.4cqw;padding:1.2cqw 3cqw">Baixar o instalador (.zip)</div>' +
+   '<div class="dlg" id="dlp" hidden style="left:60%;top:20%;width:34%;height:24%;padding:1.2cqw"><b>Downloads</b><div class="ic" style="position:static;flex-direction:row;font-size:3.4cqw;margin-top:.8cqw;justify-items:start">🗜️<span>Legenda-de-Aula.zip · Concluído</span></div></div>',
+   tl: [[300, 'mt', 'dbtn'], [1500, 'c'], [1800, 's', 'dlp']] },
+ { len: 11500, html: '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div>' +
+   '<div class="lbl" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div><div class="lbl" id="tbf" style="left:9%;top:89.4%;font-size:2.8cqw;color:#fff">📁</div>' +
+   '<div id="wnd" hidden>' + WF.replace('%T%', '📁 Explorador de Arquivos') +
+   '<div class="lbl" style="left:8%;top:20%;color:#56657a;font-weight:400">Acesso rápido</div><div class="lbl" id="sdl" style="left:8%;top:30%">Downloads</div></div>' +
+   '<div id="fl" hidden><div class="ic" id="zip" style="left:34%;top:24%">🗜️<span>Legenda-de-Aula.zip</span></div></div>' +
+   '<div class="menu" id="mn" hidden style="left:42%;top:40%"><div>Abrir</div><div id="mi">Extrair tudo…</div><div>Propriedades</div></div>' +
    '<div class="dlg" id="dl" hidden style="left:32%;top:22%;width:44%;height:40%">Extrair pastas compactadas<div class="btn2" id="bx" style="right:4%;bottom:10%">Extrair</div></div>' +
-   '<div class="ic" id="fd" hidden style="left:42%;top:24%">📁<span>Legenda-de-Aula</span></div>',
-   tl: [[300, 'm', 16, 32], [1500, 'cr'], [1600, 's', 'mn'], [2400, 'mt', 'mi'], [3500, 'c'], [3600, 'h', 'mn'], [3700, 's', 'dl'], [4300, 'mt', 'bx'], [5500, 'c'], [5600, 'h', 'dl'], [5700, 's', 'fd']] },
+   '<div class="ic" id="fd" hidden style="left:62%;top:24%">📁<span>Legenda-de-Aula</span></div>',
+   tl: [[300, 'mt', 'tbf'], [1500, 'c'], [1600, 's', 'wnd'], [2400, 'mt', 'sdl'], [3400, 'c'], [3500, 's', 'fl'], [4300, 'mt', 'zip'], [5500, 'cr'], [5600, 's', 'mn'], [6400, 'mt', 'mi'], [7500, 'c'], [7600, 'h', 'mn'], [7700, 's', 'dl'], [8400, 'mt', 'bx'], [9600, 'c'], [9700, 'h', 'dl'], [9800, 's', 'fd']] },
  { len: 11500, html: WF.replace('%T%', '📁 Legenda-de-Aula') +
    '<div class="ic" id="bat" style="left:12%;top:24%">⚙️<span>INSTALAR.bat</span></div>' +
    '<div class="dlg" id="du" hidden style="left:28%;top:20%;width:44%;height:46%"><b>Controle de Conta de Usuário</b><br>Deseja permitir que este aplicativo faça alterações no dispositivo?<div class="btn2" style="right:26%;bottom:8%">Sim</div><div class="btn2 g" style="right:4%;bottom:8%">Não</div></div>' +
@@ -362,32 +413,35 @@ const SCENES = [
    '<div class="dlg" id="fdlg" hidden style="left:32%;top:30%;width:44%;height:44%">Selecionar pasta<div class="sel" style="left:6%;top:42%;width:50%;background:#eaf0ff">📁 extensao</div></div>' +
    '<div class="dlg" id="card" hidden style="left:9%;top:60%;width:44%;height:26%;padding:1.2cqw"><b>Legenda de Aula</b> · 1.0<div class="tgl on" style="right:4%;top:30%"></div></div>',
    tl: [[300, 'm', 38, 20], [1000, 'c'], [1100, 'ty', 'u', 'chrome://extensions'], [2500, 'key', 'Enter'], [2800, 's', 'pg'], [3100, 'm', 86.5, 28.5], [4100, 'c'], [4200, 'k', 'tg'], [4300, 's', 'bl'], [5100, 'm', 19, 45], [6100, 'c'], [6200, 's', 'fdlg'], [6500, 'm', 40, 50], [7600, 'c'], [7700, 'h', 'fdlg'], [7900, 's', 'card']] },
- { len: 8800, html: '<div style="position:absolute;left:38%;top:14%;font-size:22cqw;color:#ffffff26;line-height:1">⊞</div>' +
-   '<div class="ic" style="left:3%;top:6%;font-size:4.6cqw;color:#fff">🗑️<span>Lixeira</span></div>' +
-   '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div>' +
-   '<div class="lbl" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
-   '<div class="lbl" style="left:75%;top:89.4%;font-size:2.6cqw;color:#fff">📶</div><div class="lbl" id="spk" style="left:80%;top:89.4%;font-size:2.6cqw;color:#fff">🔊</div>' +
-   '<div class="lbl" style="left:88%;top:89.5%;font-size:1.7cqw;color:#fff;font-weight:400;text-align:right">21:30<br>30/10/2026</div>' +
-   '<div class="dlg" id="qp" hidden style="left:58%;top:50%;width:38%;height:34%;padding:1.4cqw"><div class="lbl" style="left:5%;top:14%;font-size:2.6cqw">🔊</div><div style="position:absolute;left:17%;top:26%;width:54%;height:.9cqw;background:#c7d0dc;border-radius:1cqw"><div style="width:60%;height:100%;background:#1d4ed8;border-radius:1cqw"></div></div><div class="btn2 g" id="arr" style="right:5%;top:10%">&gt;</div><div id="dn" style="position:absolute;left:5%;top:60%;font-weight:700;font-size:1.9cqw">Alto-falantes (Realtek)</div></div>' +
-   '<div class="menu" id="ol" hidden style="left:56%;top:26%;width:40%"><div>Alto-falantes (Realtek)</div><div>Fones de ouvido</div><div id="ci">CABLE Input</div></div>',
+ { len: 8800, html: CORNER('Alto-falantes (Realtek)'),
    tl: [[300, 'mt', 'spk'], [1500, 'c'], [1600, 's', 'qp'], [2400, 'mt', 'arr'], [3500, 'c'], [3600, 's', 'ol'], [4300, 'mt', 'ci'], [5300, 'c'], [5400, 'k', 'ci'], [5800, 'h', 'ol'], [5900, 't', 'dn', 'CABLE Input']] },
- { len: 14000, html: '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div>' +
-   '<div class="dlg" id="run" hidden style="left:5%;top:56%;width:38%;height:27%">Executar<div class="sel" style="left:6%;top:50%;width:88%"><span id="rn"></span></div></div>' +
+ { len: 15500, html: '<div style="position:absolute;left:38%;top:14%;font-size:22cqw;color:#ffffff26;line-height:1">⊞</div>' +
+   '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e8"></div>' +
+   '<div class="lbl" id="stb" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
+   '<div class="dlg" id="sm2" hidden style="left:2%;top:38%;width:34%;height:48%"><div class="sel" style="left:6%;top:8%;width:88%;min-height:4cqw"><span id="sq"></span></div><div id="rs" hidden class="sel" style="left:6%;top:30%;width:88%;background:#eaf0ff">mmsys.cpl · Executar comando</div></div>' +
    '<div id="snd" hidden>' + WF.replace('%T%', '🔊 Som') +
    '<div class="lbl" style="left:10%;top:20%;color:#56657a">Reprodução</div><div class="lbl" id="tg" style="left:28%;top:20%;color:#56657a;border-bottom:.4cqw solid #1d4ed8">Gravação</div>' +
    '<div id="lst" hidden><div class="sel" id="cab" style="left:10%;top:34%;width:58%">🎙 CABLE Output</div><div class="btn2" id="pr" style="left:72%;top:34%">Propriedades</div></div>' +
    '<div class="dlg" id="pd" hidden style="left:22%;top:14%;width:56%;height:70%"><b>Propriedades de CABLE Output</b><div class="lbl" style="left:6%;top:18%;color:#1d4ed8">Ouvir</div>' +
    '<div class="sel" id="chk" style="left:6%;top:32%;width:88%"><span class="cbx" id="cbx"></span>Escutar este dispositivo</div><div class="sel" id="dev" style="left:6%;top:52%;width:88%">Reproduzir neste dispositivo: Padrão</div><div class="btn2" id="okb" style="right:5%;bottom:8%">OK</div></div></div>',
-   tl: [[0, 'key', 'Windows + R'], [700, 's', 'run'], [1000, 'ty', 'rn', 'mmsys.cpl'], [2300, 'key', 'Enter'], [2700, 'h', 'run'], [2700, 's', 'snd'], [3300, 'mt', 'tg'], [4300, 'c'], [4400, 's', 'lst'], [5100, 'mt', 'cab'], [6100, 'c'], [6400, 'mt', 'pr'], [7400, 'c'], [7500, 's', 'pd'], [8200, 'mt', 'chk'], [9200, 'c'], [9300, 'k', 'cbx'], [10000, 'mt', 'dev'], [11000, 'c'], [11100, 't', 'dev', 'Reproduzir neste dispositivo: Seu fone'], [11800, 'mt', 'okb'], [12800, 'c'], [12900, 'h', 'pd']] },
- { len: 11500, html: WF.replace('%T%', '🌐 Aula de hoje · Google Chrome') +
+   tl: [[300, 'mt', 'stb'], [1500, 'c'], [1600, 's', 'sm2'], [2300, 'key', 'Ctrl + V'], [2400, 't', 'sq', 'mmsys.cpl'], [2500, 's', 'rs'], [3600, 'key', 'Enter'], [4000, 'h', 'sm2'], [4000, 's', 'snd'], [4600, 'mt', 'tg'], [5600, 'c'], [5700, 's', 'lst'], [6400, 'mt', 'cab'], [7400, 'c'], [7700, 'mt', 'pr'], [8700, 'c'], [8800, 's', 'pd'], [9500, 'mt', 'chk'], [10500, 'c'], [10600, 'k', 'cbx'], [11300, 'mt', 'dev'], [12300, 'c'], [12400, 't', 'dev', 'Reproduzir neste dispositivo: Seu fone'], [13100, 'mt', 'okb'], [14100, 'c'], [14200, 'h', 'pd']] },
+ { len: 10500, html: WF.replace('%T%', '🌐 Google Chrome') +
+   '<div class="url" style="left:9%;top:16%;width:72%"><span id="u"></span></div>' +
+   '<div id="pg2" hidden><div class="lbl" style="left:9%;top:27%;font-size:2.4cqw">Microfone</div><div class="sel" id="msel" style="left:9%;top:42%;width:60%"><span id="mst">Microfone (Realtek)</span></div></div>' +
+   '<div class="menu" id="ol2" hidden style="left:9%;top:52%;width:60%"><div>Microfone (Realtek)</div><div id="co">CABLE Output</div></div>',
+   tl: [[300, 'm', 38, 20], [1000, 'c'], [1100, 'key', 'Ctrl + V'], [1200, 'ty', 'u', 'chrome://settings/content/microphone'], [3200, 'key', 'Enter'], [3500, 's', 'pg2'], [4200, 'mt', 'msel'], [5200, 'c'], [5300, 's', 'ol2'], [6000, 'mt', 'co'], [7000, 'c'], [7100, 'h', 'ol2'], [7200, 't', 'mst', 'CABLE Output']] },
+ { len: 13500, html: WF.replace('%T%', '🌐 Aula de hoje · Google Chrome') +
    '<div class="ic" style="left:14%;top:26%;font-size:9cqw;filter:grayscale(.3)">👤<span>Professor</span></div>' +
    '<div class="lbl" style="left:84%;top:13%;font-size:3.4cqw">🧩</div>' +
+   '<div class="dlg" id="perm" hidden style="left:8%;top:24%;width:34%;height:30%;padding:1.2cqw">Usar seu microfone?<div class="btn2" id="allow" style="left:8%;bottom:12%">Permitir</div><div class="btn2 g" style="right:8%;bottom:12%">Bloquear</div></div>' +
    '<div class="menu" id="dd" hidden style="left:62%;top:22%;width:30%"><div>💬 Legenda de Aula</div></div>' +
    '<div class="pan" id="pn" hidden style="left:58%;top:12%;width:36%;height:78%"><div class="btn2" id="gb" style="left:5%;top:4%">Iniciar</div><div id="st" hidden style="position:absolute;left:5%;top:15%;color:#9aabbf">Ouvindo</div>' +
    '<div class="ln" id="l1" hidden style="top:24%"><b style="color:#6aa9ff">Voz 1</b> 19:02<br>Bom, hoje vamos falar da metodologia da pesquisa.</div>' +
    '<div class="ln hi" id="l2" hidden style="top:46%"><b style="color:#6aa9ff">Voz 1</b> 19:03<br>Vamos combinar o prazo de entrega do trabalho final.<br><span style="color:#ffd166">Prazo / data</span></div>' +
    '<div class="ln" id="l3" hidden style="top:76%"><b style="color:#ff9e64">Voz 2</b> 19:03<br>Professor, a leitura é obrigatória?</div></div>',
-   tl: [[300, 'm', 86, 17], [1500, 'c'], [1600, 's', 'dd'], [2300, 'm', 72, 26], [3400, 'c'], [3500, 'h', 'dd'], [3600, 's', 'pn'], [4300, 'm', 65, 17], [5400, 'c'], [5500, 't', 'gb', 'Parar'], [5600, 's', 'st'], [6500, 's', 'l1'], [7700, 's', 'l2'], [8900, 's', 'l3']] }
+   tl: [[300, 'm', 86, 17], [1500, 'c'], [1600, 's', 'dd'], [2300, 'm', 72, 26], [3400, 'c'], [3500, 'h', 'dd'], [3600, 's', 'pn'], [4300, 'm', 65, 17], [5400, 'c'], [5500, 't', 'gb', 'Parar'], [5600, 's', 'perm'], [6400, 'mt', 'allow'], [7400, 'c'], [7500, 'h', 'perm'], [7600, 's', 'st'], [8500, 's', 'l1'], [9700, 's', 'l2'], [10900, 's', 'l3']] },
+ { len: 8800, html: CORNER('CABLE Input'),
+   tl: [[300, 'mt', 'spk'], [1500, 'c'], [1600, 's', 'qp'], [2400, 'mt', 'arr'], [3500, 'c'], [3600, 's', 'ol'], [4300, 'mt', 'rt'], [5300, 'c'], [5400, 'k', 'rt'], [5800, 'h', 'ol'], [5900, 't', 'dn', 'Alto-falantes (Realtek)']] }
 ];
 let tms = [], ivs = [];
 function stopAnim() { tms.forEach(clearTimeout); ivs.forEach(clearInterval); tms = []; ivs = []; }
