@@ -278,7 +278,7 @@ function creditRender() {
   const pt = lang === 'pt', a = (u, txt) => `<a href="${u}" target="_blank" rel="noopener">${txt}</a>`;
   const links = [PORTFOLIO_URL ? a(PORTFOLIO_URL, pt ? 'Conheça meu portfólio' : 'Conoce mi portafolio') : '',
     a('https://github.com/thiagobiologo/legenda-de-aula', pt ? 'Código aberto no GitHub' : 'Código abierto en GitHub')].filter(Boolean).join(' · ');
-  $('credit').innerHTML = `<div>${pt ? 'Criado por' : 'Creado por'} <b>Thiago Silva</b>. ${pt ? 'Projeto gratuito, feito para ajudar os colegas do mestrado.' : 'Proyecto gratuito, hecho para ayudar a los compañeros de la maestría.'}</div><div>${links}</div>`;
+  $('credit').innerHTML = `<div>${pt ? 'Criado por' : 'Creado por'} <b>Thiago Silva</b>. ${pt ? 'Projeto gratuito, feito para ajudar os colegas do mestrado.' : 'Proyecto gratuito, hecho para ayudar a los compañeros de la maestría.'}</div><div>${links}</div><div>${pt ? 'Se a ferramenta te ajudou, deixe uma <b>estrelinha</b> no projeto: abra o ' + a('https://github.com/thiagobiologo/legenda-de-aula', 'GitHub') + ' e clique em <b>Star</b> (no alto, à direita). Leva um segundo e me ajuda muito.' : 'Si la herramienta te ayudó, deja una <b>estrellita</b> en el proyecto: abre ' + a('https://github.com/thiagobiologo/legenda-de-aula', 'GitHub') + ' y haz clic en <b>Star</b> (arriba, a la derecha). Toma un segundo y me ayuda mucho.'}</div>`;
 }
 const GUIDE_URL ='https://thiagobiologo.github.io/legenda-de-aula/';
 function dlBox() {
