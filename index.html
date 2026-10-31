@@ -67,6 +67,12 @@ h2 { font: 800 clamp(22px, 5vw, 28px)/1.15 var(--f-display); margin: 0; text-wra
 @keyframes rip { 0% { transform: translate(-50%, -50%) scale(.3); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; } }
 .stage .capb { position: absolute; left: 3%; right: 3%; bottom: 3%; text-align: center; background: #000c; color: #ffe066; font-size: 2.5cqw; padding: .8cqw 1.4cqw; border-radius: .8cqw; z-index: 6; }
 .stage .rp { position: absolute; inset: 0; display: grid; place-items: center; background: #000a; color: #ffe066; font-weight: 700; font-size: 3cqw; z-index: 7; }
+.stage .hud { position: absolute; right: 2%; top: 3%; display: flex; align-items: center; gap: 1cqw; background: #0009; padding: .8cqw 1.2cqw; border-radius: 1cqw; z-index: 8; color: #fff; font-size: 1.9cqw; }
+.stage .hud .ms { width: 3.6cqw; height: 5cqw; }
+.stage .hud .ms path { fill: #fff; stroke: #14202e; stroke-width: 1.2; }
+.stage .hud .ms path.mb { fill: #dfe5ee; } .stage .hud .ms path.ml { fill: none; } .stage .hud .ms path.on { fill: #ffe066; }
+.stage .hud .hl { font-weight: 700; color: #ffe066; }
+.stage .hud kbd { background: #fff; color: #14202e; border-radius: .5cqw; padding: .3cqw 1cqw; font: 700 1.9cqw ui-monospace, Consolas, monospace; border-bottom: .3cqw solid #9aa7b8; }
 @media (prefers-reduced-motion: reduce) { .stage .cur, .stage .tgl, .stage .tgl::after { transition: none; } .stage .rip.go { animation: none; } }
 ol.do { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; counter-reset: s; }
 ol.do li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; min-width: 0; }
@@ -137,7 +143,7 @@ const T = {
     proto: "Projeto gratuito e sem fins lucrativos. Funciona só no Windows, com o Google Chrome.",
     title: "Legenda de Aula", sub: "Legenda e tradução ao vivo das aulas do mestrado, grátis, no seu computador com Windows.",
     of: (a, b) => `Passo ${a} de ${b}`, time: "cerca de 15 minutos, com a reinicialização", back: "Voltar", next: "Próximo passo", finish: "Concluir", restart: "Ver de novo",
-    video: "Animação deste passo. Clique na imagem para ver de novo.", checked: "Já fiz este passo",
+    video: "Animação deste passo. No canto, o mouse desenhado mostra qual botão clicar, e as teclas aparecem quando precisar. Clique na imagem para ver de novo.", checked: "Já fiz este passo",
     steps: [
       { h: "Baixe e abra a pasta", cap: "Baixando e extraindo a pasta",
         do: ["Clique no botão azul <b>Baixar o instalador (.zip)</b> logo abaixo e espere terminar.", "Abra o <b>Explorador de Arquivos</b> (o ícone de pasta amarela na barra de baixo da tela) e clique em <b>Downloads</b>, no menu da esquerda.", "Clique com o <b>botão direito</b> do mouse em <code>Legenda-de-Aula.zip</code> (no notebook, toque com dois dedos no touchpad) e escolha <b>Extrair tudo…</b>.", "Clique em <b>Extrair</b> e abra a pasta que apareceu. <b>Não abra os arquivos de dentro do zip</b>: extraia primeiro."],
@@ -179,7 +185,7 @@ const T = {
     proto: "Proyecto gratuito y sin fines de lucro. Funciona solo en Windows, con Google Chrome.",
     title: "Subtítulos de Clase", sub: "Subtítulos y traducción en vivo de las clases de la maestría, gratis, en tu computadora con Windows.",
     of: (a, b) => `Paso ${a} de ${b}`, time: "unos 15 minutos, con el reinicio", back: "Atrás", next: "Siguiente paso", finish: "Terminar", restart: "Ver de nuevo",
-    video: "Animación de este paso. Haz clic en la imagen para verla de nuevo.", checked: "Ya hice este paso",
+    video: "Animación de este paso. En la esquina, el mouse dibujado muestra qué botón presionar, y las teclas aparecen cuando hacen falta. Haz clic en la imagen para verla de nuevo.", checked: "Ya hice este paso",
     steps: [
       { h: "Descarga y abre la carpeta", cap: "Descargando y extrayendo la carpeta",
         do: ["Haz clic en el botón azul <b>Descargar el instalador (.zip)</b> aquí abajo y espera a que termine.", "Abre el <b>Explorador de archivos</b> (el ícono de carpeta amarilla en la barra de abajo de la pantalla) y haz clic en <b>Descargas</b>, en el menú de la izquierda.", "Haz clic con el <b>botón derecho</b> del mouse en <code>Legenda-de-Aula.zip</code> (en la notebook, toca con dos dedos el touchpad) y elige <b>Extraer todo…</b>.", "Haz clic en <b>Extraer</b> y abre la carpeta que apareció. <b>No abras los archivos desde dentro del zip</b>: extrae primero."],
@@ -280,7 +286,8 @@ function render() {
 }
 // ---------- animações dos passos ----------
 const WF = '<div class="wf" style="left:5%;top:7%;width:90%;height:86%"><div class="tb">%T%</div></div>';
-const CUR = '<svg class="cur" id="cur" viewBox="0 0 24 24" style="left:50%;top:70%"><path d="M3 2l7 18 2.6-7.4L20 10z" fill="#fff" stroke="#14202e" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="rip" id="rip"></span><div class="capb" id="capb" hidden></div>';
+const CUR = '<svg class="cur" id="cur" viewBox="0 0 24 24" style="left:50%;top:70%"><path d="M3 2l7 18 2.6-7.4L20 10z" fill="#fff" stroke="#14202e" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="rip" id="rip"></span><div class="capb" id="capb" hidden></div>' +
+ '<div class="hud" id="hud"><svg class="ms" viewBox="0 0 24 34"><path id="mL" d="M12 2H9a7 7 0 0 0-7 7v7h10z"/><path id="mR" d="M12 2h3a7 7 0 0 1 7 7v7H12z"/><path class="mb" d="M2 16h20v9a9 9 0 0 1-9 9h-2a9 9 0 0 1-9-9z"/><path class="ml" d="M12 2v14"/></svg><span class="hl" id="hudl" hidden></span><kbd id="hudk" hidden></kbd></div>';
 const SCENES = [
  { len: 8600, html: WF.replace('%T%', '📁 Downloads') +
    '<div class="ic" id="zip" style="left:12%;top:24%">🗜️<span>Legenda-de-Aula.zip</span></div>' +
@@ -288,14 +295,14 @@ const SCENES = [
    '<div class="dlg" id="dl" hidden style="left:32%;top:22%;width:44%;height:40%">Extrair pastas compactadas<div class="btn2" style="right:4%;bottom:10%">Extrair</div></div>' +
    '<div class="ic" id="fd" hidden style="left:42%;top:24%">📁<span>Legenda-de-Aula</span></div>',
    caps: { a: ['Clique com o botão direito no arquivo .zip', 'Haz clic derecho en el archivo .zip'], b: ['Escolha “Extrair tudo…”', 'Elige “Extraer todo…”'], c: ['Clique em Extrair', 'Haz clic en Extraer'], d: ['Pronto: a pasta apareceu', 'Listo: apareció la carpeta'] },
-   tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1500, 'c'], [1600, 's', 'mn'], [2300, 'cap', 'b'], [2400, 'm', 24, 46.5], [3500, 'c'], [3600, 'h', 'mn'], [3700, 's', 'dl'], [4200, 'cap', 'c'], [4300, 'm', 70, 55], [5500, 'c'], [5600, 'h', 'dl'], [5700, 's', 'fd'], [5800, 'cap', 'd']] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1500, 'cr'], [1600, 's', 'mn'], [2300, 'cap', 'b'], [2400, 'm', 24, 46.5], [3500, 'c'], [3600, 'h', 'mn'], [3700, 's', 'dl'], [4200, 'cap', 'c'], [4300, 'm', 70, 55], [5500, 'c'], [5600, 'h', 'dl'], [5700, 's', 'fd'], [5800, 'cap', 'd']] },
  { len: 11500, html: WF.replace('%T%', '📁 Legenda-de-Aula') +
    '<div class="ic" id="bat" style="left:12%;top:24%">⚙️<span>INSTALAR.bat</span></div>' +
    '<div class="dlg" id="du" hidden style="left:28%;top:20%;width:44%;height:46%"><b>Controle de Conta de Usuário</b><br>Deseja permitir que este aplicativo faça alterações no dispositivo?<div class="btn2" style="right:26%;bottom:8%">Sim</div><div class="btn2 g" style="right:4%;bottom:8%">Não</div></div>' +
    '<div class="term" id="term" hidden style="left:18%;top:14%;width:64%;height:60%"><div id="l1" hidden>&gt; Guardando a extensão no seu computador…</div><div id="l2" hidden>&gt; Baixando o VB-CABLE do site oficial…</div><div id="l3" hidden>&gt; Abrindo o instalador do VB-CABLE…</div><div id="l4" class="ok" hidden>✔ Pronto! Agora reinicie o computador.</div></div>' +
    '<div class="dlg" id="vb" hidden style="left:30%;top:24%;width:40%;height:42%"><b>VB-CABLE Driver Package</b><div class="btn2" style="left:25%;bottom:20%">Install Driver</div></div>',
    caps: { a: ['Dê dois cliques em INSTALAR.bat', 'Haz doble clic en INSTALAR.bat'], b: ['Clique em Sim', 'Haz clic en Sí'], c: ['Na janela do VB-CABLE, clique em Install Driver', 'En la ventana de VB-CABLE, haz clic en Install Driver'], d: ['Pronto. Agora reinicie o computador', 'Listo. Ahora reinicia la computadora'] },
-   tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1200, 'c'], [1450, 'c'], [1800, 's', 'du'], [2500, 'cap', 'b'], [2600, 'm', 59, 61], [3700, 'c'], [3800, 'h', 'du'], [4000, 's', 'term'], [4200, 's', 'l1'], [5000, 's', 'l2'], [6000, 's', 'l3'], [6800, 's', 'vb'], [6900, 'cap', 'c'], [7000, 'm', 46, 54], [8300, 'c'], [8400, 'h', 'vb'], [8800, 's', 'l4'], [8900, 'cap', 'd']] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1200, 'cd'], [1800, 's', 'du'], [2500, 'cap', 'b'], [2600, 'm', 59, 61], [3700, 'c'], [3800, 'h', 'du'], [4000, 's', 'term'], [4200, 's', 'l1'], [5000, 's', 'l2'], [6000, 's', 'l3'], [6800, 's', 'vb'], [6900, 'cap', 'c'], [7000, 'm', 46, 54], [8300, 'c'], [8400, 'h', 'vb'], [8800, 's', 'l4'], [8900, 'cap', 'd']] },
  { len: 8800, html: '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e0"></div><div class="lbl" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
    '<div class="menu" id="sm" hidden style="left:2%;top:44%;width:26%"><div>📄 Documentos</div><div>⚙ Configurações</div><div>⏻ Energia</div></div>' +
    '<div class="menu" id="pm" hidden style="left:29%;top:60%;width:22%"><div>Suspender</div><div>Desligar</div><div>↻ Reiniciar</div></div>' +
@@ -309,7 +316,7 @@ const SCENES = [
    '<div class="dlg" id="fdlg" hidden style="left:32%;top:30%;width:44%;height:44%">Selecionar pasta<div class="sel" style="left:6%;top:42%;width:50%;background:#eaf0ff">📁 extensao</div></div>' +
    '<div class="dlg" id="card" hidden style="left:9%;top:60%;width:44%;height:26%;padding:1.2cqw"><b>Legenda de Aula</b> · 1.0<div class="tgl on" style="right:4%;top:30%"></div></div>',
    caps: { a: ['Abra chrome://extensions', 'Abre chrome://extensions'], b: ['Ligue o Modo do desenvolvedor', 'Activa el Modo de desarrollador'], c: ['Clique em Carregar sem compactação', 'Haz clic en Cargar descomprimida'], d: ['Escolha a pasta “extensao”', 'Elige la carpeta “extensao”'], e: ['Pronto: a extensão apareceu', 'Listo: apareció la extensión'] },
-   tl: [[0, 'cap', 'a'], [300, 'm', 38, 20], [1000, 'c'], [1100, 'ty', 'u', 'chrome://extensions'], [2800, 's', 'pg'], [3000, 'cap', 'b'], [3100, 'm', 86.5, 28.5], [4100, 'c'], [4200, 'k', 'tg'], [4300, 's', 'bl'], [5000, 'cap', 'c'], [5100, 'm', 19, 45], [6100, 'c'], [6200, 's', 'fdlg'], [6400, 'cap', 'd'], [6500, 'm', 40, 50], [7600, 'c'], [7700, 'h', 'fdlg'], [7900, 's', 'card'], [8000, 'cap', 'e']] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 38, 20], [1000, 'c'], [1100, 'ty', 'u', 'chrome://extensions'], [2500, 'key', 'Enter'], [2800, 's', 'pg'], [3000, 'cap', 'b'], [3100, 'm', 86.5, 28.5], [4100, 'c'], [4200, 'k', 'tg'], [4300, 's', 'bl'], [5000, 'cap', 'c'], [5100, 'm', 19, 45], [6100, 'c'], [6200, 's', 'fdlg'], [6400, 'cap', 'd'], [6500, 'm', 40, 50], [7600, 'c'], [7700, 'h', 'fdlg'], [7900, 's', 'card'], [8000, 'cap', 'e']] },
  { len: 8200, html: WF.replace('%T%', '⚙ Configurações de áudio da reunião') +
    '<div class="lbl" style="left:10%;top:28%">Alto-falante</div><div class="sel" id="sp" style="left:34%;top:26%;width:52%"><span id="spt">Alto-falantes (Realtek)</span></div>' +
    '<div class="lbl" style="left:10%;top:52%">Microfone</div><div class="sel" style="left:34%;top:50%;width:52%">Microfone (Realtek)</div>' +
@@ -342,12 +349,27 @@ function play(i) {
   st.innerHTML = sc.html + CUR;
   st.onclick = () => play(i);
   const q = id => st.querySelector('#' + id), cur = q('cur'), rip = q('rip'), capb = q('capb');
-  let cx = 50, cy = 70;
+  let cx = 50, cy = 70, hudT, keyT;
+  // mouse desenhado no canto: mostra qual botão clicar; a tecla só aparece quando for usada
+  const hud = k => {
+    const bl = q('mL'), br = q('mR'), lb = q('hudl'), pt = lang === 'pt';
+    bl.classList.remove('on'); br.classList.remove('on');
+    (k === 'cr' ? br : bl).classList.add('on');
+    lb.textContent = k === 'cr' ? (pt ? 'Clique direito' : 'Clic derecho') : k === 'cd' ? (pt ? 'Clique duplo (2 vezes rápido)' : 'Doble clic (2 veces rápido)') : (pt ? 'Clique esquerdo' : 'Clic izquierdo');
+    lb.hidden = false; clearTimeout(hudT);
+    hudT = setTimeout(() => { bl.classList.remove('on'); br.classList.remove('on'); lb.hidden = true; }, 1800);
+  };
+  const hudKey = name => { const kb = q('hudk'); kb.textContent = name; kb.hidden = false; clearTimeout(keyT); keyT = setTimeout(() => { kb.hidden = true; }, 2200); };
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const act = a => {
     const k = a[1], x = a[2], y = a[3];
     if (k === 'm') { cx = x; cy = y; cur.style.left = x + '%'; cur.style.top = y + '%'; }
-    else if (k === 'c') { rip.style.left = cx + '%'; rip.style.top = cy + '%'; rip.classList.remove('go'); void rip.offsetWidth; rip.classList.add('go'); }
+    else if (k === 'c' || k === 'cr' || k === 'cd') {
+      const ping = () => { rip.style.left = cx + '%'; rip.style.top = cy + '%'; rip.classList.remove('go'); void rip.offsetWidth; rip.classList.add('go'); };
+      ping(); if (k === 'cd') tms.push(setTimeout(ping, 220));
+      hud(k);
+    }
+    else if (k === 'key') hudKey(x);
     else if (k === 's') q(x).hidden = false;
     else if (k === 'h') q(x).hidden = true;
     else if (k === 'k') q(x).classList.toggle('on');
