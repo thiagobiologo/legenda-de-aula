@@ -103,6 +103,8 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); ou
 .lkb .acts { display: flex; gap: 10px; flex-wrap: wrap; }
 .lkb button, .lkb a.wa { font: 700 16px var(--f-body); border-radius: 8px; padding: 11px 18px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; }
 .lkb button.main { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.dlbtn { display: block; text-align: center; background: var(--accent); color: var(--accent-ink); font: 800 19px var(--f-display); padding: 16px 18px; border-radius: 10px; text-decoration: none; }
+.dlbtn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .done-box { text-align: center; display: grid; gap: 10px; justify-items: center; }
 .done-box .big { font: 800 56px/1 var(--f-display); color: var(--ok); }
 </style>
@@ -132,75 +134,83 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); ou
 <script>
 const T = {
   pt: {
-    proto: "PROTÓTIPO · É assim que o guia de instalação vai ficar. Os vídeos e os prints reais entram na versão final.",
+    proto: "Projeto gratuito e sem fins lucrativos. Funciona só no Windows, com o Google Chrome.",
     title: "Legenda de Aula", sub: "Legenda e tradução ao vivo das aulas do mestrado, grátis, no seu computador com Windows.",
     of: (a, b) => `Passo ${a} de ${b}`, time: "cerca de 15 minutos, com a reinicialização", back: "Voltar", next: "Próximo passo", finish: "Concluir", restart: "Ver de novo",
     video: "Animação deste passo. Clique na imagem para ver de novo.", checked: "Já fiz este passo",
     steps: [
       { h: "Baixe e abra a pasta", cap: "Baixando e extraindo a pasta",
-        do: ["Clique no link da pasta que o professor mandou no grupo.", "Clique em <b>Baixar</b> e espere terminar.", "Clique com o botão direito no arquivo <code>.zip</code> e escolha <b>Extrair tudo…</b>, depois <b>Extrair</b>."],
-        see: "Você vai ver uma pasta com estes itens", mock: "files" },
+        do: ["Clique no botão azul <b>Baixar o instalador (.zip)</b> logo abaixo e espere terminar.", "Abra a pasta <b>Downloads</b>, clique com o botão direito em <code>Legenda-de-Aula.zip</code> e escolha <b>Extrair tudo…</b>.", "Clique em <b>Extrair</b> e abra a pasta que apareceu."],
+        see: "Você vai ver uma pasta com estes itens", mock: "files", dl: true },
       { h: "Instale o cabo de áudio", cap: "Instalando o cabo de áudio",
-        do: ["Dentro da pasta, dê dois cliques em <code>INSTALAR.bat</code>.", "Quando o Windows perguntar se deixa fazer alterações, clique em <b>Sim</b>.", "Espere a tela dizer <b>Pronto</b>. O próximo passo é reiniciar o computador."],
-        note: "É normal o Windows avisar que o programa é de um editor desconhecido. Ele só instala o cabo de áudio gratuito (VB-CABLE).",
+        do: ["Dentro da pasta, dê dois cliques em <code>INSTALAR.bat</code>.", "Quando o Windows perguntar se deixa fazer alterações, clique em <b>Sim</b>.", "Vai abrir a janela do cabo de áudio (VB-CABLE). Clique em <b>Install Driver</b> e depois em <b>OK</b>. Pode demorar alguns segundos.", "Espere a tela dizer <b>Pronto</b>. O próximo passo é reiniciar o computador."],
+        note: "É normal o Windows avisar que o programa é de um editor desconhecido. Ele só instala o cabo de áudio gratuito (VB-CABLE), baixado direto do site oficial da VB-Audio.",
         see: "O Windows vai perguntar isto. Clique em Sim.", mock: "uac" },
       { h: "Reinicie o computador", cap: "Reiniciando o computador",
         do: ["<b>Antes de reiniciar, guarde esta página:</b> aperte <span class=\"k\">Ctrl</span> + <span class=\"k\">D</span> para salvar nos favoritos do Chrome, ou mande o link para você mesmo no WhatsApp.", "Clique no botão <b>Iniciar</b> do Windows, depois em <b>Energia</b> e em <b>Reiniciar</b>.", "Quando o computador voltar, abra o Chrome e entre de novo por este link. O guia lembra onde você parou: é só clicar em <b>Continuar</b>."],
         note: "Por que reiniciar? O Windows só reconhece o cabo de áudio novo depois de reiniciar. Sem isso, o passo do áudio não funciona. Ao reiniciar, tudo fecha, inclusive esta página.",
         see: "O caminho para reiniciar", mock: "restart", link: true },
       { h: "Adicione a extensão ao Chrome", cap: "Carregando a extensão no Chrome",
-        do: ["Abra o Google Chrome e digite na barra de endereço: <code>chrome://extensions</code>", "Ligue a chavinha <b>Modo do desenvolvedor</b> (canto de cima, à direita).", "Clique em <b>Carregar sem compactação</b> e escolha a pasta <code>extensao</code>."],
+        do: ["Abra o Google Chrome e digite na barra de endereço: <code>chrome://extensions</code>", "Ligue a chavinha <b>Modo do desenvolvedor</b> (canto de cima, à direita).", "Clique em <b>Carregar sem compactação</b> e escolha a pasta <code>LegendaDeAula</code> › <code>extensao</code>, dentro da sua pasta de usuário (o instalador mostrou o caminho)."],
         see: "Procure esta chavinha e este botão", mock: "ext" },
       { h: "Configure o áudio da reunião", cap: "Escolhendo o alto-falante na reunião",
         do: ["Entre na aula pelo Zoom ou Meet, como sempre.", "Abra as configurações de áudio da reunião.", "No <b>alto-falante</b>, escolha <b>CABLE Input</b>. No <b>microfone</b>, deixe o seu microfone normal."],
-        note: "O som da aula passa pelo cabo para a legenda poder ouvir. Ligue o <b>Escutar este dispositivo</b> do CABLE Output para continuar ouvindo no seu fone (o vídeo mostra onde).",
+        note: "O som da aula passa pelo cabo para a legenda poder ouvir. No próximo passo você faz o som voltar para o seu fone.",
         see: "Na reunião, deixe assim", mock: "audio" },
+      { h: "Ouça a aula no seu fone", cap: "Fazendo o som voltar para o seu fone",
+        do: ["Clique com o botão direito no ícone de alto-falante, perto do relógio, e escolha <b>Sons</b>.", "Aba <b>Gravação</b> › clique em <b>CABLE Output</b> › <b>Propriedades</b>.", "Aba <b>Ouvir</b>: marque <b>Escutar este dispositivo</b>, escolha o seu fone ou caixa de som e clique em <b>OK</b>."],
+        note: "Sem este passo você não escuta a aula, porque o som passa pelo cabo. Você faz isso só uma vez.",
+        see: "O caminho no Windows", mock: "listen" },
       { h: "Abra a legenda e inicie", cap: "Iniciando a legenda",
-        do: ["No Chrome, clique no ícone de quebra-cabeça e depois em <b>Legenda de Aula</b>. A barra lateral abre.", "Escolha quem fala o quê (veja abaixo).", "Clique em <b>▶ Iniciar</b> e deixe o Chrome usar o microfone “CABLE Output” quando pedir."],
+        do: ["No Chrome, clique no ícone de quebra-cabeça e depois em <b>Legenda de Aula</b>. A barra lateral abre.", "Escolha quem fala o quê (veja abaixo).", "Clique em <b>▶ Iniciar</b> e, se o Chrome pedir o microfone, clique em <b>Permitir</b>.", "Em <code>chrome://settings/content/microphone</code>, deixe o microfone do Chrome em <b>CABLE Output</b>."],
         dir: true, see: "Assim aparece a legenda", mock: "caption" },
       { h: "Pronto", done: true }
     ],
     dirLabel: "Escolha o idioma da aula:", d1: "Espanhol → Português", d2: "Português → Espanhol", dnote: "Na barra lateral, o primeiro menu troca o sentido. Quem fala espanhol e assiste aula em português usa “Português → Espanhol”.",
     doneT: "Tudo certo!", doneP: "A legenda aparece na barra lateral, e no fim da aula você clica em <b>Salvar</b> para guardar o texto e estudar depois.",
     help: "Se algo não funcionar: abra o vídeo do passo de novo e confira se o Chrome está usando o microfone “CABLE Output”.",
-    files: ["INSTALAR.bat", "DESINSTALAR.bat", "extensao (pasta)", "LEIA-ME.pdf"],
+    files: ["INSTALAR.bat", "DESINSTALAR.bat", "LEIA-ME.txt", "extensao (pasta)", "scripts (pasta)"],
     uac: "Deseja permitir que este aplicativo faça alterações no dispositivo?", yes: "Sim", no: "Não",
     ext: ["Modo do desenvolvedor", "Carregar sem compactação"], aud: ["Alto-falante", "Microfone", "Seu microfone normal"],
     cap1: "Voz 1 · professor", cap1t: "Hoje vamos combinar o prazo de entrega do trabalho final."
   },
   es: {
-    proto: "PROTOTIPO · Así quedará la guía de instalación. Los videos y las capturas reales se agregan en la versión final.",
+    proto: "Proyecto gratuito y sin fines de lucro. Funciona solo en Windows, con Google Chrome.",
     title: "Subtítulos de Clase", sub: "Subtítulos y traducción en vivo de las clases de la maestría, gratis, en tu computadora con Windows.",
     of: (a, b) => `Paso ${a} de ${b}`, time: "unos 15 minutos, con el reinicio", back: "Atrás", next: "Siguiente paso", finish: "Terminar", restart: "Ver de nuevo",
     video: "Animación de este paso. Haz clic en la imagen para verla de nuevo.", checked: "Ya hice este paso",
     steps: [
       { h: "Descarga y abre la carpeta", cap: "Descargando y extrayendo la carpeta",
-        do: ["Haz clic en el enlace de la carpeta que el profesor mandó al grupo.", "Haz clic en <b>Descargar</b> y espera a que termine.", "Haz clic derecho en el archivo <code>.zip</code> y elige <b>Extraer todo…</b>, luego <b>Extraer</b>."],
-        see: "Vas a ver una carpeta con estos elementos", mock: "files" },
+        do: ["Haz clic en el botón azul <b>Descargar el instalador (.zip)</b> aquí abajo y espera a que termine.", "Abre la carpeta <b>Descargas</b>, haz clic derecho en <code>Legenda-de-Aula.zip</code> y elige <b>Extraer todo…</b>.", "Haz clic en <b>Extraer</b> y abre la carpeta que apareció."],
+        see: "Vas a ver una carpeta con estos elementos", mock: "files", dl: true },
       { h: "Instala el cable de audio", cap: "Instalando el cable de audio",
-        do: ["Dentro de la carpeta, haz doble clic en <code>INSTALAR.bat</code>.", "Cuando Windows pregunte si permites cambios, haz clic en <b>Sí</b>.", "Espera a que diga <b>Listo</b>. El siguiente paso es reiniciar la computadora."],
-        note: "Es normal que Windows avise que el programa es de un editor desconocido. Solo instala el cable de audio gratuito (VB-CABLE).",
+        do: ["Dentro de la carpeta, haz doble clic en <code>INSTALAR.bat</code>.", "Cuando Windows pregunte si permites cambios, haz clic en <b>Sí</b>.", "Se abre la ventana del cable de audio (VB-CABLE). Haz clic en <b>Install Driver</b> y luego en <b>OK</b>. Puede tardar unos segundos.", "Espera a que diga <b>Listo</b>. El siguiente paso es reiniciar la computadora."],
+        note: "Es normal que Windows avise que el programa es de un editor desconocido. Solo instala el cable de audio gratuito (VB-CABLE), descargado directo del sitio oficial de VB-Audio.",
         see: "Windows va a preguntar esto. Haz clic en Sí.", mock: "uac" },
       { h: "Reinicia la computadora", cap: "Reiniciando la computadora",
         do: ["<b>Antes de reiniciar, guarda esta página:</b> presiona <span class=\"k\">Ctrl</span> + <span class=\"k\">D</span> para guardarla en los favoritos de Chrome, o envíate el enlace por WhatsApp.", "Haz clic en el botón <b>Inicio</b> de Windows, luego en <b>Energía</b> y en <b>Reiniciar</b>.", "Cuando la computadora vuelva, abre Chrome y entra otra vez por este enlace. La guía recuerda dónde te quedaste: solo haz clic en <b>Continuar</b>."],
         note: "¿Por qué reiniciar? Windows solo reconoce el cable de audio nuevo después de reiniciar. Sin eso, el paso del audio no funciona. Al reiniciar se cierra todo, incluida esta página.",
         see: "El camino para reiniciar", mock: "restart", link: true },
       { h: "Agrega la extensión a Chrome", cap: "Cargando la extensión en Chrome",
-        do: ["Abre Google Chrome y escribe en la barra de direcciones: <code>chrome://extensions</code>", "Activa el interruptor <b>Modo de desarrollador</b> (arriba, a la derecha).", "Haz clic en <b>Cargar descomprimida</b> y elige la carpeta <code>extensao</code>."],
+        do: ["Abre Google Chrome y escribe en la barra de direcciones: <code>chrome://extensions</code>", "Activa el interruptor <b>Modo de desarrollador</b> (arriba, a la derecha).", "Haz clic en <b>Cargar descomprimida</b> y elige la carpeta <code>LegendaDeAula</code> › <code>extensao</code>, dentro de tu carpeta de usuario (el instalador mostró la ruta)."],
         see: "Busca este interruptor y este botón", mock: "ext" },
       { h: "Configura el audio de la reunión", cap: "Eligiendo el altavoz en la reunión",
         do: ["Entra a la clase por Zoom o Meet, como siempre.", "Abre la configuración de audio de la reunión.", "En <b>altavoz</b>, elige <b>CABLE Input</b>. En <b>micrófono</b>, deja tu micrófono normal."],
-        note: "El sonido de la clase pasa por el cable para que los subtítulos puedan escucharlo. Activa <b>Escuchar este dispositivo</b> en CABLE Output para seguir oyendo en tus auriculares (el video muestra dónde).",
+        note: "El sonido de la clase pasa por el cable para que los subtítulos puedan escucharlo. En el siguiente paso haces que el sonido vuelva a tus auriculares.",
         see: "En la reunión, déjalo así", mock: "audio" },
+      { h: "Escucha la clase en tus auriculares", cap: "Haciendo que el sonido vuelva a tus auriculares",
+        do: ["Haz clic derecho en el ícono de altavoz, cerca del reloj, y elige <b>Sonidos</b>.", "Pestaña <b>Grabación</b> › haz clic en <b>CABLE Output</b> › <b>Propiedades</b>.", "Pestaña <b>Escuchar</b>: marca <b>Escuchar este dispositivo</b>, elige tus auriculares o altavoces y haz clic en <b>Aceptar</b>."],
+        note: "Sin este paso no escuchas la clase, porque el sonido pasa por el cable. Lo haces una sola vez.",
+        see: "El camino en Windows", mock: "listen" },
       { h: "Abre los subtítulos e inicia", cap: "Iniciando los subtítulos",
-        do: ["En Chrome, haz clic en el ícono de pieza de rompecabezas y luego en <b>Subtítulos de Clase</b>. Se abre la barra lateral.", "Elige quién habla qué (mira abajo).", "Haz clic en <b>▶ Iniciar</b> y deja que Chrome use el micrófono “CABLE Output” cuando lo pida."],
+        do: ["En Chrome, haz clic en el ícono de pieza de rompecabezas y luego en <b>Subtítulos de Clase</b>. Se abre la barra lateral.", "Elige quién habla qué (mira abajo).", "Haz clic en <b>▶ Iniciar</b> y, si Chrome pide el micrófono, haz clic en <b>Permitir</b>.", "En <code>chrome://settings/content/microphone</code>, deja el micrófono de Chrome en <b>CABLE Output</b>."],
         dir: true, see: "Así se ven los subtítulos", mock: "caption" },
       { h: "Listo", done: true }
     ],
     dirLabel: "Elige el idioma de la clase:", d1: "Español → Portugués", d2: "Portugués → Español", dnote: "En la barra lateral, el primer menú cambia el sentido. Quien habla español y asiste a clase en portugués usa “Portugués → Español”.",
     doneT: "¡Todo listo!", doneP: "Los subtítulos aparecen en la barra lateral y, al final de la clase, haces clic en <b>Guardar</b> para conservar el texto y estudiar después.",
     help: "Si algo no funciona: vuelve a ver el video del paso y revisa que Chrome use el micrófono “CABLE Output”.",
-    files: ["INSTALAR.bat", "DESINSTALAR.bat", "extensao (carpeta)", "LEIA-ME.pdf"],
+    files: ["INSTALAR.bat", "DESINSTALAR.bat", "LEIA-ME.txt", "extensao (carpeta)", "scripts (carpeta)"],
     uac: "¿Quieres permitir que esta aplicación haga cambios en el dispositivo?", yes: "Sí", no: "No",
     ext: ["Modo de desarrollador", "Cargar descomprimida"], aud: ["Altavoz", "Micrófono", "Tu micrófono normal"],
     cap1: "Voz 1 · profesor", cap1t: "Hoy vamos a acordar la fecha de entrega del trabajo final."
@@ -211,6 +221,9 @@ try { lang = localStorage.getItem('guia-lang') || 'pt'; } catch (e) {}
 const $ = id => document.getElementById(id);
 
 const GUIDE_URL = 'https://thiagobiologo.github.io/legenda-de-aula/';
+function dlBox() {
+  return `<a class="dlbtn" href="Legenda-de-Aula.zip" download>⬇ ${lang === 'pt' ? 'Baixar o instalador (.zip)' : 'Descargar el instalador (.zip)'}</a>`;
+}
 function linkBox() {
   const pt = lang === 'pt';
   const msg = encodeURIComponent((pt ? 'Guia Legenda de Aula (voltar aqui depois de reiniciar): ' : 'Guía Subtítulos de Clase (volver aquí después de reiniciar): ') + GUIDE_URL);
@@ -224,6 +237,7 @@ function mock(kind, t) {
   if (kind === 'uac') return `<div class="win"><div>${t.uac}</div><div class="row"><span class="btn-fake">${t.yes}</span><span class="btn-fake ghost">${t.no}</span></div></div>`;
   if (kind === 'ext') return `<div class="win"><div class="row"><span>${t.ext[0]}</span><span class="sw"></span></div><div class="row"><span class="btn-fake">${t.ext[1]}</span></div></div>`;
   if (kind === 'audio') return `<div class="win"><div class="row"><span>${t.aud[0]}</span><span class="k">CABLE Input</span></div><div class="row"><span>${t.aud[1]}</span><span class="k">${t.aud[2]}</span></div></div>`;
+  if (kind === 'listen') return `<div class="win"><div class="row"><span>${lang === 'pt' ? 'Gravação › CABLE Output › Propriedades › Ouvir' : 'Grabación › CABLE Output › Propiedades › Escuchar'}</span></div><div><b>☑ ${lang === 'pt' ? 'Escutar este dispositivo' : 'Escuchar este dispositivo'}</b></div></div>`;
   if (kind === 'restart') return `<div class="win"><div class="row"><span>⊞ Iniciar → ⏻ ${lang === 'pt' ? 'Energia' : 'Energía'}</span></div><div>${lang === 'pt' ? 'Suspender' : 'Suspender'}</div><div>${lang === 'pt' ? 'Desligar' : 'Apagar'}</div><div><b>↻ ${lang === 'pt' ? 'Reiniciar' : 'Reiniciar'} ◀</b></div></div>`;
   return `<div class="cap-demo"><b>${t.cap1}</b>${t.cap1t}</div>`;
 }
@@ -248,6 +262,7 @@ function render() {
     <div class="stage" id="stage" role="img" aria-label="${s.cap}"></div><div class="vcap">${t.video}</div>
     <ol class="do">${s.do.map(x => `<li><span>${x}</span></li>`).join('')}</ol>
     ${s.note ? `<div class="note">${s.note}</div>` : ''}
+    ${s.dl ? dlBox() : ''}
     ${s.link ? linkBox() : ''}
     <div class="see"><small>${s.see}</small>${mock(s.mock, t)}</div>
     ${dir}
@@ -266,18 +281,19 @@ const WF = '<div class="wf" style="left:5%;top:7%;width:90%;height:86%"><div cla
 const CUR = '<svg class="cur" id="cur" viewBox="0 0 24 24" style="left:50%;top:70%"><path d="M3 2l7 18 2.6-7.4L20 10z" fill="#fff" stroke="#14202e" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="rip" id="rip"></span><div class="capb" id="capb" hidden></div>';
 const SCENES = [
  { len: 8600, html: WF.replace('%T%', '📁 Downloads') +
-   '<div class="ic" id="zip" style="left:12%;top:24%">🗜️<span>legenda-aula.zip</span></div>' +
+   '<div class="ic" id="zip" style="left:12%;top:24%">🗜️<span>Legenda-de-Aula.zip</span></div>' +
    '<div class="menu" id="mn" hidden style="left:20%;top:38%"><div>Abrir</div><div>Extrair tudo…</div><div>Propriedades</div></div>' +
    '<div class="dlg" id="dl" hidden style="left:32%;top:22%;width:44%;height:40%">Extrair pastas compactadas<div class="btn2" style="right:4%;bottom:10%">Extrair</div></div>' +
    '<div class="ic" id="fd" hidden style="left:42%;top:24%">📁<span>Legenda-de-Aula</span></div>',
    caps: { a: ['Clique com o botão direito no arquivo .zip', 'Haz clic derecho en el archivo .zip'], b: ['Escolha “Extrair tudo…”', 'Elige “Extraer todo…”'], c: ['Clique em Extrair', 'Haz clic en Extraer'], d: ['Pronto: a pasta apareceu', 'Listo: apareció la carpeta'] },
    tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1500, 'c'], [1600, 's', 'mn'], [2300, 'cap', 'b'], [2400, 'm', 24, 46.5], [3500, 'c'], [3600, 'h', 'mn'], [3700, 's', 'dl'], [4200, 'cap', 'c'], [4300, 'm', 70, 55], [5500, 'c'], [5600, 'h', 'dl'], [5700, 's', 'fd'], [5800, 'cap', 'd']] },
- { len: 11000, html: WF.replace('%T%', '📁 Legenda-de-Aula') +
+ { len: 11500, html: WF.replace('%T%', '📁 Legenda-de-Aula') +
    '<div class="ic" id="bat" style="left:12%;top:24%">⚙️<span>INSTALAR.bat</span></div>' +
    '<div class="dlg" id="du" hidden style="left:28%;top:20%;width:44%;height:46%"><b>Controle de Conta de Usuário</b><br>Deseja permitir que este aplicativo faça alterações no dispositivo?<div class="btn2" style="right:26%;bottom:8%">Sim</div><div class="btn2 g" style="right:4%;bottom:8%">Não</div></div>' +
-   '<div class="term" id="term" hidden style="left:18%;top:18%;width:64%;height:56%"><div id="l1" hidden>&gt; Baixando o VB-CABLE do site oficial…</div><div id="l2" hidden>&gt; Instalando o cabo de áudio…</div><div id="l3" hidden>&gt; Conferindo se funcionou…</div><div id="l4" class="ok" hidden>✔ Pronto! Agora reinicie o computador.</div></div>',
-   caps: { a: ['Dê dois cliques em INSTALAR.bat', 'Haz doble clic en INSTALAR.bat'], b: ['Clique em Sim', 'Haz clic en Sí'], c: ['Espere terminar e reinicie o computador', 'Espera a que termine y reinicia la computadora'] },
-   tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1200, 'c'], [1450, 'c'], [1800, 's', 'du'], [2500, 'cap', 'b'], [2600, 'm', 59, 61], [3700, 'c'], [3800, 'h', 'du'], [4000, 's', 'term'], [4200, 's', 'l1'], [5400, 's', 'l2'], [6600, 's', 'l3'], [7800, 's', 'l4'], [7900, 'cap', 'c']] },
+   '<div class="term" id="term" hidden style="left:18%;top:14%;width:64%;height:60%"><div id="l1" hidden>&gt; Guardando a extensão no seu computador…</div><div id="l2" hidden>&gt; Baixando o VB-CABLE do site oficial…</div><div id="l3" hidden>&gt; Abrindo o instalador do VB-CABLE…</div><div id="l4" class="ok" hidden>✔ Pronto! Agora reinicie o computador.</div></div>' +
+   '<div class="dlg" id="vb" hidden style="left:30%;top:24%;width:40%;height:42%"><b>VB-CABLE Driver Package</b><div class="btn2" style="left:25%;bottom:20%">Install Driver</div></div>',
+   caps: { a: ['Dê dois cliques em INSTALAR.bat', 'Haz doble clic en INSTALAR.bat'], b: ['Clique em Sim', 'Haz clic en Sí'], c: ['Na janela do VB-CABLE, clique em Install Driver', 'En la ventana de VB-CABLE, haz clic en Install Driver'], d: ['Pronto. Agora reinicie o computador', 'Listo. Ahora reinicia la computadora'] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 16, 32], [1200, 'c'], [1450, 'c'], [1800, 's', 'du'], [2500, 'cap', 'b'], [2600, 'm', 59, 61], [3700, 'c'], [3800, 'h', 'du'], [4000, 's', 'term'], [4200, 's', 'l1'], [5000, 's', 'l2'], [6000, 's', 'l3'], [6800, 's', 'vb'], [6900, 'cap', 'c'], [7000, 'm', 46, 54], [8300, 'c'], [8400, 'h', 'vb'], [8800, 's', 'l4'], [8900, 'cap', 'd']] },
  { len: 8800, html: '<div style="position:absolute;left:0;right:0;bottom:0;height:11%;background:#0c1626e0"></div><div class="lbl" style="left:2.2%;top:89%;font-size:3.4cqw;color:#fff">⊞</div>' +
    '<div class="menu" id="sm" hidden style="left:2%;top:44%;width:26%"><div>📄 Documentos</div><div>⚙ Configurações</div><div>⏻ Energia</div></div>' +
    '<div class="menu" id="pm" hidden style="left:29%;top:60%;width:22%"><div>Suspender</div><div>Desligar</div><div>↻ Reiniciar</div></div>' +
@@ -298,6 +314,13 @@ const SCENES = [
    '<div class="menu" id="ol" hidden style="left:34%;top:37%;width:52%"><div>Alto-falantes (Realtek)</div><div style="background:#cfe0ff;font-weight:700">CABLE Input</div></div>',
    caps: { a: ['Abra as configurações de áudio da reunião', 'Abre la configuración de audio de la reunión'], b: ['No alto-falante, escolha CABLE Input', 'En altavoz, elige CABLE Input'], c: ['O microfone continua o seu normal', 'El micrófono sigue siendo el tuyo de siempre'] },
    tl: [[0, 'cap', 'a'], [300, 'm', 60, 31], [1500, 'c'], [1600, 's', 'ol'], [2200, 'cap', 'b'], [2300, 'm', 50, 46], [3500, 'c'], [3600, 'h', 'ol'], [3700, 't', 'spt', 'CABLE Input'], [3750, 'k', 'sp'], [5000, 'cap', 'c'], [5100, 'm', 60, 56]] },
+ { len: 12500, html: WF.replace('%T%', '🔊 Som') +
+   '<div class="lbl" style="left:10%;top:20%;color:#56657a">Reprodução</div><div class="lbl" id="tg" style="left:28%;top:20%;color:#56657a;border-bottom:.4cqw solid #1d4ed8">Gravação</div>' +
+   '<div id="lst" hidden><div class="sel" id="cab" style="left:10%;top:34%;width:58%">🎙 CABLE Output</div><div class="btn2" id="pr" style="left:72%;top:34%">Propriedades</div></div>' +
+   '<div class="dlg" id="pd" hidden style="left:22%;top:14%;width:56%;height:70%"><b>Propriedades de CABLE Output</b><div class="lbl" style="left:6%;top:18%;color:#1d4ed8">Ouvir</div>' +
+   '<div class="sel" id="chk" style="left:6%;top:32%;width:88%">☐ Escutar este dispositivo</div><div class="sel" id="dev" style="left:6%;top:52%;width:88%">Reproduzir neste dispositivo: Padrão</div><div class="btn2" style="right:5%;bottom:8%">OK</div></div>',
+   caps: { a: ['Na janela Som, abra a aba Gravação', 'En la ventana Sonido, abre la pestaña Grabación'], b: ['Clique em CABLE Output e depois em Propriedades', 'Haz clic en CABLE Output y luego en Propiedades'], c: ['Aba Ouvir: marque “Escutar este dispositivo”', 'Pestaña Escuchar: marca “Escuchar este dispositivo”'], d: ['Escolha o seu fone e clique em OK', 'Elige tus auriculares y haz clic en Aceptar'] },
+   tl: [[0, 'cap', 'a'], [300, 'm', 31, 23], [1500, 'c'], [1600, 's', 'lst'], [2300, 'cap', 'b'], [2400, 'm', 30, 37], [3400, 'c'], [3500, 'm', 80, 38], [4500, 'c'], [4600, 's', 'pd'], [5200, 'cap', 'c'], [5300, 'm', 36, 37], [6300, 'c'], [6400, 't', 'chk', '☑ Escutar este dispositivo'], [7000, 'm', 50, 52], [8000, 'c'], [8100, 't', 'dev', 'Reproduzir neste dispositivo: Seu fone'], [8200, 'cap', 'd'], [8700, 'm', 70, 76], [9700, 'c'], [9800, 'h', 'pd']] },
  { len: 11500, html: WF.replace('%T%', '🌐 Aula de hoje · Google Chrome') +
    '<div class="ic" style="left:14%;top:26%;font-size:9cqw;filter:grayscale(.3)">👤<span>Professor</span></div>' +
    '<div class="lbl" style="left:84%;top:13%;font-size:3.4cqw">🧩</div>' +
